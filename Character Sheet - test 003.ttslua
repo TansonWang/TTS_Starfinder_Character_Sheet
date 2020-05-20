@@ -1005,7 +1005,7 @@ defaultButtonData = {
             width     = 1300,
             font_size = 300,
             label     = "Speed",
-            value     = "",
+            value     = "30",
             alignment = 2
         },
         -- !! Gender !!
@@ -1679,85 +1679,213 @@ function updateSave()
     self.editInput({index=145, value=WISMOD})
     self.editInput({index=146, value=CHAMOD})
 
-    ref_buttonData.conditions = {
-      -- Stats
-      STR = self.getInputs()[142]['value'],
-      DEX = self.getInputs()[143]['value'],
-      CON = self.getInputs()[144]['value'],
-      INT = self.getInputs()[145]['value'],
-      WIS = self.getInputs()[146]['value'],
-      CHA = self.getInputs()[147]['value'],
+    ref_buttonData.currentConditions = {
 
-      -- Status conditions
-      asleep        = 0,
-      bleeding      = 0,
-      blinded       = 0,
-      broken        = 0,
-      burning       = 0,
-      confused      = 0,
-      cowering      = 0,
-      dazed         = 0,
-      dazzled       = 0,
-      dead          = 0,
-      deafened      = 0,
-      dying         = 0,
-      encumbered    = 0,
-      entangled     = 0,
-      exhausted     = 0,
-      fascinated    = 0,
-      fatigued      = 0,
-      flatfooted    = 0,
-      frightened    = 0,
-      grappled      = 0,
-      helpless      = 0,
-      nauseated     = 0,
-      offkilter     = 0,
-      offtarget     = 0,
-      overburdened  = 0,
-      panicked      = 0,
-      paralyzed     = 0,
-      pinned        = 0,
-      prone         = 0,
-      shaken        = 0,
-      sickened      = 0,
-      stable        = 0,
-      staggered     = 0,
-      stunned       = 0,
-      unconscious   = 0,
     }
 
-    d = ref_buttonData.conditions
-    ref_buttonData.skillmod = {
-      KAC = {
-        math.min(ACDEXCalc(), ArmLimitCalc()),
-        ACFlatCalc(),
-        -2 * math.min(d['entangled'], 1),
-        ACTiredCalc(),
-        ACGrapCalc(),
-        --'prone',
+    ref_buttonData.conditionEffects = {
+      asleep = {
+        perception = -10,
       },
-      EAC = {
-        math.min(ACDEXCalc(), ArmLimitCalc()),
-        ACFlatCalc(),
-        -2 * math.min(d['entangled'], 1),
-        ACTiredCalc(),
-        ACGrapCalc(),
-        --'prone',
+      bleeding = {},
+      blinded = {
+        STRskill = -4,
+        DEXskill = -4,
+        perception = -4,
+        sight = -999,
       },
-      INIT = {
-        ACDEXCalc(),
-        -4 * math.min(d['deafened'], 1),
-        -2 * math.min(d['entangled'], 1),
-        ACTiredCalc(),
-        ACGrapCalc(),
-        --'prone',
+      broken = {},
+      burning = {},
+      confused = {},
+      cowering = {},
+      dazed = {},
+      dazzled = {
+        attack = -1,
+        sight = -1,
       },
+      dead = {},
+      deafened = {
+        INIT = -4,
+        perception = -4,
+        hearing = -999,
+      },
+      dying = {},
+      encumbered = {
+        catiscute = 1,
+        maxDEX = -self.getInputs()[125]['value'] + 2,
+        speed = -10,
+        DEXskill = -5,
+        reflex = -5,
+        DEXcheck = -5,
+        STRskill = -5,
+        STRcheck = -5,
+      },
+      entangled = {
+        speed = -0.5 * self.getInputs()[79]['value'],
+        AC = -2,
+        attack = -2,
+        reflex = -2,
+        INIT = -2,
+        DEXskill = -2,
+        DEXcheck = -5,
+      },
+      exhausted = {
+        speed = -0.5 * self.getInputs()[79]['value'],
+        AC = -3,
+        attack = -3,
+        meleeDMG = -3,
+        thrownDMG = -3,
+        reflex = -3,
+        INIT = -3,
+        DEXskill = -3,
+        reflex = -3,
+        DEXcheck = -3,
+        STRskill = -3,
+        STRcheck = -3,
+        encumberedLimit = -3,
+      },
+      fascinated = {
+        perception = -4,
+      },
+      fatigued = {
+        AC = -1,
+        attack = -1,
+        meleeDMG = -1,
+        reflex = -1,
+        INIT = -1,
+        DEXskill = -1,
+        reflex = -1,
+        DEXcheck = -1,
+        STRskill = -1,
+        STRcheck = -1,
+        encumberedLimit = -1,
+      },
+      flatfooted = {AC = -2},
+      frightened = {
+        reflex = -2,
+        fortitude = -2,
+        will = -2,
+        DEXskill = -2,
+        DEXcheck = -2,
+        STRskill = -2,
+        STRcheck = -2,
+        CONskill = -2,
+        CONcheck = -2,
+        WISskill = -2,
+        WIScheck = -2,
+        INTskill = -2,
+        INTcheck = -2,
+        CHAskill = -2,
+        CHAcheck = -2,
+      },
+      grappled = {
+        AC = -2,
+        attack = -2,
+        reflex = -2,
+        INIT = -2,
+        DEXskill = -2,
+        DEXcheck = -2,
+        grapple = 2,
+      },
+      helpless = {
+        DEX = -self.getInputs()[143]['value'] - 5,
+      },
+      nauseated = {},
+      offkilter = {attack = -2},
+      offtarget = {attack = -2},
+      overburdened = {
+        speed = -self.getInputs()[79]['value'] + 5,
+        maxDEX = -self.getInputs()[125]['value'],
+        DEXskill = -5,
+        reflex = -5,
+        DEXcheck = -5,
+        STRskill = -5,
+        STRcheck = -5,
+      },
+      panicked = {
+        reflex = -2,
+        fortitude = -2,
+        will = -2,
+        DEXskill = -2,
+        DEXcheck = -2,
+        STRskill = -2,
+        STRcheck = -2,
+        CONskill = -2,
+        CONcheck = -2,
+        WISskill = -2,
+        WIScheck = -2,
+        INTskill = -2,
+        INTcheck = -2,
+        CHAskill = -2,
+        CHAcheck = -2,
+      },
+      paralyzed = {},
+      pinned = {
+        speed = -self.getInputs()[79]['value'],
+        AC = -4,
+        attack = -4,
+        reflex = -4,
+        INIT = -4,
+        DEXskill = -4,
+        DEXcheck = -4,
+      },
+      prone = {
+        rangedAC = 4,
+        meleeAC = -4,
+        meleeAttack = -4,
+      },
+      shaken = {
+        attack = -2,
+        reflex = -2,
+        fortitude = -2,
+        will = -2,
+        DEXskill = -2,
+        DEXcheck = -2,
+        STRskill = -2,
+        STRcheck = -2,
+        CONskill = -2,
+        CONcheck = -2,
+        WISskill = -2,
+        WIScheck = -2,
+        INTskill = -2,
+        INTcheck = -2,
+        CHAskill = -2,
+        CHAcheck = -2,
+      },
+      sickened = {
+        attack = -2,
+        meleeDMG = -2,
+        rangedDMG = -2,
+        reflex = -2,
+        fortitude = -2,
+        will = -2,
+        DEXskill = -2,
+        DEXcheck = -2,
+        STRskill = -2,
+        STRcheck = -2,
+        CONskill = -2,
+        CONcheck = -2,
+        WISskill = -2,
+        WIScheck = -2,
+        INTskill = -2,
+        INTcheck = -2,
+        CHAskill = -2,
+        CHAcheck = -2,
+      },
+      stable = {},
+      staggered = {},
+      stunned = {},
+      unconscious = {}
     }
 
     -- Update dem KAC, EAC, Initiative and CMD
-    KAC = 10 + skillCalc('KAC')
-    EAC = 10 + skillCalc('EAC')
-    INIT = skillCalc('INIT')
+    c = ref_buttonData.currentConditions
+    armDexMax = self.getInputs()[125]['value']
+    armKAC = self.getInputs()[124]['value']
+    armEAC = self.getInputs()[123]['value']
+    KAC = 10 + armKAC + math.min(DEXMOD, effectCalc(c, 'maxDEX') + armDexMax) + effectCalc(c, 'AC')
+    EAC = 10 + armEAC + math.min(DEXMOD, effectCalc(c, 'maxDEX') + armDexMax) + effectCalc(c, 'AC')
+    INIT = effectCalc(c, 'INIT') + DEXMOD
     CMD = KAC + 8
     self.editInput({index=6, value=KAC})
     self.editInput({index=7, value=EAC})
@@ -1769,58 +1897,20 @@ function updateSave()
     self.script_state = saved_data
 end
 
--- Calculate the effect of Dex, paralysis, helpless and unconscious on AC
-function ACDEXCalc()
-  d = ref_buttonData.conditions
-  if d['paralyzed'] > 0 or d['helpless'] > 0 or d['unconscious'] > 0 then
-    print('Nyeh Heh Heh')
-    return -5
-  end
-
-  return d['DEX']
-end
--- Calculate the effect of Armour Dex limit and burden on AC
-function ArmLimitCalc()
-  d = ref_buttonData.conditions
-  armo = self.getInputs()[125]['value']
-  encu = 2 * math.min(1, d['encumbered'])
-  over = 0 * math.min(d['overburdened'], 1)
-  return math.max(armo, encu, over)
-end
-
--- Calculate the effect of blinded, flatfooted, cowering, off kilter and
--- stunned on AC
-function ACFlatCalc()
-  d = ref_buttonData.conditions
-  if d['blinded'] > 0 or d['flatfooted'] > 0 or d['cowering'] > 0 or d['offkilter'] > 0 or d['stunned'] > 0 then
-    return -2
-  end
-  return 0
-end
-
--- Calculate the effect of fatigue and exhaustion on AC
-function ACTiredCalc()
-  d = ref_buttonData.conditions
-  exha = -3 * math.min(d['exhausted'], 1)
-  fati = -1 * math.min(d['fatigued'], 1)
-  return math.min(exha, fati)
-end
-
--- Calculate the effect of grappled and pinned on AC
-function ACGrapCalc()
-  d = ref_buttonData.conditions
-  grap = -2 * math.min(d['grappled'], 1)
-  pinn = -4 * math.min(d['pinned'], 1)
-  return math.min(grap, pinn)
-end
--- Calculate the total of all effects on a skill
-function skillCalc(name)
-    local sum = 0
-    for k, v in pairs(ref_buttonData.skillmod[name]) do
-        sum = sum + v
+function effectCalc(conditions, stat)
+  effects = ref_buttonData.conditionEffects
+  total = 0
+  print('Looking for '..stat..' affecting conditions')
+  for i, condition in pairs(conditions) do
+    for affectedStat, bonus in pairs(effects[condition]) do
+      if affectedStat == stat then
+        total = total + bonus
+        print('Current total is '..total)
+      end
     end
-    print(sum..' is the total for '..name)
-    return sum
+  end
+  print('Final total is '..total)
+  return total
 end
 
 --Startup procedure

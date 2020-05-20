@@ -1,0 +1,1951 @@
+--[[    Character Sheet Template    by: Herp 'n' Derp the dynamic duo
+  Big thanks to Mr Stump for his original code and his formating especially,
+  the excellent looking png for the character sheet.
+]]
+
+--Set this to true while editing and false when you have finished
+disableSave = true
+--Remember to set this to false once you are done making changes
+--Then, after you save & apply it, save your game too
+
+--Color information for button text (r,g,b, values of 0-1)
+buttonFontColor = {0,0,0}
+--Color information for button background
+buttonColor = {1,1,1}
+--Change scale of button (Avoid changing if possible)
+buttonScale = {0.1,0.1,0.1}
+
+--This is the button placement information
+defaultButtonData = {
+    --Add checkboxes
+    checkbox = {
+        --[[
+        pos   = the position (pasted from the helper tool)
+        size  = height/width/font_size for checkbox
+        state = default starting value for checkbox (true=checked, false=not)
+        ]]
+        -- Acrobatics
+        {
+            pos   = {0.626, 0.1, -1.183},
+            size  = 300,
+            state = false
+        },
+        -- Athletics
+        {
+            pos   = {0.626, 0.1, -1.085},
+            size  = 300,
+            state = false
+        },
+        -- Bluff
+        {
+            pos   = {0.626, 0.1, -0.994},
+            size  = 300,
+            state = false
+        },
+        -- Computers
+        {
+            pos   = {0.626, 0.1, -0.895},
+            size  = 300,
+            state = false
+        },
+        -- Culture
+        {
+            pos   = {0.626, 0.1, -0.8},
+            size  = 300,
+            state = false
+        },
+        -- Diplomacy
+        {
+            pos   = {0.626, 0.1, -0.701},
+            size  = 300,
+            state = false
+        },
+        -- Disguise
+        {
+            pos   = {0.626, 0.1, -0.604},
+            size  = 300,
+            state = false
+        },
+        -- Engineering
+        {
+            pos   = {0.626, 0.1, -0.508},
+            size  = 300,
+            state = false
+        },
+        -- Intimidate
+        {
+            pos   = {0.626, 0.1, -0.414},
+            size  = 300,
+            state = false
+        },
+        -- Life Science
+        {
+            pos   = {0.626, 0.1, -0.317},
+            size  = 300,
+            state = false
+        },
+        -- Medicine
+        {
+            pos   = {0.626, 0.1, -0.215},
+            size  = 300,
+            state = false
+        },
+        -- Mysticism
+        {
+            pos   = {0.626, 0.1, -0.119},
+            size  = 300,
+            state = false
+        },
+        -- Perception
+        {
+            pos   = {0.626, 0.1, -0.016},
+            size  = 300,
+            state = false
+        },
+        -- Physical Science
+        {
+            pos   = {0.626, 0.1, 0.074},
+            size  = 300,
+            state = false
+        },
+        -- Piloting
+        {
+            pos   = {0.626, 0.1, 0.172},
+            size  = 300,
+            state = false
+        },
+        -- Profession
+        {
+            pos   = {0.626, 0.1, 0.27},
+            size  = 300,
+            state = false
+        },
+        -- Profession
+        {
+            pos   = {0.626, 0.1, 0.461},
+            size  = 300,
+            state = false
+        },
+        -- Sense Motive
+        {
+            pos   = {0.626, 0.1, 0.655},
+            size  = 300,
+            state = false
+        },
+        -- Sleight of Hand
+        {
+            pos   = {0.626, 0.1, 0.753},
+            size  = 300,
+            state = false
+        },
+        -- Stealth
+        {
+            pos   = {0.626, 0.1, 0.851},
+            size  = 300,
+            state = false
+        },
+        -- Survival
+        {
+            pos   = {0.626, 0.1, 0.948},
+            size  = 300,
+            state = false
+        },
+        ------------------------------------------------------------------------
+        -- Full BAB?
+        {
+            pos   = {1.25, 0.1, -1.46},
+            size  = 300,
+            state = false
+        },
+
+
+        -- Good FORT?
+        {
+            pos   = {-0.9, 0.1, -0.134},
+            size  = 300,
+            state = false
+        },
+        -- Good REF?
+        {
+            pos   = {-0.9, 0.1, -0.0375},
+            size  = 300,
+            state = false
+        },
+        -- Good WILL?
+        {
+            pos   = {-0.9, 0.1, 0.059},
+            size  = 300,
+            state = false
+        },
+        ------------------------------------------------------------------------
+
+        --End of checkboxes
+    },
+    --THE COUNTERS ARE DEAD BABY
+    counter = {},
+
+    --Add editable text boxes
+    textbox = {
+        --[[
+        pos       = the position (pasted from the helper tool)
+        rows      = how many lines of text you want for this box
+        width     = how wide the text box is
+        font_size = size of text. This and "rows" effect overall height
+        label     = what is shown when there is no text. "" = nothing
+        value     = text entered into box. "" = nothing
+        alignment = Number to indicate how you want text aligned
+                    (1=Automatic, 2=Left, 3=Center, 4=Right, 5=Justified)
+        ]]
+        -- !! Strength !!
+        {
+          pos       = {-1.33, 0.12, -1.142},
+          rows      = 1,
+          width     = 900,
+          font_size = 800,
+          label     = "-",
+          value     = "10",
+          alignment = 3
+        },
+        -- !! Dexterity !!
+        {
+          pos       = {-1.33, 0.12, -0.789},
+          rows      = 1,
+          width     = 900,
+          font_size = 800,
+          label     = "-",
+          value     = "10",
+          alignment = 3
+        },
+        -- !! Constitution !!
+        {
+          pos       = {-1.33, 0.12, -0.446},
+          rows      = 1,
+          width     = 900,
+          font_size = 800,
+          label     = "-",
+          value     = "10",
+          alignment = 3
+        },
+        -- !! Intelligence !!
+        {
+          pos       = {-1.33, 0.12, -0.11},
+          rows      = 1,
+          width     = 900,
+          font_size = 800,
+          label     = "-",
+          value     = "10",
+          alignment = 3
+        },
+        -- !! Wisdom !!
+        {
+          pos       = {-1.33, 0.12, 0.22},
+          rows      = 1,
+          width     = 900,
+          font_size = 800,
+          label     = "-",
+          value     = "10",
+          alignment = 3
+        },
+        -- !! Charisma !!
+        {
+          pos       = {-1.33, 0.12, 0.563},
+          rows      = 1,
+          width     = 900,
+          font_size = 800,
+          label     = "-",
+          value     = "10",
+          alignment = 3
+        },
+
+
+
+        -- !! KAC !!
+        {
+          pos       = {-0.997, 0.1, -1.133},
+          rows      = 1,
+          width     = 900,
+          font_size = 800,
+          label     = "-",
+          value     = "10",
+          alignment = 3
+        },
+        -- !! EAC !!
+        {
+          pos       = {-0.658, 0.1, -1.133},
+          rows      = 1,
+          width     = 900,
+          font_size = 800,
+          label     = "-",
+          value     = "10",
+          alignment = 3
+        },
+        -- !! Initiative !!
+        {
+          pos       = {-0.319, 0.1, -1.133},
+          rows      = 1,
+          width     = 900,
+          font_size = 800,
+          label     = "-",
+          value     = "0",
+          alignment = 3
+        },
+        -- !! CMD !!
+        {
+          pos       = {0.02, 0.1, -1.133},
+          rows      = 1,
+          width     = 900,
+          font_size = 800,
+          label     = "-",
+          value     = "18",
+          alignment = 3
+        },
+
+
+        -- !! FORT !!
+        {
+          pos       = {-0.817, 0.1, -0.134},
+          rows      = 1,
+          width     = 500,
+          font_size = 450,
+          label     = "-",
+          value     = "0",
+          alignment = 3
+        },
+        -- !! REF !!
+        {
+          pos       = {-0.817, 0.1, -0.0375},
+          rows      = 1,
+          width     = 500,
+          font_size = 450,
+          label     = "-",
+          value     = "0",
+          alignment = 3
+        },
+        -- !! WILL !!
+        {
+          pos       = {-0.817, 0.1, 0.059},
+          rows      = 1,
+          width     = 500,
+          font_size = 450,
+          label     = "-",
+          value     = "0",
+          alignment = 3
+        },
+
+
+
+        -- !! BAB !!
+        {
+          pos       = {-0.559, 0.1, 0.023},
+          rows      = 1,
+          width     = 850,
+          font_size = 650,
+          label     = "-",
+          value     = "0",
+          alignment = 3
+        },
+        -- !! Melee !!
+        {
+          pos       = {-0.27, 0.1, 0.023},
+          rows      = 1,
+          width     = 850,
+          font_size = 650,
+          label     = "-",
+          value     = "0",
+          alignment = 3
+        },
+        -- !! Ranged !!
+        {
+          pos       = {0.019, 0.1, 0.023},
+          rows      = 1,
+          width     = 850,
+          font_size = 650,
+          label     = "-",
+          value     = "0",
+          alignment = 3
+        },
+        -- !! Thrown !!
+        {
+          pos       = {0.308, 0.1, 0.023},
+          rows      = 1,
+          width     = 850,
+          font_size = 650,
+          label     = "-",
+          value     = "0",
+          alignment = 3
+        },
+
+
+
+        -- !! Max SP !!
+        {
+          pos       = {-0.473, 0.1, -0.854},
+          rows      = 1,
+          width     = 650,
+          font_size = 300,
+          label     = "-",
+          value     = "0",
+          alignment = 3
+        },
+        -- !! Cur SP !!
+        {
+          pos       = {-0.69, 0.1, -0.716},
+          rows      = 1,
+          width     = 1300,
+          font_size = 800,
+          label     = "-",
+          value     = "0",
+          alignment = 3
+        },
+        -- !! Max HP !!
+        {
+          pos       = {-0.473, 0.1, -0.514},
+          rows      = 1,
+          width     = 650,
+          font_size = 300,
+          label     = "-",
+          value     = "0",
+          alignment = 3
+        },
+        -- !! Cur HP !!
+        {
+          pos       = {-0.69, 0.1, -0.38},
+          rows      = 1,
+          width     = 1300,
+          font_size = 800,
+          label     = "-",
+          value     = "0",
+          alignment = 3
+        },
+        -- !! Cur RP !!
+        {
+          pos       = {-0.044, 0.1, -0.728},
+          rows      = 1,
+          width     = 900,
+          font_size = 800,
+          label     = "-",
+          value     = "0",
+          alignment = 3
+        },
+        -- !! Max RP !!
+        {
+          pos       = {0.29, 0.1, -0.728},
+          rows      = 1,
+          width     = 900,
+          font_size = 800,
+          label     = "-",
+          value     = "0",
+          alignment = 3
+        },
+
+
+        -- !! Acrobatics !!
+        {
+          pos       = {0.771, 0.1, -1.183},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "-",
+          value     = "0",
+          alignment = 3
+        },
+        -- !! Athletics !!
+        {
+          pos       = {0.771, 0.1, -1.086},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "-",
+          value     = "0",
+          alignment = 3
+        },
+        -- !! Bluff !!
+        {
+          pos       = {0.771, 0.1, -0.989},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "-",
+          value     = "0",
+          alignment = 3
+        },
+        -- !! Computers !!
+        {
+          pos       = {0.771, 0.1, -0.892},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "-",
+          value     = "0",
+          alignment = 3
+        },
+        -- !! Culture !!
+        {
+          pos       = {0.771, 0.1, -0.796},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "-",
+          value     = "0",
+          alignment = 3
+        },
+        -- !! Diplomacy !!
+        {
+          pos       = {0.771, 0.1, -0.699},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "-",
+          value     = "0",
+          alignment = 3
+        },
+        -- !! Disguise !!
+        {
+          pos       = {0.771, 0.1, -0.602},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "-",
+          value     = "0",
+          alignment = 3
+        },
+        -- !! Engineering !!
+        {
+          pos       = {0.771, 0.1, -0.505},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "-",
+          value     = "0",
+          alignment = 3
+        },
+        -- !! Initmidate !!
+        {
+          pos       = {0.771, 0.1, -0.408},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "-",
+          value     = "0",
+          alignment = 3
+        },
+        -- !! Life Science !!
+        {
+          pos       = {0.771, 0.1, -0.3112},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "-",
+          value     = "0",
+          alignment = 3
+        },
+        -- !! Medicine !!
+        {
+          pos       = {0.771, 0.1, -0.214},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "-",
+          value     = "0",
+          alignment = 3
+        },
+        -- !! Mysticism !!
+        {
+          pos       = {0.771, 0.1, -0.117},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "-",
+          value     = "0",
+          alignment = 3
+        },
+        -- !! Perception !!
+        {
+          pos       = {0.771, 0.1, -0.021},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "-",
+          value     = "0",
+          alignment = 3
+        },
+        -- !! Physical Science !!
+        {
+          pos       = {0.771, 0.1, 0.076},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "-",
+          value     = "0",
+          alignment = 3
+        },
+        -- !! Piloting !!
+        {
+          pos       = {0.771, 0.1, 0.173},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "-",
+          value     = "0",
+          alignment = 3
+        },
+        -- !! Profession !!
+        {
+          pos       = {0.771, 0.1, 0.27},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "-",
+          value     = "0",
+          alignment = 3
+        },
+        -- !! Profession !!
+        {
+          pos       = {0.771, 0.1, 0.464},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "-",
+          value     = "0",
+          alignment = 3
+        },
+        -- !! Sense Motive !!
+        {
+          pos       = {0.771, 0.1, 0.655},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "-",
+          value     = "0",
+          alignment = 3
+        },
+        -- !! Sleight of Hand !!
+        {
+          pos       = {0.771, 0.1, 0.75},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "-",
+          value     = "0",
+          alignment = 3
+        },
+        -- !! Stealth !!
+        {
+          pos       = {0.771, 0.1, 0.85},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "-",
+          value     = "0",
+          alignment = 3
+        },
+        -- !! Survival !!
+        {
+          pos       = {0.771, 0.1, 0.948},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "-",
+          value     = "0",
+          alignment = 3
+        },
+
+        --ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo--
+        -- !! Acrobatics !!
+        {
+          pos       = {1.355, 0.1, -1.183},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "-",
+          value     = "0",
+          alignment = 3
+        },
+        -- !! Athletics !!
+        {
+          pos       = {1.355, 0.1, -1.086},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "-",
+          value     = "0",
+          alignment = 3
+        },
+        -- !! Bluff !!
+        {
+          pos       = {1.355, 0.1, -0.989},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "-",
+          value     = "0",
+          alignment = 3
+        },
+        -- !! Computers !!
+        {
+          pos       = {1.355, 0.1, -0.892},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "-",
+          value     = "0",
+          alignment = 3
+        },
+        -- !! Culture !!
+        {
+          pos       = {1.355, 0.1, -0.796},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "-",
+          value     = "0",
+          alignment = 3
+        },
+        -- !! Diplomacy !!
+        {
+          pos       = {1.355, 0.1, -0.699},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "-",
+          value     = "0",
+          alignment = 3
+        },
+        -- !! Disguise !!
+        {
+          pos       = {1.355, 0.1, -0.602},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "-",
+          value     = "0",
+          alignment = 3
+        },
+        -- !! Engineering !!
+        {
+          pos       = {1.355, 0.1, -0.505},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "-",
+          value     = "0",
+          alignment = 3
+        },
+        -- !! Initmidate !!
+        {
+          pos       = {1.355, 0.1, -0.408},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "-",
+          value     = "0",
+          alignment = 3
+        },
+        -- !! Life Science !!
+        {
+          pos       = {1.355, 0.1, -0.3112},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "-",
+          value     = "0",
+          alignment = 3
+        },
+        -- !! Medicine !!
+        {
+          pos       = {1.355, 0.1, -0.214},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "-",
+          value     = "0",
+          alignment = 3
+        },
+        -- !! Mysticism !!
+        {
+          pos       = {1.355, 0.1, -0.117},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "-",
+          value     = "0",
+          alignment = 3
+        },
+        -- !! Perception !!
+        {
+          pos       = {1.355, 0.1, -0.021},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "-",
+          value     = "0",
+          alignment = 3
+        },
+        -- !! Physical Science !!
+        {
+          pos       = {1.355, 0.1, 0.076},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "-",
+          value     = "0",
+          alignment = 3
+        },
+        -- !! Piloting !!
+        {
+          pos       = {1.355, 0.1, 0.173},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "-",
+          value     = "0",
+          alignment = 3
+        },
+        -- !! Profession !!
+        {
+          pos       = {1.355, 0.1, 0.27},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "-",
+          value     = "0",
+          alignment = 3
+        },
+        -- !! Profession !!
+        {
+          pos       = {1.355, 0.1, 0.464},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "-",
+          value     = "0",
+          alignment = 3
+        },
+        -- !! Sense Motive !!
+        {
+          pos       = {1.355, 0.1, 0.655},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "-",
+          value     = "0",
+          alignment = 3
+        },
+        -- !! Sleight of Hand !!
+        {
+          pos       = {1.355, 0.1, 0.75},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "-",
+          value     = "0",
+          alignment = 3
+        },
+        -- !! Stealth !!
+        {
+          pos       = {1.355, 0.1, 0.85},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "-",
+          value     = "0",
+          alignment = 3
+        },
+        -- !! Survival !!
+        {
+          pos       = {1.355, 0.1, 0.948},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "-",
+          value     = "0",
+          alignment = 3
+        },
+        --ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo--
+
+
+        -----------------------------------------------------------
+        -- !! HP/SP per Class Level !!
+        {
+            pos       = {0.75, 0.1, -1.735},
+            rows      = 1,
+            width     = 3400,
+            font_size = 300,
+            label     = "write HP/lvl there >",
+            value     = "HP/SP per Class Level:",
+            alignment = 1
+        },
+        {
+            pos       = {1.25, 0.1, -1.735},
+            rows      = 1,
+            width     = 950,
+            font_size = 300,
+            label     = "",
+            value     = "6",
+            alignment = 3
+        },
+        -- !! HP from Race !!
+        {
+            pos       = {0.75, 0.1, -1.643},
+            rows      = 1,
+            width     = 3400,
+            font_size = 300,
+            label     = "write racial HP there >",
+            value     = "HP from Race:",
+            alignment = 1
+        },
+        {
+            pos       = {1.25, 0.1, -1.643},
+            rows      = 1,
+            width     = 950,
+            font_size = 300,
+            label     = "",
+            value     = "4",
+            alignment = 3
+        },
+        -- !! Skill ranks per Class Level !!
+        {
+            pos       = {0.75, 0.1, -1.551},
+            rows      = 1,
+            width     = 3400,
+            font_size = 300,
+            label     = "write ranks/lvl there >",
+            value     = "Skill ranks per level:",
+            alignment = 1
+        },
+        {
+            pos       = {1.25, 0.1, -1.551},
+            rows      = 1,
+            width     = 950,
+            font_size = 300,
+            label     = "",
+            value     = "4",
+            alignment = 3
+        },
+        -- !! Full BAB progression? !!
+        {
+            pos       = {0.75, 0.1, -1.459},
+            rows      = 1,
+            width     = 3400,
+            font_size = 300,
+            label     = "check if martial class >",
+            value     = "Full BAB progression?",
+            alignment = 1
+        },
+
+        -----------------------------------------------------------
+
+
+
+
+        -- !! Name !!
+        {
+            pos       = {-0.33, 0.1, -1.845},
+            rows      = 1,
+            width     = 5000,
+            font_size = 300,
+            label     = "Name",
+            value     = "",
+            alignment = 2
+        },
+        -- !! Class !!
+        {
+            pos       = {-1.18, 0.1, -1.744},
+            rows      = 1,
+            width     = 2500,
+            font_size = 300,
+            label     = "Class",
+            value     = "",
+            alignment = 2
+        },
+        -- !! Level !!
+        {
+            pos       = {-0.785, 0.1, -1.744},
+            rows      = 1,
+            width     = 1000,
+            font_size = 300,
+            label     = "Level",
+            value     = "",
+            alignment = 2
+        },
+        -- !! Race !!
+        {
+            pos       = {-0.424, 0.1, -1.744},
+            rows      = 1,
+            width     = 2000,
+            font_size = 300,
+            label     = "Race",
+            value     = "",
+            alignment = 2
+        },
+        -- !! Theme !!
+        {
+            pos       = {0.111, 0.1, -1.744},
+            rows      = 1,
+            width     = 2000,
+            font_size = 300,
+            label     = "Theme",
+            value     = "",
+            alignment = 2
+        },
+        -- !! Size !!
+        {
+            pos       = {-1.333, 0.1, -1.6},
+            rows      = 1,
+            width     = 1200,
+            font_size = 300,
+            label     = "Size",
+            value     = "",
+            alignment = 2
+        },
+        -- !! Speed !!
+        {
+            pos       = {-1.018, 0.1, -1.6},
+            rows      = 1,
+            width     = 1300,
+            font_size = 300,
+            label     = "Speed",
+            value     = "",
+            alignment = 2
+        },
+        -- !! Gender !!
+        {
+            pos       = {-0.727, 0.1, -1.6},
+            rows      = 1,
+            width     = 1000,
+            font_size = 300,
+            label     = "Gender",
+            value     = "",
+            alignment = 2
+        },
+        -- !! Home World !!
+        {
+            pos       = {-0.103, 0.1, -1.6},
+            rows      = 1,
+            width     = 4250,
+            font_size = 300,
+            label     = "Home World",
+            value     = "",
+            alignment = 2
+        },
+        -- !! Alignment !!
+        {
+            pos       = {-1.226, 0.1, -1.452},
+            rows      = 1,
+            width     = 2200,
+            font_size = 300,
+            label     = "Alignment",
+            value     = "",
+            alignment = 2
+        },
+        -- !! Deity !!
+        {
+            pos       = {-0.689, 0.1, -1.452},
+            rows      = 1,
+            width     = 2200,
+            font_size = 300,
+            label     = "Deity",
+            value     = "",
+            alignment = 2
+        },
+        -- !! Player Name !!
+        {
+            pos       = {-0.042, 0.1, -1.452},
+            rows      = 1,
+            width     = 3200,
+            font_size = 300,
+            label     = "Player Name",
+            value     = "",
+            alignment = 2
+        },
+        -- !! DR !!
+        {
+            pos       = {-0.907, 0.1, -0.96},
+            rows      = 1,
+            width     = 2000,
+            font_size = 300,
+            label     = "DR",
+            value     = "",
+            alignment = 2
+        },
+        -- !! Resistances !!
+        {
+            pos       = {-0.127, 0.1, -0.96},
+            rows      = 1,
+            width     = 2600,
+            font_size = 300,
+            label     = "Resistances",
+            value     = "",
+            alignment = 2
+        },
+
+        -- !! Weapons !!
+
+        -- Weapon 1
+        {
+            pos       = {-0.900, 0.1, 0.29},
+            rows      = 1,
+            width     = 2450,
+            font_size = 250,
+            label     = "Weapon Name",
+            value     = "Laser Rifle, Azimuth",
+            alignment = 2
+        },
+        {
+            pos       = {-0.554, 0.1, 0.29},
+            rows      = 1,
+            width     = 550,
+            font_size = 300,
+            label     = "Lvl",
+            value     = "1",
+            alignment = 2
+        },
+        {
+            pos       = {-0.373, 0.1, 0.29},
+            rows      = 1,
+            width     = 1000,
+            font_size = 200,
+            label     = "Damage",
+            value     = "1d8",
+            alignment = 2
+        },
+        {
+            pos       = {-0.104, 0.1, 0.29},
+            rows      = 1,
+            width     = 1200,
+            font_size = 200,
+            label     = "Damage Type",
+            value     = "F",
+            alignment = 2
+        },
+        {
+            pos       = {0.196, 0.1, 0.29},
+            rows      = 1,
+            width     = 1200,
+            font_size = 200,
+            label     = "Crit",
+            value     = "1d6 Burn",
+            alignment = 2
+        },
+        {
+            pos       = {0.384, 0.1, 0.29},
+            rows      = 1,
+            width     = 350,
+            font_size = 150,
+            label     = "Bulk",
+            value     = 1,
+            alignment = 2
+        },
+        {
+            pos       = {-1.016, 0.1, 0.383},
+            rows      = 1,
+            width     = 1150,
+            font_size = 300,
+            label     = "Range",
+            value     = "80ft",
+            alignment = 2
+        },
+        {
+            pos       = {-0.73, 0.1, 0.383},
+            rows      = 1,
+            width     = 1150,
+            font_size = 300,
+            label     = "Type",
+            value     = "Longarm",
+            alignment = 2
+        },
+        {
+            pos       = {-0.392, 0.1, 0.383},
+            rows      = 1,
+            width     = 1650,
+            font_size = 200,
+            label     = "Capacity/Usage/AmmoType",
+            value     = "20/1/charges",
+            alignment = 2
+        },
+        {
+            pos       = {0.115, 0.1, 0.383},
+            rows      = 1,
+            width     = 2900,
+            font_size = 200,
+            label     = "Special",
+            value     = "",
+            alignment = 2
+        },
+
+        -- Weapon 2
+          {
+              pos       = {-0.900, 0.1, 0.485},
+              rows      = 1,
+              width     = 2450,
+              font_size = 250,
+              label     = "Weapon Name",
+              value     = "",
+              alignment = 2
+          },
+          {
+              pos       = {-0.554, 0.1, 0.485},
+              rows      = 1,
+              width     = 550,
+              font_size = 300,
+              label     = "Lvl",
+              value     = "",
+              alignment = 2
+          },
+          {
+              pos       = {-0.373, 0.1, 0.485},
+              rows      = 1,
+              width     = 1000,
+              font_size = 200,
+              label     = "Damage",
+              value     = "",
+              alignment = 2
+          },
+          {
+              pos       = {-0.104, 0.1, 0.485},
+              rows      = 1,
+              width     = 1200,
+              font_size = 200,
+              label     = "Damage Type",
+              value     = "",
+              alignment = 2
+          },
+          {
+              pos       = {0.196, 0.1, 0.485},
+              rows      = 1,
+              width     = 1200,
+              font_size = 200,
+              label     = "Crit",
+              value     = "",
+              alignment = 2
+          },
+          {
+              pos       = {0.384, 0.1, 0.485},
+              rows      = 1,
+              width     = 350,
+              font_size = 150,
+              label     = "Bulk",
+              value     = "",
+              alignment = 2
+          },
+          {
+              pos       = {-1.016, 0.1, 0.583},
+              rows      = 1,
+              width     = 1150,
+              font_size = 300,
+              label     = "Range",
+              value     = "",
+              alignment = 2
+          },
+          {
+              pos       = {-0.73, 0.1, 0.583},
+              rows      = 1,
+              width     = 1150,
+              font_size = 300,
+              label     = "Type",
+              value     = "",
+              alignment = 2
+          },
+          {
+              pos       = {-0.392, 0.1, 0.583},
+              rows      = 1,
+              width     = 1650,
+              font_size = 200,
+              label     = "Capacity/Usage",
+              value     = "",
+              alignment = 2
+          },
+          {
+              pos       = {0.115, 0.1, 0.583},
+              rows      = 1,
+              width     = 2900,
+              font_size = 200,
+              label     = "Special",
+              value     = "",
+              alignment = 2
+          },
+
+          -- Weapon 3
+          {
+              pos       = {-0.900, 0.1, 0.674},
+              rows      = 1,
+              width     = 2450,
+              font_size = 250,
+              label     = "Weapon Name",
+              value     = "",
+              alignment = 2
+          },
+          {
+              pos       = {-0.554, 0.1, 0.674},
+              rows      = 1,
+              width     = 550,
+              font_size = 300,
+              label     = "Lvl",
+              value     = "",
+              alignment = 2
+          },
+          {
+              pos       = {-0.373, 0.1, 0.674},
+              rows      = 1,
+              width     = 1000,
+              font_size = 200,
+              label     = "Damage",
+              value     = "",
+              alignment = 2
+          },
+          {
+              pos       = {-0.104, 0.1, 0.674},
+              rows      = 1,
+              width     = 1200,
+              font_size = 200,
+              label     = "Damage Type",
+              value     = "",
+              alignment = 2
+          },
+          {
+              pos       = {0.196, 0.1, 0.674},
+              rows      = 1,
+              width     = 1200,
+              font_size = 200,
+              label     = "Crit",
+              value     = "",
+              alignment = 2
+          },
+          {
+              pos       = {0.384, 0.1, 0.674},
+              rows      = 1,
+              width     = 350,
+              font_size = 150,
+              label     = "Bulk",
+              value     = "",
+              alignment = 2
+          },
+          {
+              pos       = {-1.016, 0.1, 0.773},
+              rows      = 1,
+              width     = 1150,
+              font_size = 300,
+              label     = "Range",
+              value     = "",
+              alignment = 2
+          },
+          {
+              pos       = {-0.73, 0.1, 0.773},
+              rows      = 1,
+              width     = 1150,
+              font_size = 300,
+              label     = "Type",
+              value     = "",
+              alignment = 2
+          },
+          {
+              pos       = {-0.392, 0.1, 0.773},
+              rows      = 1,
+              width     = 1650,
+              font_size = 200,
+              label     = "Capacity/Usage",
+              value     = "",
+              alignment = 2
+          },
+          {
+              pos       = {0.115, 0.1, 0.773},
+              rows      = 1,
+              width     = 2900,
+              font_size = 200,
+              label     = "Special",
+              value     = "",
+              alignment = 2
+          },
+
+        -- !! Feats and Profs !!
+        {
+            pos       = {0.600, 0.1, 1.550},
+            rows      = 12,
+            width     = 7800,
+            font_size = 300,
+            label     = "Feats and Profs",
+            value     = "",
+            alignment = 2
+        },
+        -- !! Languages !!
+        {
+            pos       = {-0.942, 0.1, 1.715},
+            rows      = 6,
+            width     = 4800,
+            font_size = 300,
+            label     = "Languages",
+            value     = "",
+            alignment = 2
+        },
+
+
+        -- !! Professions 1 !!
+        {
+            pos       = {0.990, 0.1, 0.342},
+            rows      = 1,
+            width     = 2500,
+            font_size = 300,
+            label     = "Profession",
+            value     = "",
+            alignment = 2
+        },
+        -- !! Professions 2 !!
+        {
+            pos       = {0.990, 0.1, 0.537},
+            rows      = 1,
+            width     = 2500,
+            font_size = 300,
+            label     = "Profession",
+            value     = "",
+            alignment = 2
+        },
+
+        -- !! Armor !!
+        {
+            pos       = {-1.150, 0.1, 0.962},
+            rows      = 1,
+            width     = 2700,
+            font_size = 300,
+            label     = "Armor Name",
+            value     = "Carboard Armour",
+            alignment = 2
+        },
+        {
+            pos       = {-0.749, 0.1, 0.962},
+            rows      = 1,
+            width     = 500,
+            font_size = 300,
+            label     = "lvl",
+            value     = 20,
+            alignment = 2
+        },
+        {
+            pos       = {-1.356, 0.1, 1.062},
+            rows      = 1,
+            width     = 800,
+            font_size = 300,
+            label     = "EAC",
+            value     = 3,
+            alignment = 2
+        },
+        {
+            pos       = {-1.164, 0.1, 1.062},
+            rows      = 1,
+            width     = 800,
+            font_size = 300,
+            label     = "KAC",
+            value     = 5,
+            alignment = 2
+        },
+        {
+            pos       = {-0.97, 0.1, 1.062},
+            rows      = 1,
+            width     = 800,
+            font_size = 300,
+            label     = "Dex",
+            value     = 2,
+            alignment = 2
+        },
+        {
+            pos       = {-0.776, 0.1, 1.062},
+            rows      = 1,
+            width     = 800,
+            font_size = 300,
+            label     = "AC P",
+            value     = 2,
+            alignment = 2
+        },
+        {
+            pos       = {-1.329, 0.1, 1.16},
+            rows      = 1,
+            width     = 1000,
+            font_size = 300,
+            label     = "Type",
+            value     = "Light",
+            alignment = 2
+        },
+        {
+            pos       = {-1.093, 0.1, 1.16},
+            rows      = 1,
+            width     = 1000,
+            font_size = 200,
+            label     = "Capacity/Usage",
+            value     = "",
+            alignment = 2
+        },
+        {
+            pos       = {-0.894, 0.1, 1.16},
+            rows      = 1,
+            width     = 600,
+            font_size = 150,
+            label     = "Upgrds",
+            value     = "",
+            alignment = 2
+        },
+        {
+            pos       = {-0.752, 0.1, 1.16},
+            rows      = 1,
+            width     = 600,
+            font_size = 150,
+            label     = "Wpns",
+            value     = "",
+            alignment = 2
+        },
+        {
+            pos       = {-1.354, 0.1, 1.258},
+            rows      = 1,
+            width     = 800,
+            font_size = 200,
+            label     = "Strength",
+            value     = "",
+            alignment = 2
+        },
+        {
+            pos       = {-1.163, 0.1, 1.258},
+            rows      = 1,
+            width     = 800,
+            font_size = 200,
+            label     = "Damage",
+            value     = "",
+            alignment = 2
+        },
+        {
+            pos       = {-0.967, 0.1, 1.258},
+            rows      = 1,
+            width     = 800,
+            font_size = 200,
+            label     = "Bulk",
+            value     = "",
+            alignment = 2
+        },
+        {
+            pos       = {-0.777, 0.1, 1.258},
+            rows      = 1,
+            width     = 800,
+            font_size = 200,
+            label     = "Speed",
+            value     = "",
+            alignment = 2
+        },
+        {
+            pos       = {-1.257, 0.1, 1.354},
+            rows      = 1,
+            width     = 1700,
+            font_size = 300,
+            label     = "Upgrade Slot",
+            value     = "",
+            alignment = 2
+        },
+        {
+            pos       = {-0.874, 0.1, 1.354},
+            rows      = 1,
+            width     = 1700,
+            font_size = 300,
+            label     = "Upgrade Slot",
+            value     = "",
+            alignment = 2
+        },
+        {
+            pos       = {-0.486, 0.1, 0.969},
+            rows      = 1,
+            width     = 1700,
+            font_size = 300,
+            label     = "Upgrade Slot",
+            value     = "",
+            alignment = 2
+        },
+        {
+            pos       = {-0.486, 0.1, 1.066},
+            rows      = 1,
+            width     = 1700,
+            font_size = 300,
+            label     = "Urgrade Slot",
+            value     = "",
+            alignment = 2
+        },
+        {
+            pos       = {-0.486, 0.1, 1.16},
+            rows      = 1,
+            width     = 1700,
+            font_size = 300,
+            label     = "Upgrade Slot",
+            value     = "",
+            alignment = 2
+        },
+        {
+            pos       = {-0.486, 0.1, 1.256},
+            rows      = 1,
+            width     = 1700,
+            font_size = 300,
+            label     = "Upgrade Slot",
+            value     = "",
+            alignment = 2
+        },
+        {
+            pos       = {-0.486, 0.1, 1.355},
+            rows      = 1,
+            width     = 1700,
+            font_size = 300,
+            label     = "Upgrade Slot",
+            value     = "",
+            alignment = 2
+        },
+
+
+
+
+        -- !! Strength MOD!!
+        {
+          pos       = {-1.33, 0.12, -1.02},
+          rows      = 1,
+          width     = 400,
+          font_size = 300,
+          label     = "0",
+          value     = "0",
+          alignment = 3
+        },
+        -- !! Dexterity MOD!!
+        {
+          pos       = {-1.33, 0.12, -0.667},
+          rows      = 1,
+          width     = 400,
+          font_size = 300,
+          label     = "0",
+          value     = "0",
+          alignment = 3
+        },
+        -- !! Constitution MOD!!
+        {
+          pos       = {-1.33, 0.12, -0.324},
+          rows      = 1,
+          width     = 400,
+          font_size = 300,
+          label     = "0",
+          value     = "0",
+          alignment = 3
+        },
+        -- !! Intelligence MOD!!
+        {
+          pos       = {-1.33, 0.12, 0.012},
+          rows      = 1,
+          width     = 400,
+          font_size = 300,
+          label     = "0",
+          value     = "0",
+          alignment = 3
+        },
+        -- !! Wisdom MOD!!
+        {
+          pos       = {-1.33, 0.12, 0.342},
+          rows      = 1,
+          width     = 400,
+          font_size = 300,
+          label     = "0",
+          value     = "0",
+          alignment = 3
+        },
+        -- !! Charisma MOD!!
+        {
+          pos       = {-1.33, 0.12, 0.685},
+          rows      = 1,
+          width     = 400,
+          font_size = 300,
+          label     = "0",
+          value     = "0",
+          alignment = 3
+        },
+        --End of textboxes
+    }
+}
+
+
+
+--Lua beyond this point, I recommend doing something more fun with your life
+
+--Save function
+function updateSave()
+    -- Time to update those stats and things!
+    -- Update dem stat MODS much wow not cancer at all
+    STRMOD = math.floor((self.getInputs()[1]['value'] - 10)/ 2)
+    DEXMOD = math.floor((self.getInputs()[2]['value'] - 10)/ 2)
+    CONMOD = math.floor((self.getInputs()[3]['value'] - 10)/ 2)
+    INTMOD = math.floor((self.getInputs()[4]['value'] - 10)/ 2)
+    WISMOD = math.floor((self.getInputs()[5]['value'] - 10)/ 2)
+    CHAMOD = math.floor((self.getInputs()[6]['value'] - 10)/ 2)
+    self.editInput({index=141, value=STRMOD})
+    self.editInput({index=142, value=DEXMOD})
+    self.editInput({index=143, value=CONMOD})
+    self.editInput({index=144, value=INTMOD})
+    self.editInput({index=145, value=WISMOD})
+    self.editInput({index=146, value=CHAMOD})
+
+    ref_buttonData.conditions = {
+      -- Stats
+      STR = self.getInputs()[142]['value'],
+      DEX = self.getInputs()[143]['value'],
+      CON = self.getInputs()[144]['value'],
+      INT = self.getInputs()[145]['value'],
+      WIS = self.getInputs()[146]['value'],
+      CHA = self.getInputs()[147]['value'],
+
+      -- Status conditions
+      asleep        = 0,
+      bleeding      = 0,
+      blinded       = 0,
+      broken        = 0,
+      burning       = 0,
+      confused      = 0,
+      cowering      = 0,
+      dazed         = 0,
+      dazzled       = 0,
+      dead          = 0,
+      deafened      = 0,
+      dying         = 0,
+      encumbered    = 0,
+      entangled     = 0,
+      exhausted     = 0,
+      fascinated    = 0,
+      fatigued      = 0,
+      flatfooted    = 0,
+      frightened    = 0,
+      grappled      = 0,
+      helpless      = 0,
+      nauseated     = 0,
+      offkilter     = 0,
+      offtarget     = 0,
+      overburdened  = 0,
+      panicked      = 0,
+      paralyzed     = 0,
+      pinned        = 0,
+      prone         = 0,
+      shaken        = 0,
+      sickened      = 0,
+      stable        = 0,
+      staggered     = 0,
+      stunned       = 0,
+      unconscious   = 0,
+    }
+
+    d = ref_buttonData.conditions
+    ref_buttonData.skillmod = {
+      KAC = {
+        math.min(ACDEXCalc(), ArmLimitCalc()),
+        ACFlatCalc(),
+        -2 * math.min(d['entangled'], 1),
+        ACTiredCalc(),
+        ACGrapCalc(),
+        --'prone',
+      },
+      EAC = {
+        math.min(ACDEXCalc(), ArmLimitCalc()),
+        ACFlatCalc(),
+        -2 * math.min(d['entangled'], 1),
+        ACTiredCalc(),
+        ACGrapCalc(),
+        --'prone',
+      },
+      INIT = {
+        ACDEXCalc(),
+        -4 * math.min(d['deafened'], 1),
+        -2 * math.min(d['entangled'], 1),
+        ACTiredCalc(),
+        ACGrapCalc(),
+        --'prone',
+      },
+    }
+
+    -- Update dem KAC, EAC, Initiative and CMD
+    KAC = 10 + skillCalc('KAC')
+    EAC = 10 + skillCalc('EAC')
+    INIT = skillCalc('INIT')
+    CMD = KAC + 8
+    self.editInput({index=6, value=KAC})
+    self.editInput({index=7, value=EAC})
+    self.editInput({index=8, value=INIT})
+    self.editInput({index=9, value=CMD})
+
+    saved_data = JSON.encode(ref_buttonData)
+    if disableSave==true then saved_data="" end
+    self.script_state = saved_data
+end
+
+-- Calculate the effect of Dex, paralysis, helpless and unconscious on AC
+function ACDEXCalc()
+  d = ref_buttonData.conditions
+  if d['paralyzed'] > 0 or d['helpless'] > 0 or d['unconscious'] > 0 then
+    print('Nyeh Heh Heh')
+    return -5
+  end
+
+  return d['DEX']
+end
+-- Calculate the effect of Armour Dex limit and burden on AC
+function ArmLimitCalc()
+  d = ref_buttonData.conditions
+  armo = self.getInputs()[125]['value']
+  encu = 2 * math.min(1, d['encumbered'])
+  over = 0 * math.min(d['overburdened'], 1)
+  return math.max(armo, encu, over)
+end
+
+-- Calculate the effect of blinded, flatfooted, cowering, off kilter and
+-- stunned on AC
+function ACFlatCalc()
+  d = ref_buttonData.conditions
+  if d['blinded'] > 0 or d['flatfooted'] > 0 or d['cowering'] > 0 or d['offkilter'] > 0 or d['stunned'] > 0 then
+    return -2
+  end
+  return 0
+end
+
+-- Calculate the effect of fatigue and exhaustion on AC
+function ACTiredCalc()
+  d = ref_buttonData.conditions
+  exha = -3 * math.min(d['exhausted'], 1)
+  fati = -1 * math.min(d['fatigued'], 1)
+  return math.min(exha, fati)
+end
+
+-- Calculate the effect of grappled and pinned on AC
+function ACGrapCalc()
+  d = ref_buttonData.conditions
+  grap = -2 * math.min(d['grappled'], 1)
+  pinn = -4 * math.min(d['pinned'], 1)
+  return math.min(grap, pinn)
+end
+-- Calculate the total of all effects on a skill
+function skillCalc(name)
+    local sum = 0
+    for k, v in pairs(ref_buttonData.skillmod[name]) do
+        sum = sum + v
+    end
+    print(sum..' is the total for '..name)
+    return sum
+end
+
+--Startup procedure
+function onload(saved_data)
+    if disableSave==true then saved_data="" end
+    if saved_data ~= "" then
+        local loaded_data = JSON.decode(saved_data)
+        ref_buttonData = loaded_data
+    else
+        ref_buttonData = defaultButtonData
+    end
+
+    spawnedButtonCount = 0
+    createCheckbox()
+    createTextbox()
+    createButton()
+
+
+    --displayModifiers()
+end
+
+-- Click functions for buttons
+function printsmth()
+  updateSave()
+  -- print(self.getInputs()[142]['value'])
+  print('printsmth')
+  d = ref_buttonData.conditions
+  updateSave()
+end
+
+
+--Checks or unchecks the given box
+function click_checkbox(tableIndex, buttonIndex)
+    if ref_buttonData.checkbox[tableIndex].state == true then
+        ref_buttonData.checkbox[tableIndex].state = false
+        self.editButton({index=buttonIndex, label=""})
+    else
+        ref_buttonData.checkbox[tableIndex].state = true
+        self.editButton({index=buttonIndex, label=string.char(10008)})
+    end
+    updateSave()
+end
+
+
+--Updates saved value for given text box
+function click_textbox(i, value, selected)
+    if selected == false then
+        ref_buttonData.textbox[i].value = value
+        updateSave()
+    end
+end
+
+--Dud function for if you have a background on a counter
+function click_none() end
+
+
+
+-- Button creation
+function createButton()
+  button_parameters_1 = {
+      click_function = 'printsmth',
+      function_owner = self,
+      label = '',
+      position = {-5,0.1,-3},
+      rotation = {0,0,0},
+      width = 500,
+      height = 500,
+      font_size = 100
+  }
+  self.createButton(button_parameters_1)
+end
+
+-- Makes checkboxes
+function createCheckbox()
+    for i, data in ipairs(ref_buttonData.checkbox) do
+        --Sets up reference function
+        local buttonNumber = spawnedButtonCount
+        local funcName = "checkbox"..i
+        local func = function()
+           click_checkbox(i, buttonNumber)
+        end
+        self.setVar(funcName, func)
+        --Sets up label
+        local label = ""
+        if data.state==true then label=string.char(10008) end
+        --Creates button and counts it
+        self.createButton({
+            label          = label,
+            click_function = funcName,
+            function_owner = self,
+            position       = data.pos,
+            height         = data.size,
+            width          = data.size,
+            font_size      = data.size,
+            scale          = buttonScale,
+            color          = buttonColor,
+            font_color     = buttonFontColor
+        })
+        spawnedButtonCount = spawnedButtonCount + 1
+    end
+end
+
+
+function createTextbox()
+    for i, data in ipairs(ref_buttonData.textbox) do
+        --Sets up reference function
+        local funcName = "textbox"..i
+        local func = function(_,_,val,sel) click_textbox(i,val,sel) end
+        self.setVar(funcName, func)
+
+        self.createInput({
+            input_function = funcName,
+            function_owner = self,
+            label          = data.label,
+            alignment      = data.alignment,
+            position       = data.pos,
+            scale          = buttonScale,
+            width          = data.width,
+            height         = (data.font_size*data.rows)+24,
+            font_size      = data.font_size,
+            color          = buttonColor,
+            font_color     = buttonFontColor,
+            value          = data.value,
+        })
+
+
+    end
+end

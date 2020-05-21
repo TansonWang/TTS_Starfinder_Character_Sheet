@@ -227,7 +227,7 @@ defaultButtonData = {
           width     = 900,
           font_size = 800,
           label     = "STR",
-          value     = "10",
+          value     = 10,
           alignment = 3
         },
         -- !! Dexterity !!
@@ -237,7 +237,7 @@ defaultButtonData = {
           width     = 900,
           font_size = 800,
           label     = "DEX",
-          value     = "10",
+          value     = 10,
           alignment = 3
         },
         -- !! Constitution !!
@@ -247,7 +247,7 @@ defaultButtonData = {
           width     = 900,
           font_size = 800,
           label     = "CON",
-          value     = "10",
+          value     = 10,
           alignment = 3
         },
         -- !! Intelligence !!
@@ -257,7 +257,7 @@ defaultButtonData = {
           width     = 900,
           font_size = 800,
           label     = "INT",
-          value     = "10",
+          value     = 10,
           alignment = 3
         },
         -- !! Wisdom !!
@@ -267,7 +267,7 @@ defaultButtonData = {
           width     = 900,
           font_size = 800,
           label     = "WIS",
-          value     = "10",
+          value     = 10,
           alignment = 3
         },
         -- !! Charisma !!
@@ -277,7 +277,7 @@ defaultButtonData = {
           width     = 900,
           font_size = 800,
           label     = "CHA",
-          value     = "10",
+          value     = 10,
           alignment = 3
         },
 
@@ -287,40 +287,40 @@ defaultButtonData = {
         {
           pos       = {-0.997, 0.1, -1.133},
           rows      = 1,
-          width     = 900,
-          font_size = 800,
+          width     = 1000,
+          font_size = 700,
           label     = "KAC",
-          value     = "10",
+          value     = 10,
           alignment = 3
         },
         -- !! EAC !!
         {
           pos       = {-0.658, 0.1, -1.133},
           rows      = 1,
-          width     = 900,
-          font_size = 800,
+          width     = 1000,
+          font_size = 700,
           label     = "EAC",
-          value     = "10",
+          value     = 10,
           alignment = 3
         },
         -- !! Initiative !!
         {
           pos       = {-0.319, 0.1, -1.133},
           rows      = 1,
-          width     = 900,
-          font_size = 800,
+          width     = 1000,
+          font_size = 700,
           label     = "initiative",
-          value     = "0",
+          value     = 0,
           alignment = 3
         },
         -- !! CMD !!
         {
           pos       = {0.02, 0.1, -1.133},
           rows      = 1,
-          width     = 900,
-          font_size = 800,
+          width     = 1000,
+          font_size = 700,
           label     = "CMD",
-          value     = "18",
+          value     = 18,
           alignment = 3
         },
 
@@ -332,7 +332,7 @@ defaultButtonData = {
           width     = 500,
           font_size = 450,
           label     = "FORT",
-          value     = "0",
+          value     = 0,
           alignment = 3
         },
         -- !! REF !!
@@ -342,7 +342,7 @@ defaultButtonData = {
           width     = 500,
           font_size = 450,
           label     = "REF",
-          value     = "0",
+          value     = 0,
           alignment = 3
         },
         -- !! WILL !!
@@ -352,7 +352,7 @@ defaultButtonData = {
           width     = 500,
           font_size = 450,
           label     = "WILL",
-          value     = "0",
+          value     = 0,
           alignment = 3
         },
 
@@ -365,7 +365,7 @@ defaultButtonData = {
           width     = 850,
           font_size = 650,
           label     = "BAB",
-          value     = "0",
+          value     = 0,
           alignment = 3
         },
         -- !! Melee !!
@@ -375,7 +375,7 @@ defaultButtonData = {
           width     = 850,
           font_size = 650,
           label     = "meleeAttackBonus",
-          value     = "0",
+          value     = 0,
           alignment = 3
         },
         -- !! Ranged !!
@@ -385,7 +385,7 @@ defaultButtonData = {
           width     = 850,
           font_size = 650,
           label     = "rangedAttackBonus",
-          value     = "0",
+          value     = 0,
           alignment = 3
         },
         -- !! Thrown !!
@@ -395,7 +395,7 @@ defaultButtonData = {
           width     = 850,
           font_size = 650,
           label     = "thrownAttackBonus",
-          value     = "0",
+          value     = 0,
           alignment = 3
         },
 
@@ -408,7 +408,7 @@ defaultButtonData = {
           width     = 650,
           font_size = 300,
           label     = "maxSP",
-          value     = "0",
+          value     = 0,
           alignment = 3
         },
         -- !! Cur SP !!
@@ -418,7 +418,7 @@ defaultButtonData = {
           width     = 1300,
           font_size = 800,
           label     = "curSP",
-          value     = "0",
+          value     = 0,
           alignment = 3
         },
         -- !! Max HP !!
@@ -428,7 +428,7 @@ defaultButtonData = {
           width     = 650,
           font_size = 300,
           label     = "maxHP",
-          value     = "0",
+          value     = 0,
           alignment = 3
         },
         -- !! Cur HP !!
@@ -438,7 +438,7 @@ defaultButtonData = {
           width     = 1300,
           font_size = 800,
           label     = "curHP",
-          value     = "0",
+          value     = 0,
           alignment = 3
         },
         -- !! Cur RP !!
@@ -448,7 +448,7 @@ defaultButtonData = {
           width     = 900,
           font_size = 800,
           label     = "curRP",
-          value     = "0",
+          value     = 0,
           alignment = 3
         },
         -- !! Max RP !!
@@ -458,7 +458,7 @@ defaultButtonData = {
           width     = 900,
           font_size = 800,
           label     = "maxRP",
-          value     = "0",
+          value     = 0,
           alignment = 3
         },
 
@@ -470,7 +470,7 @@ defaultButtonData = {
           width     = 350,
           font_size = 300,
           label     = "acrobatics",
-          value     = "0",
+          value     = 0,
           alignment = 3
         },
         -- !! Athletics !!
@@ -480,7 +480,7 @@ defaultButtonData = {
           width     = 350,
           font_size = 300,
           label     = "athletics",
-          value     = "0",
+          value     = 0,
           alignment = 3
         },
         -- !! Bluff !!
@@ -490,7 +490,7 @@ defaultButtonData = {
           width     = 350,
           font_size = 300,
           label     = "bluff",
-          value     = "0",
+          value     = 0,
           alignment = 3
         },
         -- !! Computers !!
@@ -500,7 +500,7 @@ defaultButtonData = {
           width     = 350,
           font_size = 300,
           label     = "computers",
-          value     = "0",
+          value     = 0,
           alignment = 3
         },
         -- !! Culture !!
@@ -510,7 +510,7 @@ defaultButtonData = {
           width     = 350,
           font_size = 300,
           label     = "culture",
-          value     = "0",
+          value     = 0,
           alignment = 3
         },
         -- !! Diplomacy !!
@@ -520,7 +520,7 @@ defaultButtonData = {
           width     = 350,
           font_size = 300,
           label     = "diplomacy",
-          value     = "0",
+          value     = 0,
           alignment = 3
         },
         -- !! Disguise !!
@@ -530,7 +530,7 @@ defaultButtonData = {
           width     = 350,
           font_size = 300,
           label     = "disguise",
-          value     = "0",
+          value     = 0,
           alignment = 3
         },
         -- !! Engineering !!
@@ -540,7 +540,7 @@ defaultButtonData = {
           width     = 350,
           font_size = 300,
           label     = "engineering",
-          value     = "0",
+          value     = 0,
           alignment = 3
         },
         -- !! Initmidate !!
@@ -550,7 +550,7 @@ defaultButtonData = {
           width     = 350,
           font_size = 300,
           label     = "intimidate",
-          value     = "0",
+          value     = 0,
           alignment = 3
         },
         -- !! Life Science !!
@@ -560,7 +560,7 @@ defaultButtonData = {
           width     = 350,
           font_size = 300,
           label     = "lifeScience",
-          value     = "0",
+          value     = 0,
           alignment = 3
         },
         -- !! Medicine !!
@@ -570,7 +570,7 @@ defaultButtonData = {
           width     = 350,
           font_size = 300,
           label     = "medicine",
-          value     = "0",
+          value     = 0,
           alignment = 3
         },
         -- !! Mysticism !!
@@ -580,7 +580,7 @@ defaultButtonData = {
           width     = 350,
           font_size = 300,
           label     = "mysticism",
-          value     = "0",
+          value     = 0,
           alignment = 3
         },
         -- !! Perception !!
@@ -590,7 +590,7 @@ defaultButtonData = {
           width     = 350,
           font_size = 300,
           label     = "perception",
-          value     = "0",
+          value     = 0,
           alignment = 3
         },
         -- !! Physical Science !!
@@ -600,7 +600,7 @@ defaultButtonData = {
           width     = 350,
           font_size = 300,
           label     = "physicalScience",
-          value     = "0",
+          value     = 0,
           alignment = 3
         },
         -- !! Piloting !!
@@ -610,7 +610,7 @@ defaultButtonData = {
           width     = 350,
           font_size = 300,
           label     = "piloting",
-          value     = "0",
+          value     = 0,
           alignment = 3
         },
         -- !! Profession !!
@@ -620,7 +620,7 @@ defaultButtonData = {
           width     = 350,
           font_size = 300,
           label     = "profession1",
-          value     = "0",
+          value     = 0,
           alignment = 3
         },
         -- !! Profession !!
@@ -630,7 +630,7 @@ defaultButtonData = {
           width     = 350,
           font_size = 300,
           label     = "profession2",
-          value     = "0",
+          value     = 0,
           alignment = 3
         },
         -- !! Sense Motive !!
@@ -640,7 +640,7 @@ defaultButtonData = {
           width     = 350,
           font_size = 300,
           label     = "senseMotive",
-          value     = "0",
+          value     = 0,
           alignment = 3
         },
         -- !! Sleight of Hand !!
@@ -650,7 +650,7 @@ defaultButtonData = {
           width     = 350,
           font_size = 300,
           label     = "sleightOfHand",
-          value     = "0",
+          value     = 0,
           alignment = 3
         },
         -- !! Stealth !!
@@ -660,7 +660,7 @@ defaultButtonData = {
           width     = 350,
           font_size = 300,
           label     = "stealth",
-          value     = "0",
+          value     = 0,
           alignment = 3
         },
         -- !! Survival !!
@@ -670,7 +670,7 @@ defaultButtonData = {
           width     = 350,
           font_size = 300,
           label     = "survival",
-          value     = "0",
+          value     = 0,
           alignment = 3
         },
 
@@ -682,7 +682,7 @@ defaultButtonData = {
           width     = 350,
           font_size = 300,
           label     = "acrobaticsBonus",
-          value     = "0",
+          value     = 0,
           alignment = 3
         },
         -- !! Athletics !!
@@ -692,7 +692,7 @@ defaultButtonData = {
           width     = 350,
           font_size = 300,
           label     = "athleticsBonus",
-          value     = "0",
+          value     = 0,
           alignment = 3
         },
         -- !! Bluff !!
@@ -702,7 +702,7 @@ defaultButtonData = {
           width     = 350,
           font_size = 300,
           label     = "bluffBonus",
-          value     = "0",
+          value     = 0,
           alignment = 3
         },
         -- !! Computers !!
@@ -712,7 +712,7 @@ defaultButtonData = {
           width     = 350,
           font_size = 300,
           label     = "computersBonus",
-          value     = "0",
+          value     = 0,
           alignment = 3
         },
         -- !! Culture !!
@@ -722,7 +722,7 @@ defaultButtonData = {
           width     = 350,
           font_size = 300,
           label     = "cultureBonus",
-          value     = "0",
+          value     = 0,
           alignment = 3
         },
         -- !! Diplomacy !!
@@ -732,7 +732,7 @@ defaultButtonData = {
           width     = 350,
           font_size = 300,
           label     = "diplomacyBonus",
-          value     = "0",
+          value     = 0,
           alignment = 3
         },
         -- !! Disguise !!
@@ -742,7 +742,7 @@ defaultButtonData = {
           width     = 350,
           font_size = 300,
           label     = "disguiseBonus",
-          value     = "0",
+          value     = 0,
           alignment = 3
         },
         -- !! Engineering !!
@@ -752,7 +752,7 @@ defaultButtonData = {
           width     = 350,
           font_size = 300,
           label     = "engineeringBonus",
-          value     = "0",
+          value     = 0,
           alignment = 3
         },
         -- !! Initmidate !!
@@ -762,7 +762,7 @@ defaultButtonData = {
           width     = 350,
           font_size = 300,
           label     = "intimidateBonus",
-          value     = "0",
+          value     = 0,
           alignment = 3
         },
         -- !! Life Science !!
@@ -772,7 +772,7 @@ defaultButtonData = {
           width     = 350,
           font_size = 300,
           label     = "lifeScienceBonus",
-          value     = "0",
+          value     = 0,
           alignment = 3
         },
         -- !! Medicine !!
@@ -782,7 +782,7 @@ defaultButtonData = {
           width     = 350,
           font_size = 300,
           label     = "medicineBonus",
-          value     = "0",
+          value     = 0,
           alignment = 3
         },
         -- !! Mysticism !!
@@ -792,7 +792,7 @@ defaultButtonData = {
           width     = 350,
           font_size = 300,
           label     = "mysticismBonus",
-          value     = "0",
+          value     = 0,
           alignment = 3
         },
         -- !! Perception !!
@@ -802,7 +802,7 @@ defaultButtonData = {
           width     = 350,
           font_size = 300,
           label     = "perceptionBonus",
-          value     = "0",
+          value     = 0,
           alignment = 3
         },
         -- !! Physical Science !!
@@ -812,7 +812,7 @@ defaultButtonData = {
           width     = 350,
           font_size = 300,
           label     = "physicalScienceBonus",
-          value     = "0",
+          value     = 0,
           alignment = 3
         },
         -- !! Piloting !!
@@ -822,7 +822,7 @@ defaultButtonData = {
           width     = 350,
           font_size = 300,
           label     = "pilotingBonus",
-          value     = "0",
+          value     = 0,
           alignment = 3
         },
         -- !! Profession !!
@@ -832,7 +832,7 @@ defaultButtonData = {
           width     = 350,
           font_size = 300,
           label     = "-profession1Bonus",
-          value     = "0",
+          value     = 0,
           alignment = 3
         },
         -- !! Profession !!
@@ -842,7 +842,7 @@ defaultButtonData = {
           width     = 350,
           font_size = 300,
           label     = "profession2Bonus",
-          value     = "0",
+          value     = 0,
           alignment = 3
         },
         -- !! Sense Motive !!
@@ -852,7 +852,7 @@ defaultButtonData = {
           width     = 350,
           font_size = 300,
           label     = "senseMotiveBonus",
-          value     = "0",
+          value     = 0,
           alignment = 3
         },
         -- !! Sleight of Hand !!
@@ -862,7 +862,7 @@ defaultButtonData = {
           width     = 350,
           font_size = 300,
           label     = "sleightOfHandBonus",
-          value     = "0",
+          value     = 0,
           alignment = 3
         },
         -- !! Stealth !!
@@ -872,7 +872,7 @@ defaultButtonData = {
           width     = 350,
           font_size = 300,
           label     = "stealthBonus",
-          value     = "0",
+          value     = 0,
           alignment = 3
         },
         -- !! Survival !!
@@ -882,7 +882,7 @@ defaultButtonData = {
           width     = 350,
           font_size = 300,
           label     = "survivalBonus",
-          value     = "0",
+          value     = 0,
           alignment = 3
         },
         --ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo--
@@ -905,7 +905,7 @@ defaultButtonData = {
             width     = 950,
             font_size = 300,
             label     = "HP/LVL",
-            value     = "6",
+            value     = 6,
             alignment = 3
         },
         -- !! HP from Race !!
@@ -924,7 +924,7 @@ defaultButtonData = {
             width     = 950,
             font_size = 300,
             label     = "HP/Race",
-            value     = "4",
+            value     = 4,
             alignment = 3
         },
         -- !! Skill ranks per Class Level !!
@@ -943,7 +943,7 @@ defaultButtonData = {
             width     = 950,
             font_size = 300,
             label     = "Ranks/LVL",
-            value     = "4",
+            value     = 4,
             alignment = 3
         },
         -- !! Full BAB progression? !!
@@ -989,7 +989,7 @@ defaultButtonData = {
             width     = 1000,
             font_size = 300,
             label     = "LVL",
-            value     = "1",
+            value     = 1,
             alignment = 2
         },
         -- !! Race !!
@@ -1029,7 +1029,7 @@ defaultButtonData = {
             width     = 1300,
             font_size = 300,
             label     = "speed",
-            value     = "",
+            value     = 30,
             alignment = 2
         },
         -- !! Gender !!
@@ -1121,7 +1121,7 @@ defaultButtonData = {
             width     = 550,
             font_size = 300,
             label     = "weapon1LVL",
-            value     = "1",
+            value     = 1,
             alignment = 2
         },
         {
@@ -1715,29 +1715,181 @@ defaultButtonData = {
     }
 }
 
+attributeGroups = {
+  STATS = {'STATS'},
+  STR = {'STR', 'STATS'},
+  DEX = {'DEX', 'STATS'},
+  CON = {'CON', 'STATS'},
+  INT = {'INT', 'STATS'},
+  WIS = {'WIS', 'STATS'},
+  CHA = {'CHA', 'STATS'},
 
+  MODS = {'MODS'},
+  STRMOD = {'STRMOD', 'STATMODS'},
+  DEXMOD = {'DEXMOD', 'STATMODS'},
+  CONMOD = {'CONMOD', 'STATMODS'},
+  INTMOD = {'INTMOD', 'STATMODS'},
+  WISMOD = {'WISMOD', 'STATMODS'},
+  CHAMOD = {'CHAMOD', 'STATMODS'},
+
+  checks = {'checks'},
+  STRChecks = {'STRChecks', 'checks'},
+  DEXChecks = {'DEXChecks', 'checks'},
+  CONChecks = {'CONChecks', 'checks'},
+  INTChecks = {'INTChecks', 'checks'},
+  WISChecks = {'WISChecks', 'checks'},
+  CHAChecks = {'CHAChecks', 'checks'},
+
+  skills = {'skills', 'checks'},
+  STRSkills = {'STRSkills', 'STRChecks', 'skills', 'checks'},
+  athletics = {'athletics', 'STRSkills', 'STRChecks', 'skills', 'checks'},
+
+  DEXSkills = {'DEXSkills', 'DEXChecks', 'skills', 'checks'},
+  acrobatics = {'acrobatics', 'DEXSkills', 'DEXChecks', 'skills', 'checks'},
+  acrobaticsEscape = {'acrobaticsEscape', 'acrobatics', 'DEXSkills', 'DEXChecks', 'skills', 'checks'},
+  piloting = {'piloting', 'DEXSkills', 'DEXChecks', 'skills', 'checks'},
+  sleightOfHand = {'sleightOfHand', 'DEXSkills', 'DEXChecks', 'skills', 'checks'},
+  stealth = {'stealth', 'DEXSkills', 'DEXChecks', 'skills', 'checks'},
+
+  CONSkills = {'CONSkills', 'CONChecks', 'skills', 'checks'},
+
+  INTSkills = {'INTSkills', 'INTChecks', 'skills', 'checks'},
+  computers = {'computers', 'INTSkills', 'INTChecks', 'skills', 'checks'},
+  culture = {'culture', 'INTSkills', 'INTChecks', 'skills', 'checks'},
+  engineering = {'engineering', 'INTSkills', 'INTChecks', 'skills', 'checks'},
+  lifeScience = {'lifeScience', 'INTSkills', 'INTChecks', 'skills', 'checks'},
+  medicine = {'medicine', 'INTSkills', 'INTChecks', 'skills', 'checks'},
+  physicalScience = {'physicalScience', 'INTSkills', 'INTChecks', 'skills', 'checks'},
+  profession1 = {'profession1', 'INTSkills', 'INTChecks', 'skills', 'checks'},
+
+  WISSkills = {'WISSkills', 'WISChecks', 'skills', 'checks'},
+  mysticism = {'mysticism', 'WISSkills', 'WISChecks', 'skills', 'checks'},
+  perception = {'perception', 'WISSkills', 'WISChecks', 'skills', 'checks'},
+  perceptionSight = {'perceptionSight', 'perception', 'WISSkills', 'WISChecks', 'skills', 'checks'},
+  perceptionHearing = {'perceptionHearing', 'perception', 'WISSkills', 'WISChecks', 'skills', 'checks'},
+  profession2 = {'profession2', 'WISSkills', 'WISChecks', 'skills', 'checks'},
+  senseMotive = {'senseMotive', 'WISSkills', 'WISChecks', 'skills', 'checks'},
+  survival = {'survival', 'WISSkills', 'WISChecks', 'skills', 'checks'},
+
+  CHASkills = {'CHASkills', 'CHAChecks', 'skills', 'checks'},
+  bluff = {'bluff', 'CHASkills', 'CHAChecks', 'skills', 'checks'},
+  diplomacy = {'diplomacy', 'CHASkills', 'CHAChecks', 'skills', 'checks'},
+  disguise = {'disguise', 'CHASkills', 'CHAChecks', 'skills', 'checks'},
+  intimidate = {'intimidate', 'CHASkills', 'CHAChecks', 'skills', 'checks'},
+
+  AC = {'AC'},
+  KAC = {'KAC', 'AC'},
+  RKAC = {'RKAC', 'KAC', 'AC'},
+  MKAC = {'MKAC', 'KAC', 'AC'},
+  EAC = {'EAC', 'AC'},
+  RKAC = {'RKAC', 'EAC', 'AC'},
+  MKAC = {'MKAC', 'EAC', 'AC'},
+
+  maxDEX = {'maxDEX'},
+
+  attackRolls = {'attackRolls'},
+  spellAttackRolls = {'spellAttackRolls', 'attackRolls'},
+  weaponAttackRolls = {'weaponAttackRolls', 'attackRolls'},
+  meleeAttackRolls = {'meleeAttackRolls', 'weaponAttackRolls', 'attackRolls'},
+  basicMeleeAttackRolls = {'basicMeleeAttackRolls', 'meleeAttackRolls', 'weaponAttackRolls', 'attackRolls'},
+  advancedMeleeAttackRolls = {'advancedMeleeAttackRolls', 'meleeAttackRolls', 'weaponAttackRolls', 'attackRolls'},
+  rangedAttackRolls = {'rangedAttackRolls', 'weaponAttackRolls', 'attackRolls'},
+  smallArmAttackRolls = {'smallArmAttackRolls', 'rangedAttackRolls', 'weaponAttackRolls', 'attackRolls'},
+  longarmAttackRolls = {'longarmAttackRolls', 'rangedAttackRolls', 'weaponAttackRolls', 'attackRolls'},
+  heavyWeaponAttackRolls = {'heavyWeaponAttackRolls', 'rangedAttackRolls', 'weaponAttackRolls', 'attackRolls'},
+  thrownAttackRolls = {'thrownAttackRolls', 'rangedAttackRolls', 'weaponAttackRolls', 'attackRolls'},
+
+  attackDamage = {'attackDamage'},
+  spellDamage = {'spellDamage', 'attackDamage'},
+  weaponDamage = {'weaponDamage', 'attackDamage'},
+  meleeDamage = {'meleeDamage', 'weaponDamage', 'attackDamage'},
+  basicMeleeDamage = {'basicMeleeDamage', 'meleeDamage', 'weaponDamage', 'attackDamage'},
+  advancedMeleeDamage = {'advancedMeleeDamage', 'meleeDamage', 'weaponDamage', 'attackDamage'},
+  rangedDamage = {'rangedDamage', 'weaponDamage', 'attackDamage'},
+  smallArmDamage = {'smallArmDamage', 'rangedDamage', 'weaponDamage', 'attackDamage'},
+  longarmDamage = {'longarmDamage', 'rangedDamage', 'weaponDamage', 'attackDamage'},
+  heavyWeaponDamage = {'heavyWeaponDamage', 'rangedDamage', 'weaponDamage', 'attackDamage'},
+  thrownDamage = {'thrownDamage', 'rangedDamage', 'weaponDamage', 'attackDamage'},
+
+  combatManeuvers = {'combatManeuvers', 'attackRolls'},
+  bullRush = {'bullRush', 'combatManeuvers', 'attackRolls'},
+  dirtyTrick = {'dirtyTrick', 'combatManeuvers', 'attackRolls'},
+  disarm = {'disarm', 'combatManeuvers', 'attackRolls'},
+  grapple = {'grapple', 'combatManeuvers', 'attackRolls'},
+  reposition = {'reposition', 'combatManeuvers', 'attackRolls'},
+  sunder = {'sunder', 'combatManeuvers', 'attackRolls'},
+  trip = {'trip', 'combatManeuvers', 'attackRolls'},
+
+  CMD = {'CMD'},
+  bullRushD = {'bullRushD', 'CMD'},
+  dirtyTrickD = {'dirtyTrickD', 'CMD'},
+  disarmD = {'diarmD', 'CMD'},
+  grappleD = {'grappleD', 'CMD'},
+  repositionD = {'repositionD', 'CMD'},
+  sunderD = {'sunderD', 'CMD'},
+  tripD = {'tripD', 'CMD'},
+
+  saves = {'saves'},
+  FORT = {'FORT', 'saves'},
+  REF = {'REF', 'saves'},
+  WILL = {'WILL', 'saves'},
+
+  encumberedBulk = {'encumberedBulk'},
+  overburdenedBulk = {'overburdenedBulk'},
+
+  DC = {'DC'},
+  weaponDC = {'weaponDC', 'DC'},
+  spellDC = {'spellDC', 'DC'},
+  abilityDC = {'abilityDC', 'DC'},
+
+  HP = {'HP'},
+  HPPerLevel = {'HPPerLevel'},
+  SP = {'SP'},
+  SPPerLevel = {'SPPerLevel'},
+  RP = {'RP'},
+  ACP = {'ACP'},
+  ranksPerLevel = {'ranksPerLevel'},
+  casterLevel = {'casterLevel'},
+  spellPenetration = {'spellPenetration'},
+  speed = {'speed'},
+  INIT = {'INIT'},
+}
 
 --Lua beyond this point, I recommend doing something more fun with your life
+--
+function onPlayerTurnStart(player_color_start, player_color_previous)
+  print(player_color_start)
+end
+
+
 
 -- Calculate the outputs, ignoring conditions
 function updateOutputBasic()
   -- Time to update those stats and things!
-  -- Update dem stat MODS oooooooooooooooooooooooooooooooooooooooooooo--
-  STRMOD = math.floor((self.getInputs()[1]['value'] - 10)/ 2)
-  DEXMOD = math.floor((self.getInputs()[2]['value'] - 10)/ 2)
-  CONMOD = math.floor((self.getInputs()[3]['value'] - 10)/ 2)
-  INTMOD = math.floor((self.getInputs()[4]['value'] - 10)/ 2)
-  WISMOD = math.floor((self.getInputs()[5]['value'] - 10)/ 2)
-  CHAMOD = math.floor((self.getInputs()[6]['value'] - 10)/ 2)
+  -- Update base stats
+  STR = self.getInputs()[1]['value'] + effectCalc(c, 'STR')
+  DEX = self.getInputs()[2]['value'] + effectCalc(c, 'DEX')
+  CON = self.getInputs()[3]['value'] + effectCalc(c, 'CON')
+  INT = self.getInputs()[4]['value'] + effectCalc(c, 'INT')
+  WIS = self.getInputs()[5]['value'] + effectCalc(c, 'WIS')
+  CHA = self.getInputs()[6]['value'] + effectCalc(c, 'CHA')
 
+  -- Update dem stat mods
+  STRMOD = math.floor((STR - 10)/ 2) + effectCalc(c, 'STRMOD')
+  DEXMOD = math.floor((DEX - 10)/ 2) + effectCalc(c, 'DEXMOD')
+  CONMOD = math.floor((CON - 10)/ 2) + effectCalc(c, 'CONMOD')
+  INTMOD = math.floor((INT - 10)/ 2) + effectCalc(c, 'INTMOD')
+  WISMOD = math.floor((WIS - 10)/ 2) + effectCalc(c, 'WISMOD')
+  CHAMOD = math.floor((CHA - 10)/ 2) + effectCalc(c, 'CHAMOD')
 
-  -- Update dem KAC, EAC, Initiative and CMD oooooooooooooooooooooooooooooooooooooooooooo--
-  maxDEX = self.getInputs()[125]['value']
-  KAC = 10 + math.min(DEXMOD, maxDEX) + self.getInputs()[124]['value']
-  EAC = 10 + math.min(DEXMOD, maxDEX) + self.getInputs()[123]['value']
-  initiative = DEXMOD
+  -- Update dem KAC, EAC, Initiative and CMD
+  armDexMax = self.getInputs()[125]['value']
+  armKAC = self.getInputs()[124]['value']
+  armEAC = self.getInputs()[123]['value']
+  KAC = 10 + armKAC + math.min(DEXMOD, effectCalc(c, 'maxDEX') + armDexMax) + effectCalc(c, 'KAC')
+  EAC = 10 + armEAC + math.min(DEXMOD, effectCalc(c, 'maxDEX') + armDexMax) + effectCalc(c, 'EAC')
+  INIT = effectCalc(c, 'INIT') + DEXMOD
   CMD = KAC + 8
-
 
   -- Update dem SAVES + define LVL oooooooooooooooooooooooooooooooooooooooooooo--
   -- for each save, see if it is a good save or bad save and calculate.
@@ -1810,7 +1962,7 @@ function updateOutputBoxes()
 
   self.editInput({index=6, value=KAC})
   self.editInput({index=7, value=EAC})
-  self.editInput({index=8, value=initiative})
+  self.editInput({index=8, value=INIT})
   self.editInput({index=9, value=CMD})
 
 
@@ -1860,16 +2012,216 @@ end
 
 --Save function
 function updateSave()
+
+
+    ref_buttonData.currentConditions = {
+      'stunned',
+      'flatfooted',
+      'deafened',
+      'pinned',
+      'flatfooted'
+    }
+
+    ref_buttonData.conditionEffects = {
+      asleep = {
+        other = {'helpless'},
+        perception = -10,
+      },
+      bleeding = {},
+      blinded = {
+        other = {'flatfooted'},
+        STRSkills = -4,
+        DEXSkills = -4,
+        perception = -4,
+        perceptionHearing = -99
+      },
+      broken = {},
+      burning = {},
+      confused = {},
+      cowering = {
+        other = {'flatfooted'},
+      },
+      dazed = {},
+      dazzled = {
+        attackRolls = -1,
+        perceptionSight = -1,
+      },
+      dead = {},
+      deafened = {
+        INIT = -4,
+        perception = -4,
+        perceptionHearing = -99
+      },
+      dying = {},
+      encumbered = {
+        maxDEX = -self.getInputs()[125]['value'] + 2,
+        speed = -10,
+        DEXChecks = -5,
+        STRChecks = -5,
+      },
+      entangled = {
+        speed = -0.5 * self.getInputs()[79]['value'],
+        AC = -2,
+        attackRolls = -2,
+        REF = -2,
+        INIT = -2,
+        DEXChecks = -2,
+      },
+      exhausted = {
+        speed = -0.5 * self.getInputs()[79]['value'],
+        AC = -3,
+        attackRolls = -3,
+        meleeDamage = -3,
+        thrownDamage = -3,
+        INIT = -3,
+        REF = -3,
+        DEXChecks = -3,
+        STRChecks = -3,
+        encumberedBulk = -3,
+      },
+      fascinated = {
+        perception = -4,
+      },
+      fatigued = {
+        AC = -1,
+        attackRolls = -1,
+        meleeDamage = -1,
+        REF = -1,
+        INIT = -1,
+        DEXChecks = -1,
+        STRChecks = -1,
+        encumberedBulk = -1,
+      },
+      flatfooted = {
+        AC = -2
+      },
+      frightened = {
+        attackRolls = -2,
+        saves = -2,
+        checks = -2,
+      },
+      grappled = {
+        AC = -2,
+        attackRolls = -2,
+        REF = -2,
+        INIT = -2,
+        DEXChecks = -2,
+        grapple = 2,
+        acrobaticsEscape = 2
+      },
+      helpless = {
+        DEX = -self.getInputs()[143]['value'] - 5,
+        MAC = -4
+      },
+      nauseated = {},
+      offkilter = {
+        other = {'flatfooted'},
+        attackRolls = -2,
+      },
+      offtarget = {attackRolls = -2},
+      overburdened = {
+        speed = -self.getInputs()[79]['value'] + 5,
+        maxDEX = -self.getInputs()[125]['value'],
+        REF = -5,
+        DEXChecks = -5,
+        STRChecks = -5,
+      },
+      panicked = {
+        saves = -2,
+        checks = -2,
+      },
+      paralyzed = {},
+      pinned = {
+        other = {'flatfooted'},
+        speed = -self.getInputs()[79]['value'],
+        AC = -4,
+        attackRolls = -4,
+        REF = -4,
+        INIT = -4,
+        DEXChecks = -4,
+      },
+      prone = {
+        RAC = 4,
+        MAC = -4,
+        meleeAttackRolls = -4,
+      },
+      shaken = {
+        attackRolls = -2,
+        saves = -2,
+        checks = -2,
+      },
+      sickened = {
+        attackRolls = -2,
+        weaponDamage = -2,
+        saves = -2,
+        checks = -2,
+      },
+      stable = {},
+      staggered = {},
+      stunned = {
+        other = {'flatfooted'},
+      },
+      unconscious = {}
+    }
+
+    c = ref_buttonData.currentConditions
+    c = tagEffects(c)
     updateOutputBasic()
     updateOutputBoxes()
 
-    -- Update the data and reset the sheet if disableSave is turned on.
     saved_data = JSON.encode(ref_buttonData)
     if disableSave==true then saved_data="" end
     self.script_state = saved_data
 end
 
+function tagEffects(effectsList)
+  effects = ref_buttonData.conditionEffects
+  taggedEffects = {}
+  for i,condition in pairs(effectsList) do
+    if taggedEffects[condition] == nil then
+      print('taggedEffects has a new effect: '..condition)
+      taggedEffects[condition] = true
+      if effects[condition]['other'] ~= nil then
+        for j, additionalCondition in pairs(effects[condition]['other']) do
+          if additionalCondition ~= nil then
+            print(condition..' also wants to add the effect '..additionalCondition)
+            if taggedEffects[additionalCondition] == nil then
+              print('Accepted!')
+              taggedEffects[additionalCondition] = true
+            else
+              print('Rejected!')
+            end
+          end
+        end
+      end
+    else
+      print('taggedEffects already has '..condition)
+    end
+  end
+  return taggedEffects
+end
 
+
+function effectCalc(conditions, stat)
+  effects = ref_buttonData.conditionEffects
+  total = 0
+  replacements = {}
+  print('Looking for '..stat..' affecting conditions')
+  for i,possibleStat in pairs(attributeGroups[stat]) do
+    print(stat..' could be listed as '..possibleStat)
+    for condition, j in pairs(conditions) do
+      print('Looking for things affecting '..possibleStat..' in '..condition)
+      if effects[condition][possibleStat] ~= nil then
+        print(possibleStat..' is affected by '..condition..'!')
+        total = total + effects[condition][possibleStat]
+        print('Current total is '..total)
+      end
+    end
+  end
+  print('Final total for '..stat..' is '..total)
+  print('There are '..#replacements..' replacements waiting\n')
+  return total
+end
 
 --Startup procedure
 function onload(saved_data)
@@ -1884,6 +2236,7 @@ function onload(saved_data)
     spawnedButtonCount = 0
     createCheckbox()
     createTextbox()
+    createButton()
 
 
 
@@ -1914,7 +2267,9 @@ function click_textbox(i, value, selected)
 end
 
 --Dud function for if you have a background on a counter
-function click_none() end
+function click_button()
+  updateSave()
+end
 
 
 
@@ -1966,4 +2321,18 @@ function createTextbox()
 
 
     end
+end
+
+function createButton()
+  button_parameters_1 = {
+      click_function = 'click_button',
+      function_owner = self,
+      label = '',
+      position = {-5,0.1,-3},
+      rotation = {0,0,0},
+      width = 500,
+      height = 500,
+      font_size = 100
+  }
+  self.createButton(button_parameters_1)
 end

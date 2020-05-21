@@ -1,0 +1,41 @@
+-- !! ALERT !! --
+-- replace card_GUID with the GUID of an object of your choice.
+-- a large, flat plane like a card is ideal.
+card_GUID = 'b1b440'
+print('Penguin')
+
+button_parameters = {
+    click_function='SpawnMissile', function_owner=nil, label='NUKE',
+    position={0,0.8,0}, rotation={0,0,0}, width=500, height=500, font_size=100
+}
+
+function onLoad()
+  card = getObjectFromGUID(card_GUID)
+  print('Penguin')
+  card.createButton(button_parameters)
+  print('Penguin')
+end
+
+function SpawnMissile()
+  local pos = card.getPosition()
+  local angle = card.getRotation()
+  print('Penguin')
+  spawnparams = {
+    type = 'Custom_Assetbundle',
+    position          = {pos.x,pos.y+1,pos.z},
+    rotation          = {angle.x, angle.y, angle.z},
+    scale             = {x=1, y=1, z=1},
+}
+missile = spawnObject(spawnparams)
+params = {
+    assetbundle = "http://cloud-3.steamusercontent.com/ugc/967615741393485109/01E45EA1FA36958B4CB453090E04418DA8EFC717/",
+    type = 1,
+    material = 0,
+}
+missile.setCustomObject(params)
+s = getObjectFromGUID(missile.getGUID())
+
+print(s.getGUID()..' is the guid')
+print('Penguin')
+
+end

@@ -1713,7 +1713,6 @@ defaultButtonData = {
         },
         --End of textboxes
     },
-
     --Add buttons
     button = {
       -- Acrobatics

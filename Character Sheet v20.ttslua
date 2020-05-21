@@ -207,7 +207,6 @@ defaultButtonData = {
     },
     --THE COUNTERS ARE DEAD BABY
     counter = {},
-
     --Add editable text boxes
     textbox = {
         --[[
@@ -969,7 +968,7 @@ defaultButtonData = {
             width     = 5000,
             font_size = 300,
             label     = "name",
-            value     = "",
+            value     = "Fyrtog the Mighty",
             alignment = 2
         },
         -- !! Class !!
@@ -1410,7 +1409,7 @@ defaultButtonData = {
             width     = 2500,
             font_size = 300,
             label     = "profession1Type",
-            value     = 4,
+            value     = "(INT-based)",
             alignment = 2
         },
         -- !! Professions 2 !!
@@ -1420,7 +1419,7 @@ defaultButtonData = {
             width     = 2500,
             font_size = 300,
             label     = "profession2Type",
-            value     = 5,
+            value     = "(WIS-based)",
             alignment = 2
         },
 
@@ -1712,6 +1711,135 @@ defaultButtonData = {
           alignment = 3
         },
         --End of textboxes
+    },
+    --Add buttons
+    button = {
+      -- Acrobatics
+      {
+         label = 'acrobatics',
+         pos = {1.48, 0.1, -1.183},
+         rot = {0,0,0},
+      },
+      -- Athletics
+      {
+          pos   = {1.48, 0.1, -1.085},
+          rot = {0,0,0},
+          label = "athletics"
+      },
+      -- Bluff
+      {
+          pos   = {1.48, 0.1, -0.994},
+          rot = {0,0,0},
+          label = "bluff"
+      },
+      -- Computers
+      {
+          pos   = {1.48, 0.1, -0.895},
+          rot = {0,0,0},
+          label = "computers"
+      },
+      -- Culture
+      {
+          pos   = {1.48, 0.1, -0.8},
+          rot = {0,0,0},
+          label = "culture"
+      },
+      -- Diplomacy
+      {
+          pos   = {1.48, 0.1, -0.701},
+          rot = {0,0,0},
+          label = "diplomacy"
+      },
+      -- Disguise
+      {
+          pos   = {1.48, 0.1, -0.604},
+          rot = {0,0,0},
+          label = "disguise"
+      },
+      -- Engineering
+      {
+          pos   = {1.48, 0.1, -0.508},
+          rot = {0,0,0},
+          label = "engineering"
+      },
+      -- Intimidate
+      {
+          pos   = {1.48, 0.1, -0.414},
+          rot = {0,0,0},
+          label = "intimidate"
+      },
+      -- Life Science
+      {
+          pos   = {1.48, 0.1, -0.317},
+          rot = {0,0,0},
+          label = "lifeScience"
+      },
+      -- Medicine
+      {
+          pos   = {1.48, 0.1, -0.215},
+          rot = {0,0,0},
+          label = "medicine"
+      },
+      -- Mysticism
+      {
+          pos   = {1.48, 0.1, -0.119},
+          rot = {0,0,0},
+          label = "mysticism"
+      },
+      -- Perception
+      {
+          pos   = {1.48, 0.1, -0.016},
+          rot = {0,0,0},
+          label = "perception"
+      },
+      -- Physical Science
+      {
+          pos   = {1.48, 0.1, 0.074},
+          rot = {0,0,0},
+          label = "physicalScience"
+      },
+      -- Piloting
+      {
+          pos   = {1.48, 0.1, 0.172},
+          rot = {0,0,0},
+          label = "piloting"
+      },
+      -- Profession
+      {
+          pos   = {1.48, 0.1, 0.27},
+          rot = {0,0,0},
+          label = "profession1"
+      },
+      -- Profession
+      {
+          pos   = {1.48, 0.1, 0.461},
+          rot = {0,0,0},
+          label = "profession2"
+      },
+      -- Sense Motive
+      {
+          pos   = {1.48, 0.1, 0.655},
+          rot = {0,0,0},
+          label = "senseMotive"
+      },
+      -- Sleight of Hand
+      {
+          pos   = {1.48, 0.1, 0.753},
+          rot = {0,0,0},
+          label = "sleightOfHand"
+      },
+      -- Stealth
+      {
+          pos   = {1.48, 0.1, 0.851},
+          rot = {0,0,0},
+          label = "stealth"
+      },
+      -- Survival
+      {
+          pos   = {1.48, 0.1, 0.948},
+          rot = {0,0,0},
+          label = "survival"
+      },
     }
 }
 
@@ -1933,7 +2061,7 @@ function updateOutputBasic()
   -- this assumes that no effects are capable of changing skill ranks
   -- (i swear ta god)
   function calculateSkills(skill, stat)
-    statModRef = {STRMOD, DEXMOD, CONMOD, INTMOD, WISMOD, CHAMOD}
+    local statModRef = {STRMOD, DEXMOD, CONMOD, INTMOD, WISMOD, CHAMOD}
     if ref_buttonData.checkbox[skill].state == true  and tonumber(self.getInputs()[skill + 23]['value']) ~= 0 then
       return self.getInputs()[skill + 23]['value'] + statModRef[stat] + 3
     else
@@ -1942,27 +2070,27 @@ function updateOutputBasic()
   end
 
   ACP = effectCalc(c, 'ACP', self.getInputs()[126]['value'])
-  acrobaticsBonus = effectCalc(c, 'acrobatics', calculateSkills(1, 2) - ACP)
-  athleticsBonus = effectCalc(c, 'athletics', calculateSkills(2, 1) - ACP)
-  bluffBonus = effectCalc(c, 'bluff', calculateSkills(3, 6))
-  computersBonus = effectCalc(c, 'computers', calculateSkills(4, 4))
-  cultureBonus = effectCalc(c, 'culture', calculateSkills(5, 4))
-  diplomacyBonus = effectCalc(c, 'diplomacy', calculateSkills(6, 6))
-  disguiseBonus = effectCalc(c, 'disguise', calculateSkills(7, 6))
-  engineeringBonus = effectCalc(c, 'engineering', calculateSkills(8, 4))
-  intimidateBonus = effectCalc(c, 'intimidate', calculateSkills(9, 6))
-  lifeScienceBonus = effectCalc(c, 'lifeScience', calculateSkills(10, 4))
-  medicineBonus = effectCalc(c, 'medicine', calculateSkills(11, 4))
-  mysticismBonus = effectCalc(c, 'mysticism', calculateSkills(12, 5))
-  perceptionBonus = effectCalc(c, 'perception', calculateSkills(13, 5))
-  physicalScienceBonus = effectCalc(c, 'physicalScience', calculateSkills(14, 4))
-  pilotingBonus = effectCalc(c, 'piloting', calculateSkills(15, 2))
-  profession1Bonus = effectCalc(c, 'profession1', calculateSkills(16, 4))
-  profession2Bonus = effectCalc(c, 'profession2', calculateSkills(17, 5))
-  senseMotiveBonus = effectCalc(c, 'senseMotive', calculateSkills(18, 5))
-  sleightOfHandBonus = effectCalc(c, 'sleightOfHand', calculateSkills(19, 2) - ACP)
-  stealthBonus = effectCalc(c, 'stealth', calculateSkills(20, 2) - ACP)
-  survivalBonus = effectCalc(c, 'survival', calculateSkills(21, 5))
+  acrobatics = effectCalc(c, 'acrobatics', calculateSkills(1, 2) - ACP)
+  athletics = effectCalc(c, 'athletics', calculateSkills(2, 1) - ACP)
+  bluff = effectCalc(c, 'bluff', calculateSkills(3, 6))
+  computers = effectCalc(c, 'computers', calculateSkills(4, 4))
+  culture = effectCalc(c, 'culture', calculateSkills(5, 4))
+  diplomacy = effectCalc(c, 'diplomacy', calculateSkills(6, 6))
+  disguise = effectCalc(c, 'disguise', calculateSkills(7, 6))
+  engineering = effectCalc(c, 'engineering', calculateSkills(8, 4))
+  intimidate = effectCalc(c, 'intimidate', calculateSkills(9, 6))
+  lifeScience = effectCalc(c, 'lifeScience', calculateSkills(10, 4))
+  medicine = effectCalc(c, 'medicine', calculateSkills(11, 4))
+  mysticism = effectCalc(c, 'mysticism', calculateSkills(12, 5))
+  perception = effectCalc(c, 'perception', calculateSkills(13, 5))
+  physicalScience = effectCalc(c, 'physicalScience', calculateSkills(14, 4))
+  piloting = effectCalc(c, 'piloting', calculateSkills(15, 2))
+  profession1 = effectCalc(c, 'profession1', calculateSkills(16, 4))
+  profession2 = effectCalc(c, 'profession2', calculateSkills(17, 5))
+  senseMotive = effectCalc(c, 'senseMotive', calculateSkills(18, 5))
+  sleightOfHand = effectCalc(c, 'sleightOfHand', calculateSkills(19, 2) - ACP)
+  stealth = effectCalc(c, 'stealth', calculateSkills(20, 2) - ACP)
+  survival = effectCalc(c, 'survival', calculateSkills(21, 5))
 end
 
 -- Set all the textboxes
@@ -1994,27 +2122,27 @@ function updateOutputBoxes()
   self.editInput({index=15, value=rangedAttackBonus})
   self.editInput({index=16, value=thrownAttackBonus})
 
-  self.editInput({index=44, value=acrobaticsBonus})
-  self.editInput({index=45, value=athleticsBonus})
-  self.editInput({index=46, value=bluffBonus})
-  self.editInput({index=47, value=computersBonus})
-  self.editInput({index=48, value=cultureBonus})
-  self.editInput({index=49, value=diplomacyBonus})
-  self.editInput({index=50, value=disguiseBonus})
-  self.editInput({index=51, value=engineeringBonus})
-  self.editInput({index=52, value=intimidateBonus})
-  self.editInput({index=53, value=lifeScienceBonus})
-  self.editInput({index=54, value=medicineBonus})
-  self.editInput({index=55, value=mysticismBonus})
-  self.editInput({index=56, value=perceptionBonus})
-  self.editInput({index=57, value=physicalScienceBonus})
-  self.editInput({index=58, value=pilotingBonus})
-  self.editInput({index=59, value=profession1Bonus})
-  self.editInput({index=60, value=profession2Bonus})
-  self.editInput({index=61, value=senseMotiveBonus})
-  self.editInput({index=62, value=sleightOfHandBonus})
-  self.editInput({index=63, value=stealthBonus})
-  self.editInput({index=64, value=survivalBonus})
+  self.editInput({index=44, value=acrobatics})
+  self.editInput({index=45, value=athletics})
+  self.editInput({index=46, value=bluff})
+  self.editInput({index=47, value=computers})
+  self.editInput({index=48, value=culture})
+  self.editInput({index=49, value=diplomacy})
+  self.editInput({index=50, value=disguise})
+  self.editInput({index=51, value=engineering})
+  self.editInput({index=52, value=intimidate})
+  self.editInput({index=53, value=lifeScience})
+  self.editInput({index=54, value=medicine})
+  self.editInput({index=55, value=mysticism})
+  self.editInput({index=56, value=perception})
+  self.editInput({index=57, value=physicalScience})
+  self.editInput({index=58, value=piloting})
+  self.editInput({index=59, value=profession1})
+  self.editInput({index=60, value=profession2})
+  self.editInput({index=61, value=senseMotive})
+  self.editInput({index=62, value=sleightOfHand})
+  self.editInput({index=63, value=stealth})
+  self.editInput({index=64, value=survival})
 
   -- Update dem Ranks
   ranks = 0
@@ -2326,9 +2454,10 @@ function click_textbox(i, value, selected)
     end
 end
 
--- a button that updates the sheet. IT'S A BUTTON YEEEE
-function click_button()
+--Print out the modifier for a skill check
+function skill_button(skill_name)
   updateSave()
+  print(self.getInputs()[73]['value']..' rolls a '..skill_name..' check with a '.._G[skill_name]..' modifier!')
 end
 
 
@@ -2384,21 +2513,28 @@ function createTextbox()
 end
 
 function createButton()
-  button_parameters_1 = {
-      click_function = 'click_button',
-      function_owner = self,
-      label = '',
-      position = {-5,0.1,-3},
-      rotation = {0,0,0},
-      width = 500,
-      height = 500,
-      font_size = 100
-  }
-  self.createButton(button_parameters_1)
+  for i, data in ipairs(ref_buttonData.button) do
+    local buttonNumber = spawnedButtonCount
+    local funcName = "skillbutton"..i
+    local func = function() skill_button(data.label) end
+    self.setVar(funcName, func)
+    button_parameters = {
+      click_function = funcName,
+      function_owner  = self,
+      label = data.label,
+      position = data.pos,
+      rotation = data.rot,
+      height = 40,
+      width = 40,
+      font_size = 1,
+    }
+    self.createButton(button_parameters)
+    spawnedButtonCount = spawnedButtonCount + 1
+  end
 end
 
 
---
+-- this function is only used in updateSave() because lua is stupid and doesn't have this natively
 function boolToInt(bool)
   if bool == true then return 1
   elseif bool == false then return 0

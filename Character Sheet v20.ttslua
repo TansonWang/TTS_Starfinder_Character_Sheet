@@ -1850,11 +1850,11 @@ attributeGroups = {
   spellDC = {'spellDC', 'DC'},
   abilityDC = {'abilityDC', 'DC'},
 
-  HP = {'HP'},
+  maxHP = {'maxHP'},
   HPPerLevel = {'HPPerLevel'},
-  SP = {'SP'},
+  maxSP = {'maxSP'},
   SPPerLevel = {'SPPerLevel'},
-  RP = {'RP'},
+  maxRP = {'maxRP'},
   ACP = {'ACP'},
   ranksPerLevel = {'ranksPerLevel'},
   casterLevel = {'casterLevel'},
@@ -1875,88 +1875,94 @@ end
 function updateOutputBasic()
   -- Time to update those stats and things!
   -- Update base stats
-  STR = self.getInputs()[1]['value'] + effectCalc(c, 'STR')
-  DEX = self.getInputs()[2]['value'] + effectCalc(c, 'DEX')
-  CON = self.getInputs()[3]['value'] + effectCalc(c, 'CON')
-  INT = self.getInputs()[4]['value'] + effectCalc(c, 'INT')
-  WIS = self.getInputs()[5]['value'] + effectCalc(c, 'WIS')
-  CHA = self.getInputs()[6]['value'] + effectCalc(c, 'CHA')
+  STR = effectCalc(c, 'STR', self.getInputs()[1]['value'])
+  DEX = effectCalc(c, 'DEX', self.getInputs()[2]['value'])
+  CON = effectCalc(c, 'CON', self.getInputs()[3]['value'])
+  INT = effectCalc(c, 'INT', self.getInputs()[4]['value'])
+  WIS = effectCalc(c, 'WIS', self.getInputs()[5]['value'])
+  CHA = effectCalc(c, 'CHA', self.getInputs()[6]['value'])
 
   -- Update dem stat mods
-  STRMOD = math.floor((STR - 10)/ 2) + effectCalc(c, 'STRMOD')
-  DEXMOD = math.floor((DEX - 10)/ 2) + effectCalc(c, 'DEXMOD')
-  CONMOD = math.floor((CON - 10)/ 2) + effectCalc(c, 'CONMOD')
-  INTMOD = math.floor((INT - 10)/ 2) + effectCalc(c, 'INTMOD')
-  WISMOD = math.floor((WIS - 10)/ 2) + effectCalc(c, 'WISMOD')
-  CHAMOD = math.floor((CHA - 10)/ 2) + effectCalc(c, 'CHAMOD')
+  STRMOD = effectCalc(c, 'STRMOD', math.floor((STR - 10)/ 2))
+  DEXMOD = effectCalc(c, 'DEXMOD', math.floor((DEX - 10)/ 2))
+  CONMOD = effectCalc(c, 'CONMOD', math.floor((CON - 10)/ 2))
+  INTMOD = effectCalc(c, 'INTMOD', math.floor((INT - 10)/ 2))
+  WISMOD = effectCalc(c, 'WISMOD', math.floor((WIS - 10)/ 2))
+  CHAMOD = effectCalc(c, 'CHAMOD', math.floor((CHA - 10)/ 2))
 
   -- Update dem KAC, EAC, Initiative and CMD
-  armDexMax = self.getInputs()[125]['value']
-  armKAC = self.getInputs()[124]['value']
-  armEAC = self.getInputs()[123]['value']
-  KAC = 10 + armKAC + math.min(DEXMOD, effectCalc(c, 'maxDEX') + armDexMax) + effectCalc(c, 'KAC')
-  EAC = 10 + armEAC + math.min(DEXMOD, effectCalc(c, 'maxDEX') + armDexMax) + effectCalc(c, 'EAC')
-  INIT = effectCalc(c, 'INIT') + DEXMOD
-  CMD = KAC + 8
+  maxDEX = effectCalc(c, 'maxDEX', self.getInputs()[125]['value'])
+  -- KAC and EAC have been split in half for clarity.
+  KAC = effectCalc(c, 'KAC', self.getInputs()[124]['value'])
+  EAC = effectCalc(c, 'EAC', self.getInputs()[123]['value'])
+  KAC = 10 + KAC + math.min(DEXMOD, effectCalc(c, 'maxDEX', maxDEX))
+  EAC = 10 + EAC + math.min(DEXMOD, effectCalc(c, 'maxDEX', maxDEX))
+  INIT = effectCalc(c, 'INIT', DEXMOD)
+  CMD = effectCalc(c, 'CMD', KAC + 8)
 
-  -- Update dem SAVES + define LVL oooooooooooooooooooooooooooooooooooooooooooo--
+  -- Update dem SAVES + define LVL
   -- for each save, see if it is a good save or bad save and calculate.
-  function calculateSave(lvl, state)
-    if state == true then return math.floor(lvl/2)+2
-    else return math.floor(lvl/3) end
-  end
+  -- the save formula is SAVE = min(LVL/(3 - bool) + 2 * bool + STATMOD
 
   LVL = self.getInputs()[75]['value']
-  FORT = calculateSave(LVL, ref_buttonData.checkbox[23].state) + CONMOD
-  REF = calculateSave(LVL, ref_buttonData.checkbox[24].state) + DEXMOD
-  WILL = calculateSave(LVL, ref_buttonData.checkbox[25].state) + WISMOD
+  goodFORT = boolToInt(ref_buttonData.checkbox[23].state)
+  goodREF = boolToInt(ref_buttonData.checkbox[24].state)
+  goodWILL = boolToInt(ref_buttonData.checkbox[25].state)
+  FORT = effectCalc(c, 'FORT', math.floor(LVL/(3 - goodFORT)) + 2 * goodFORT + CONMOD)
+  REF = effectCalc(c, 'REF', math.floor(LVL/(3 - goodREF)) + 2 * goodREF + DEXMOD)
+  WILL = effectCalc(c, 'WILL', math.floor(LVL/(3 - goodWILL)) + 2 *goodWILL + WISMOD)
 
 
-  -- Update dem BAB, attack bonuses oooooooooooooooooooooooooooooooooooooooooooo--
-  if ref_buttonData.checkbox[22].state == true then BAB = LVL
-  else BAB = math.floor(LVL * 3/4) end
-  meleeAttackBonus = BAB + STRMOD
-  rangedAttackBonus = BAB + DEXMOD
-  thrownAttackBonus = BAB + STRMOD
+  -- Update dem BAB, attack bonuses
+  BAB = math.floor(LVL * 3/4 + (LVL/4) * boolToInt(ref_buttonData.checkbox[22].state))
+  meleeAttackBonus = effectCalc(c, 'meleeAttackRolls', BAB + STRMOD)
+  rangedAttackBonus = effectCalc(c, 'rangedAttackRolls', BAB + DEXMOD)
+  thrownAttackBonus = effectCalc(c, 'thrownAttackRolls', BAB + STRMOD)
 
 
-  -- Update dem max sp/hp/rp oooooooooooooooooooooooooooooooooooooooooooo--
-  maxSP = LVL * (self.getInputs()[67]['value'] + CONMOD)
-  maxHP = LVL * self.getInputs()[67]['value'] + self.getInputs()[69]['value']
-  maxRP = math.max(math.floor(LVL / 2) + self.getInputs()[141 + self.getInputs()[149]['value']]['value'], 1)
+  -- Update dem max sp/hp/rp + keySTAT
+  SPPerLevel = effectCalc(c, 'SPPerLevel', self.getInputs()[67]['value'] + CONMOD)
+  HPPerLevel = effectCalc(c, 'HPPerLevel', self.getInputs()[67]['value'])
+  maxSP = effectCalc(c, 'maxSP', SPPerLevel * LVL)
+  maxHP = effectCalc(c, 'maxHP', HPPerLevel * LVL)
+  keySTAT = self.getInputs()[141 + self.getInputs()[149]['value']]['value']
+  maxRP = effectCalc(c, 'maxRP', math.max(math.floor(LVL / 2) + keySTAT, 1))
 
 
   -- Update dem skills + ACP
+  -- this assumes that no effects are capable of changing skill ranks
+  -- (i swear ta god)
   function calculateSkills(skill, stat)
+    statModRef = {STRMOD, DEXMOD, CONMOD, INTMOD, WISMOD, CHAMOD}
     if ref_buttonData.checkbox[skill].state == true  and tonumber(self.getInputs()[skill + 23]['value']) ~= 0 then
-      return self.getInputs()[skill + 23]['value'] + self.getInputs()[141 + stat]['value'] + 3
+      return self.getInputs()[skill + 23]['value'] + statModRef[stat] + 3
     else
-      return self.getInputs()[skill + 23]['value'] + self.getInputs()[141 + stat]['value']
+      return self.getInputs()[skill + 23]['value'] + statModRef[stat]
     end
-    end
+  end
 
-  ACP = self.getInputs()[126]['value']
-  acrobaticsBonus = calculateSkills(1, 2) - ACP
-  athleticsBonus = calculateSkills(2, 1) - ACP
-  bluffBonus = calculateSkills(3, 6)
-  computersBonus = calculateSkills(4, 4)
-  cultureBonus = calculateSkills(5, 4)
-  diplomacyBonus = calculateSkills(6, 6)
-  disguiseBonus = calculateSkills(7, 6)
-  engineeringBonus = calculateSkills(8, 4)
-  intimidateBonus = calculateSkills(9, 6)
-  lifeScienceBonus = calculateSkills(10, 4)
-  medicineBonus = calculateSkills(11, 4)
-  mysticismBonus = calculateSkills(12, 5)
-  perceptionBonus = calculateSkills(13, 5)
-  physicalScienceBonus = calculateSkills(14, 4)
-  pilotingBonus = calculateSkills(15, 2)
-  profession1Bonus = calculateSkills(16, self.getInputs()[119]['value'])
-  profession2Bonus = calculateSkills(17, self.getInputs()[120]['value'])
-  senseMotiveBonus = calculateSkills(18, 5)
-  sleightOfHandBonus = calculateSkills(19, 2) - ACP
-  stealthBonus = calculateSkills(20, 2) - ACP
-  survivalBonus = calculateSkills(21, 5)
+  ACP = effectCalc(c, 'ACP', self.getInputs()[126]['value'])
+  acrobaticsBonus = effectCalc(c, 'acrobatics', calculateSkills(1, 2) - ACP)
+  athleticsBonus = effectCalc(c, 'athletics', calculateSkills(2, 1) - ACP)
+  bluffBonus = effectCalc(c, 'bluff', calculateSkills(3, 6))
+  computersBonus = effectCalc(c, 'computers', calculateSkills(4, 4))
+  cultureBonus = effectCalc(c, 'culture', calculateSkills(5, 4))
+  diplomacyBonus = effectCalc(c, 'diplomacy', calculateSkills(6, 6))
+  disguiseBonus = effectCalc(c, 'disguise', calculateSkills(7, 6))
+  engineeringBonus = effectCalc(c, 'engineering', calculateSkills(8, 4))
+  intimidateBonus = effectCalc(c, 'intimidate', calculateSkills(9, 6))
+  lifeScienceBonus = effectCalc(c, 'lifeScience', calculateSkills(10, 4))
+  medicineBonus = effectCalc(c, 'medicine', calculateSkills(11, 4))
+  mysticismBonus = effectCalc(c, 'mysticism', calculateSkills(12, 5))
+  perceptionBonus = effectCalc(c, 'perception', calculateSkills(13, 5))
+  physicalScienceBonus = effectCalc(c, 'physicalScience', calculateSkills(14, 4))
+  pilotingBonus = effectCalc(c, 'piloting', calculateSkills(15, 2))
+  profession1Bonus = effectCalc(c, 'profession1', calculateSkills(16, 4))
+  profession2Bonus = effectCalc(c, 'profession2', calculateSkills(17, 5))
+  senseMotiveBonus = effectCalc(c, 'senseMotive', calculateSkills(18, 5))
+  sleightOfHandBonus = effectCalc(c, 'sleightOfHand', calculateSkills(19, 2) - ACP)
+  stealthBonus = effectCalc(c, 'stealth', calculateSkills(20, 2) - ACP)
+  survivalBonus = effectCalc(c, 'survival', calculateSkills(21, 5))
 end
 
 -- Set all the textboxes
@@ -2023,10 +2029,8 @@ function updateSave()
 
 
     ref_buttonData.currentConditions = {
-      'encumbered',
-      'overburdened',
-      'pinned',
-      'grappled',
+      'shaken',
+      'helpless'
     }
 
     ref_buttonData.conditionEffects = {
@@ -2063,9 +2067,9 @@ function updateSave()
       encumbered = {
         maxDEX = '2',
         speed = -10,
-        ACP = '-5'
-        -- STRAbilityChecks = min(ACP, -5)
-        -- DEXAbilityChecks = min(ACP, -5)
+        ACP = '-5',
+        STRAbilityChecks = -5,
+        DEXAbilityChecks = -5,
       },
       entangled = {
         speed = -0.5 * self.getInputs()[79]['value'], -- replace later
@@ -2135,9 +2139,9 @@ function updateSave()
         speed = '5',
         maxDEX = '0',
         REF = -5,
-        ACP = '-5'
-        -- STRAbilityChecks = min(ACP, -5)
-        -- DEXAbilityChecks = min(ACP, -5)
+        ACP = '-5',
+        STRAbilityChecks = -5,
+        DEXAbilityChecks = -5,
       },
       panicked = {
         saves = -2,
@@ -2245,34 +2249,38 @@ function tagEffects(effectsList)
   return taggedEffects
 end
 
-
-function effectCalc(conditions, stat)
+-- note, if let initial = false, then it will ignore it
+function effectCalc(conditions, stat, initial)
   effects = ref_buttonData.conditionEffects
   total = 0
   replacements = {}
-  print('Looking for '..stat..' affecting conditions')
+  -- print('Looking for '..stat..' effecting conditions')
   for i,possibleStat in pairs(attributeGroups[stat]) do
-    print(stat..' could be listed as '..possibleStat)
+    -- print(stat..' could be listed as '..possibleStat)
     for condition, j in pairs(conditions) do
-      print('Looking for things affecting '..possibleStat..' in '..condition)
+      -- print('Looking for things effecting '..possibleStat..' in '..condition)
       if type(effects[condition][possibleStat]) == 'number' then
-        print(possibleStat..' is affected in a normal way by '..condition..'!')
+        -- print(possibleStat..' is effected by '..condition..'!')
         total = total + effects[condition][possibleStat]
-        print('Current total is '..total)
+        -- print('Current total is '..total)
       elseif type(effects[condition][possibleStat]) == 'string' then
-        print(condition..' wants to replace '..possibleStat..'... add it to the replacements list.')
+        -- print(condition..' wants to replace '..possibleStat..'... add it to the replacements list.')
         table.insert(replacements, effects[condition][possibleStat])
       end
     end
   end
-  print('Final total for '..stat..' is '..total)
-  print('\nThere are '..#replacements..' replacements waiting')
-  table.insert(replacements, total)
-  for i,v in pairs(replacements) do
-    print(i)
-    print(v)
+  -- print('Calculated total for '..stat..' is '..total)
+  -- print('\nThere are '..#replacements..' replacements waiting')
+
+  if initial ~= false then
+    table.insert(replacements, total + initial)
   end
-  return total
+
+  for i,v in pairs(replacements) do
+    -- print('contestant #'..i..' has value '..v)
+  end
+  -- print('Final total for '..stat..' is '..math.min(table.unpack(replacements))..'\n')
+  return math.min(table.unpack(replacements))
 end
 
 --Startup procedure
@@ -2318,7 +2326,7 @@ function click_textbox(i, value, selected)
     end
 end
 
---Dud function for if you have a background on a counter
+-- a button that updates the sheet. IT'S A BUTTON YEEEE
 function click_button()
   updateSave()
 end
@@ -2387,4 +2395,12 @@ function createButton()
       font_size = 100
   }
   self.createButton(button_parameters_1)
+end
+
+
+--
+function boolToInt(bool)
+  if bool == true then return 1
+  elseif bool == false then return 0
+  end
 end

@@ -1740,6 +1740,14 @@ attributeGroups = {
   WISChecks = {'WISChecks', 'checks'},
   CHAChecks = {'CHAChecks', 'checks'},
 
+  abilityChecks = {'abilityChecks'},
+  STRAbilityChecks = {'STRAbilityChecks', 'STRChecks', 'checks'},
+  DEXAbilityChecks = {'DEXAbilityChecks', 'DEXChecks', 'checks'},
+  CONAbilityChecks = {'CONAbilityChecks', 'CONChecks', 'checks'},
+  INTAbilityChecks = {'INTAbilityChecks', 'INTChecks', 'checks'},
+  WISAbilityChecks = {'WISAbilityChecks', 'WISChecks', 'checks'},
+  CHAAbilityChecks = {'CHAAbilityChecks', 'CHAChecks', 'checks'},
+
   skills = {'skills', 'checks'},
   STRSkills = {'STRSkills', 'STRChecks', 'skills', 'checks'},
   athletics = {'athletics', 'STRSkills', 'STRChecks', 'skills', 'checks'},
@@ -2015,11 +2023,10 @@ function updateSave()
 
 
     ref_buttonData.currentConditions = {
-      'stunned',
-      'flatfooted',
-      'deafened',
+      'encumbered',
+      'overburdened',
       'pinned',
-      'flatfooted'
+      'grappled',
     }
 
     ref_buttonData.conditionEffects = {
@@ -2054,13 +2061,14 @@ function updateSave()
       },
       dying = {},
       encumbered = {
-        maxDEX = -self.getInputs()[125]['value'] + 2,
+        maxDEX = '2',
         speed = -10,
-        DEXChecks = -5,
-        STRChecks = -5,
+        ACP = '-5'
+        -- STRAbilityChecks = min(ACP, -5)
+        -- DEXAbilityChecks = min(ACP, -5)
       },
       entangled = {
-        speed = -0.5 * self.getInputs()[79]['value'],
+        speed = -0.5 * self.getInputs()[79]['value'], -- replace later
         AC = -2,
         attackRolls = -2,
         REF = -2,
@@ -2068,7 +2076,8 @@ function updateSave()
         DEXChecks = -2,
       },
       exhausted = {
-        speed = -0.5 * self.getInputs()[79]['value'],
+        quashes  = {'fatigued'},
+        speed = -0.5 * self.getInputs()[79]['value'], -- replace later
         AC = -3,
         attackRolls = -3,
         meleeDamage = -3,
@@ -2110,7 +2119,7 @@ function updateSave()
         acrobaticsEscape = 2
       },
       helpless = {
-        DEX = -self.getInputs()[143]['value'] - 5,
+        DEX = '0',
         MAC = -4
       },
       nauseated = {},
@@ -2118,13 +2127,17 @@ function updateSave()
         other = {'flatfooted'},
         attackRolls = -2,
       },
-      offtarget = {attackRolls = -2},
+      offtarget = {
+        attackRolls = -2
+      },
       overburdened = {
-        speed = -self.getInputs()[79]['value'] + 5,
-        maxDEX = -self.getInputs()[125]['value'],
+        quashes = {'encumbered'},
+        speed = '5',
+        maxDEX = '0',
         REF = -5,
-        DEXChecks = -5,
-        STRChecks = -5,
+        ACP = '-5'
+        -- STRAbilityChecks = min(ACP, -5)
+        -- DEXAbilityChecks = min(ACP, -5)
       },
       panicked = {
         saves = -2,
@@ -2133,7 +2146,8 @@ function updateSave()
       paralyzed = {},
       pinned = {
         other = {'flatfooted'},
-        speed = -self.getInputs()[79]['value'],
+        quashes = {'grappled'},
+        speed = '0',
         AC = -4,
         attackRolls = -4,
         REF = -4,
@@ -2161,7 +2175,9 @@ function updateSave()
       stunned = {
         other = {'flatfooted'},
       },
-      unconscious = {}
+      unconscious = {
+        other = {'helpless'},
+      }
     }
 
     c = ref_buttonData.currentConditions
@@ -2177,27 +2193,55 @@ end
 function tagEffects(effectsList)
   effects = ref_buttonData.conditionEffects
   taggedEffects = {}
+
+  -- test if condition is already in the list
+  -- adds conditions via the 'true' tag
   for i,condition in pairs(effectsList) do
+    -- print('\n'..condition..' volunteers as tribute.')
     if taggedEffects[condition] == nil then
-      print('taggedEffects has a new effect: '..condition)
+      -- print('taggedEffects has a new effect: '..condition)
       taggedEffects[condition] = true
+
+      -- test if condition wants to apply more conditions, then see if they are in the list
       if effects[condition]['other'] ~= nil then
         for j, additionalCondition in pairs(effects[condition]['other']) do
           if additionalCondition ~= nil then
-            print(condition..' also wants to add the effect '..additionalCondition)
+            -- print(condition..' also wants to add the effect '..additionalCondition)
             if taggedEffects[additionalCondition] == nil then
-              print('Accepted!')
+              -- print('Accepted!')
               taggedEffects[additionalCondition] = true
             else
-              print('Rejected!')
+              -- print('Rejected!')
             end
           end
         end
       end
+
+      -- test if condition wants to quash, then label all conditions to be quashed with the 'false' tag
+      if effects[condition]['quashes'] ~= nil then
+        for k, quashedCondition in pairs(effects[condition]['quashes']) do
+          -- print(condition..' is now quashing '..quashedCondition..'!')
+          -- This bit is useless, by the way, but it tells you when the quashing does something.
+          -- if taggedEffects[quashedCondition] ~= nil then
+          --   print(condition..' quashed '..quashedCondition..' from taggedEffects!')
+          -- end
+          -- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+          taggedEffects[quashedCondition] = false
+        end
+      end
     else
-      print('taggedEffects already has '..condition)
+      -- print('taggedEffects already has '..condition)
     end
   end
+
+  -- removes all quashed conditions via the 'false' tag
+  for taggedCondition, legitimate in pairs(taggedEffects) do
+    if legitimate == false then
+      -- print('Since '..taggedCondition..' was quashed, it will now be removed.')
+      taggedEffects[taggedCondition] = nil
+    end
+  end
+
   return taggedEffects
 end
 
@@ -2211,15 +2255,23 @@ function effectCalc(conditions, stat)
     print(stat..' could be listed as '..possibleStat)
     for condition, j in pairs(conditions) do
       print('Looking for things affecting '..possibleStat..' in '..condition)
-      if effects[condition][possibleStat] ~= nil then
-        print(possibleStat..' is affected by '..condition..'!')
+      if type(effects[condition][possibleStat]) == 'number' then
+        print(possibleStat..' is affected in a normal way by '..condition..'!')
         total = total + effects[condition][possibleStat]
         print('Current total is '..total)
+      elseif type(effects[condition][possibleStat]) == 'string' then
+        print(condition..' wants to replace '..possibleStat..'... add it to the replacements list.')
+        table.insert(replacements, effects[condition][possibleStat])
       end
     end
   end
   print('Final total for '..stat..' is '..total)
-  print('There are '..#replacements..' replacements waiting\n')
+  print('\nThere are '..#replacements..' replacements waiting')
+  table.insert(replacements, total)
+  for i,v in pairs(replacements) do
+    print(i)
+    print(v)
+  end
   return total
 end
 

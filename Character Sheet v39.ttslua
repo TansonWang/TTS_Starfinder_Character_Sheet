@@ -1,0 +1,3396 @@
+--[[    Character Sheet Template    by: Herp and Derp (the Dynamic Duo), with
+acknowledgements to the original template creator, MrStump]]
+
+--Set this to true while editing and false when you have finished
+disableSave = true
+--Remember to set this to false once you are done making changes
+--Then, after you save & apply it, save your game too
+
+--Color information for button text (r,g,b, values of 0-1)
+buttonFontColor = {0,0,0}
+--Color information for button background
+buttonColor = {1,1,1}
+--Change scale of button (Avoid changing if possible)
+buttonScale = {0.1,0.1,0.1}
+
+--This is the button placement information
+defaultButtonData = {
+    currentConditions = {
+    },
+
+    conditionEffects = {
+      asleep = {
+        other = {'helpless'},
+        perception = -10,
+      },
+      bleeding = {},
+      blinded = {
+        other = {'flatfooted'},
+        STRSkills = -4,
+        DEXSkills = -4,
+        perception = -4,
+        perceptionHearing = -99
+      },
+      broken = {},
+      burning = {},
+      confused = {},
+      cowering = {
+        other = {'flatfooted'},
+      },
+      dazed = {},
+      dazzled = {
+        attackRolls = -1,
+        perceptionSight = -1,
+      },
+      dead = {},
+      deafened = {
+        INIT = -4,
+        perception = -4,
+        perceptionHearing = -99
+      },
+      dying = {},
+      encumbered = {
+        maxDEX = 'r2',
+        speed = -10,
+        ACP = 'r-5',
+        STRAbilityChecks = -5,
+        DEXAbilityChecks = -5,
+      },
+      entangled = {
+        speed = 'm0.5',
+        AC = -2,
+        attackRolls = -2,
+        REF = -2,
+        INIT = -2,
+        DEXChecks = -2,
+      },
+      exhausted = {
+        quashes  = {'fatigued'},
+        speed = 'm0.5',
+        AC = -3,
+        attackRolls = -3,
+        meleeDamage = -3,
+        thrownDamage = -3,
+        INIT = -3,
+        REF = -3,
+        DEXChecks = -3,
+        STRChecks = -3,
+        encumberedBulk = -3,
+      },
+      fascinated = {
+        perception = -4,
+      },
+      fatigued = {
+        AC = -1,
+        attackRolls = -1,
+        meleeDamage = -1,
+        REF = -1,
+        INIT = -1,
+        DEXChecks = -1,
+        STRChecks = -1,
+        encumberedBulk = -1,
+      },
+      flatfooted = {
+        AC = -2
+      },
+      frightened = {
+        attackRolls = -2,
+        saves = -2,
+        checks = -2,
+      },
+      grappled = {
+        AC = -2,
+        attackRolls = -2,
+        REF = -2,
+        INIT = -2,
+        DEXChecks = -2,
+        grapple = 2,
+        acrobaticsEscape = 2
+      },
+      helpless = {
+        DEX = 'r0',
+        MAC = -4
+      },
+      nauseated = {},
+      offkilter = {
+        other = {'flatfooted'},
+        attackRolls = -2,
+      },
+      offtarget = {
+        attackRolls = -2
+      },
+      overburdened = {
+        quashes = {'encumbered'},
+        speed = 'r5',
+        maxDEX = 'r0',
+        REF = -5,
+        ACP = 'r-5',
+        STRAbilityChecks = -5,
+        DEXAbilityChecks = -5,
+      },
+      panicked = {
+        saves = -2,
+        checks = -2,
+      },
+      paralyzed = {
+        DEX = 'r0',
+      },
+      pinned = {
+        other = {'flatfooted'},
+        quashes = {'grappled'},
+        speed = 'r0',
+        AC = -4,
+        attackRolls = -4,
+        REF = -4,
+        INIT = -4,
+        DEXChecks = -4,
+      },
+      prone = {
+        RAC = 4,
+        MAC = -4,
+        meleeAttackRolls = -4,
+      },
+      shaken = {
+        attackRolls = -2,
+        saves = -2,
+        checks = -2,
+      },
+      sickened = {
+        attackRolls = -2,
+        weaponDamage = -2,
+        saves = -2,
+        checks = -2,
+      },
+      stable = {},
+      staggered = {},
+      stunned = {
+        other = {'flatfooted'},
+      },
+      unconscious = {
+        other = {'helpless'},
+      }
+    },
+    --Add checkboxes
+    checkbox = {
+        --[[
+        pos   = the position (pasted from the helper tool)
+        size  = height/width/font_size for checkbox
+        state = default starting value for checkbox (true=checked, false=not)
+        label = tooltip
+        ]]
+        -- Acrobatics
+        {
+            pos   = {0.626, 0.1, -1.183},
+            size  = 300,
+            state = false,
+            label = "acrobaticsCS"
+        },
+        -- Athletics
+        {
+            pos   = {0.626, 0.1, -1.085},
+            size  = 300,
+            state = false,
+            label = "athleticsCS"
+        },
+        -- Bluff
+        {
+            pos   = {0.626, 0.1, -0.994},
+            size  = 300,
+            state = false,
+            label = "bluffCS"
+        },
+        -- Computers
+        {
+            pos   = {0.626, 0.1, -0.895},
+            size  = 300,
+            state = false,
+            label = "computersCS"
+        },
+        -- Culture
+        {
+            pos   = {0.626, 0.1, -0.8},
+            size  = 300,
+            state = false,
+            label = "cultureCS"
+        },
+        -- Diplomacy
+        {
+            pos   = {0.626, 0.1, -0.701},
+            size  = 300,
+            state = false,
+            label = "diplomacyCS"
+        },
+        -- Disguise
+        {
+            pos   = {0.626, 0.1, -0.604},
+            size  = 300,
+            state = false,
+            label = "disguiseCS"
+        },
+        -- Engineering
+        {
+            pos   = {0.626, 0.1, -0.508},
+            size  = 300,
+            state = false,
+            label = "engineeringCS"
+        },
+        -- Intimidate
+        {
+            pos   = {0.626, 0.1, -0.414},
+            size  = 300,
+            state = false,
+            label = "intimidateCS"
+        },
+        -- Life Science
+        {
+            pos   = {0.626, 0.1, -0.317},
+            size  = 300,
+            state = false,
+            label = "lifeScienceCS"
+        },
+        -- Medicine
+        {
+            pos   = {0.626, 0.1, -0.215},
+            size  = 300,
+            state = false,
+            label = "medicineCS"
+        },
+        -- Mysticism
+        {
+            pos   = {0.626, 0.1, -0.119},
+            size  = 300,
+            state = false,
+            label = "mysticismCS"
+        },
+        -- Perception
+        {
+            pos   = {0.626, 0.1, -0.016},
+            size  = 300,
+            state = false,
+            label = "perceptionCS"
+        },
+        -- Physical Science
+        {
+            pos   = {0.626, 0.1, 0.074},
+            size  = 300,
+            state = false,
+            label = "physicalScienceCS"
+        },
+        -- Piloting
+        {
+            pos   = {0.626, 0.1, 0.172},
+            size  = 300,
+            state = false,
+            label = "pilotingCS"
+        },
+        -- Profession
+        {
+            pos   = {0.626, 0.1, 0.27},
+            size  = 300,
+            state = false,
+            label = "profession1CS"
+        },
+        -- Profession
+        {
+            pos   = {0.626, 0.1, 0.461},
+            size  = 300,
+            state = false,
+            label = "profession2CS"
+        },
+        -- Sense Motive
+        {
+            pos   = {0.626, 0.1, 0.655},
+            size  = 300,
+            state = false,
+            label = "senseMotiveCS"
+        },
+        -- Sleight of Hand
+        {
+            pos   = {0.626, 0.1, 0.753},
+            size  = 300,
+            state = false,
+            label = "sleightOfHandCS"
+        },
+        -- Stealth
+        {
+            pos   = {0.626, 0.1, 0.851},
+            size  = 300,
+            state = false,
+            label = "stealthCS"
+        },
+        -- Survival
+        {
+            pos   = {0.626, 0.1, 0.948},
+            size  = 300,
+            state = false,
+            label = "suvivalCS"
+        },
+        ------------------------------------------------------------------------
+        -- Full BAB?
+        {
+            pos   = {1.25, 0.1, -1.495},
+            size  = 300,
+            state = false,
+            label = "goodBAB"
+        },
+
+
+        -- Good FORT?
+        {
+            pos   = {-0.9, 0.1, -0.134},
+            size  = 300,
+            state = false,
+            label = "goodFORT"
+        },
+        -- Good REF?
+        {
+            pos   = {-0.9, 0.1, -0.0375},
+            size  = 300,
+            state = false,
+            label = "goodREF"
+        },
+        -- Good WILL?
+        {
+            pos   = {-0.9, 0.1, 0.059},
+            size  = 300,
+            state = false,
+            label = "goodWILL"
+        },
+        ------------------------------------------------------------------------
+
+        -- Conditions!
+        {
+            pos   = {0.15, 0.1, 1.227},
+            size  = 300,
+            state = false,
+            label = "asleep"
+        },
+        {
+            pos   = {0.15, 0.1, 1.311},
+            size  = 300,
+            state = false,
+            label = "bleeding"
+        },
+        {
+            pos   = {0.15, 0.1, 1.406},
+            size  = 300,
+            state = false,
+            label = "blinded"
+        },
+        {
+            pos   = {0.15, 0.1, 1.499},
+            size  = 300,
+            state = false,
+            label = "burning"
+        },
+        {
+            pos   = {0.15, 0.1, 1.593},
+            size  = 300,
+            state = false,
+            label = "confused"
+        },
+        {
+            pos   = {0.15, 0.1, 1.687},
+            size  = 300,
+            state = false,
+            label = "cowering"
+        },
+        {
+            pos   = {0.15, 0.1, 1.781},
+            size  = 300,
+            state = false,
+            label = "dazed"
+        },
+        {
+            pos   = {0.15, 0.1, 1.875},
+            size  = 300,
+            state = false,
+            label = "dazzled"
+        },
+
+        {
+            pos   = {0.55, 0.1, 1.227},
+            size  = 300,
+            state = false,
+            label = "deafened"
+        },
+        {
+            pos   = {0.55, 0.1, 1.311},
+            size  = 300,
+            state = false,
+            label = "dying"
+        },
+        {
+            pos   = {0.55, 0.1, 1.406},
+            size  = 300,
+            state = false,
+            label = "encumbered"
+        },
+        {
+            pos   = {0.55, 0.1, 1.499},
+            size  = 300,
+            state = false,
+            label = "entangled"
+        },
+        {
+            pos   = {0.55, 0.1, 1.593},
+            size  = 300,
+            state = false,
+            label = "exhausted"
+        },
+        {
+            pos   = {0.55, 0.1, 1.687},
+            size  = 300,
+            state = false,
+            label = "fascinated"
+        },
+        {
+            pos   = {0.55, 0.1, 1.781},
+            size  = 300,
+            state = false,
+            label = "fatigued"
+        },
+        {
+            pos   = {0.55, 0.1, 1.875},
+            size  = 300,
+            state = false,
+            label = "flatfooted"
+        },
+
+        {
+            pos   = {0.95, 0.1, 1.227},
+            size  = 300,
+            state = false,
+            label = "frightened"
+        },
+        {
+            pos   = {0.95, 0.1, 1.311},
+            size  = 300,
+            state = false,
+            label = "grappled"
+        },
+        {
+            pos   = {0.95, 0.1, 1.406},
+            size  = 300,
+            state = false,
+            label = "helpless"
+        },
+        {
+            pos   = {0.95, 0.1, 1.499},
+            size  = 300,
+            state = false,
+            label = "nauseated"
+        },
+        {
+            pos   = {0.95, 0.1, 1.593},
+            size  = 300,
+            state = false,
+            label = "offkilter"
+        },
+        {
+            pos   = {0.95, 0.1, 1.687},
+            size  = 300,
+            state = false,
+            label = "offtarget"
+        },
+        {
+            pos   = {0.95, 0.1, 1.781},
+            size  = 300,
+            state = false,
+            label = "overburdened"
+        },
+        {
+            pos   = {0.95, 0.1, 1.875},
+            size  = 300,
+            state = false,
+            label = "panicked"
+        },
+
+        {
+            pos   = {1.35, 0.1, 1.227},
+            size  = 300,
+            state = false,
+            label = "paralyzed"
+        },
+        {
+            pos   = {1.35, 0.1, 1.311},
+            size  = 300,
+            state = false,
+            label = "pinned"
+        },
+        {
+            pos   = {1.35, 0.1, 1.406},
+            size  = 300,
+            state = false,
+            label = "prone"
+        },
+        {
+            pos   = {1.35, 0.1, 1.499},
+            size  = 300,
+            state = false,
+            label = "shaken"
+        },
+        {
+            pos   = {1.35, 0.1, 1.593},
+            size  = 300,
+            state = false,
+            label = "sickened"
+        },
+        {
+            pos   = {1.35, 0.1, 1.687},
+            size  = 300,
+            state = false,
+            label = "staggered"
+        },
+        {
+            pos   = {1.35, 0.1, 1.781},
+            size  = 300,
+            state = false,
+            label = "stunned"
+        },
+        {
+            pos   = {1.35, 0.1, 1.875},
+            size  = 300,
+            state = false,
+            label = "unconcious"
+        },
+
+
+        --End of checkboxes
+    },
+    --THE COUNTERS ARE DEAD BABY
+    counter = {},
+    --Add editable text boxes
+    textbox = {
+        --[[
+        pos       = the position (pasted from the helper tool)
+        rows      = how many lines of text you want for this box
+        width     = how wide the text box is
+        font_size = size of text. This and "rows" effect overall height
+        label     = what is shown when there is no text. "" = nothing
+        value     = text entered into box. "" = nothing
+        alignment = Number to indicate how you want text aligned
+                    (1=Automatic, 2=Left, 3=Center, 4=Right, 5=Justified)
+        ]]
+        -- !! Strength !!
+        {
+          pos       = {-1.33, 0.12, -1.142},
+          rows      = 1,
+          width     = 900,
+          font_size = 800,
+          label     = "STR",
+          value     = 10,
+          alignment = 3
+        },
+        -- !! Dexterity !!
+        {
+          pos       = {-1.33, 0.12, -0.789},
+          rows      = 1,
+          width     = 900,
+          font_size = 800,
+          label     = "DEX",
+          value     = 10,
+          alignment = 3
+        },
+        -- !! Constitution !!
+        {
+          pos       = {-1.33, 0.12, -0.446},
+          rows      = 1,
+          width     = 900,
+          font_size = 800,
+          label     = "CON",
+          value     = 10,
+          alignment = 3
+        },
+        -- !! Intelligence !!
+        {
+          pos       = {-1.33, 0.12, -0.11},
+          rows      = 1,
+          width     = 900,
+          font_size = 800,
+          label     = "INT",
+          value     = 10,
+          alignment = 3
+        },
+        -- !! Wisdom !!
+        {
+          pos       = {-1.33, 0.12, 0.22},
+          rows      = 1,
+          width     = 900,
+          font_size = 800,
+          label     = "WIS",
+          value     = 10,
+          alignment = 3
+        },
+        -- !! Charisma !!
+        {
+          pos       = {-1.33, 0.12, 0.563},
+          rows      = 1,
+          width     = 900,
+          font_size = 800,
+          label     = "CHA",
+          value     = 10,
+          alignment = 3
+        },
+
+
+
+        -- !! KAC !!
+        {
+          pos       = {-0.997, 0.1, -1.133},
+          rows      = 1,
+          width     = 1000,
+          font_size = 700,
+          label     = "KAC",
+          value     = 10,
+          alignment = 3
+        },
+        -- !! EAC !!
+        {
+          pos       = {-0.658, 0.1, -1.133},
+          rows      = 1,
+          width     = 1000,
+          font_size = 700,
+          label     = "EAC",
+          value     = 10,
+          alignment = 3
+        },
+        -- !! Initiative !!
+        {
+          pos       = {-0.319, 0.1, -1.133},
+          rows      = 1,
+          width     = 1000,
+          font_size = 700,
+          label     = "initiative",
+          value     = 0,
+          alignment = 3
+        },
+        -- !! CMD !!
+        {
+          pos       = {0.02, 0.1, -1.133},
+          rows      = 1,
+          width     = 1000,
+          font_size = 700,
+          label     = "CMD",
+          value     = 18,
+          alignment = 3
+        },
+
+
+        -- !! FORT !!
+        {
+          pos       = {-0.817, 0.1, -0.134},
+          rows      = 1,
+          width     = 500,
+          font_size = 450,
+          label     = "FORT",
+          value     = 0,
+          alignment = 3
+        },
+        -- !! REF !!
+        {
+          pos       = {-0.817, 0.1, -0.0375},
+          rows      = 1,
+          width     = 500,
+          font_size = 450,
+          label     = "REF",
+          value     = 0,
+          alignment = 3
+        },
+        -- !! WILL !!
+        {
+          pos       = {-0.817, 0.1, 0.059},
+          rows      = 1,
+          width     = 500,
+          font_size = 450,
+          label     = "WILL",
+          value     = 0,
+          alignment = 3
+        },
+
+
+
+        -- !! BAB !!
+        {
+          pos       = {-0.559, 0.1, 0.023},
+          rows      = 1,
+          width     = 850,
+          font_size = 650,
+          label     = "BAB",
+          value     = 0,
+          alignment = 3
+        },
+        -- !! Melee !!
+        {
+          pos       = {-0.27, 0.1, 0.023},
+          rows      = 1,
+          width     = 850,
+          font_size = 650,
+          label     = "meleeAttackBonus",
+          value     = 0,
+          alignment = 3
+        },
+        -- !! Ranged !!
+        {
+          pos       = {0.019, 0.1, 0.023},
+          rows      = 1,
+          width     = 850,
+          font_size = 650,
+          label     = "rangedAttackBonus",
+          value     = 0,
+          alignment = 3
+        },
+        -- !! Thrown !!
+        {
+          pos       = {0.308, 0.1, 0.023},
+          rows      = 1,
+          width     = 850,
+          font_size = 650,
+          label     = "thrownAttackBonus",
+          value     = 0,
+          alignment = 3
+        },
+
+
+
+        -- !! Max SP !!
+        {
+          pos       = {-0.473, 0.1, -0.854},
+          rows      = 1,
+          width     = 650,
+          font_size = 300,
+          label     = "maxSP",
+          value     = 0,
+          alignment = 3
+        },
+        -- !! Cur SP !!
+        {
+          pos       = {-0.69, 0.1, -0.716},
+          rows      = 1,
+          width     = 1300,
+          font_size = 800,
+          label     = "curSP",
+          value     = 0,
+          alignment = 3
+        },
+        -- !! Max HP !!
+        {
+          pos       = {-0.473, 0.1, -0.514},
+          rows      = 1,
+          width     = 650,
+          font_size = 300,
+          label     = "maxHP",
+          value     = 0,
+          alignment = 3
+        },
+        -- !! Cur HP !!
+        {
+          pos       = {-0.69, 0.1, -0.38},
+          rows      = 1,
+          width     = 1300,
+          font_size = 800,
+          label     = "curHP",
+          value     = 0,
+          alignment = 3
+        },
+        -- !! Cur RP !!
+        {
+          pos       = {-0.044, 0.1, -0.728},
+          rows      = 1,
+          width     = 900,
+          font_size = 800,
+          label     = "curRP",
+          value     = 0,
+          alignment = 3
+        },
+        -- !! Max RP !!
+        {
+          pos       = {0.29, 0.1, -0.728},
+          rows      = 1,
+          width     = 900,
+          font_size = 800,
+          label     = "maxRP",
+          value     = 0,
+          alignment = 3
+        },
+
+
+        -- !! Acrobatics !!
+        {
+          pos       = {0.771, 0.1, -1.183},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "acrobatics",
+          value     = 0,
+          alignment = 3
+        },
+        -- !! Athletics !!
+        {
+          pos       = {0.771, 0.1, -1.086},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "athletics",
+          value     = 0,
+          alignment = 3
+        },
+        -- !! Bluff !!
+        {
+          pos       = {0.771, 0.1, -0.989},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "bluff",
+          value     = 0,
+          alignment = 3
+        },
+        -- !! Computers !!
+        {
+          pos       = {0.771, 0.1, -0.892},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "computers",
+          value     = 0,
+          alignment = 3
+        },
+        -- !! Culture !!
+        {
+          pos       = {0.771, 0.1, -0.796},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "culture",
+          value     = 0,
+          alignment = 3
+        },
+        -- !! Diplomacy !!
+        {
+          pos       = {0.771, 0.1, -0.699},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "diplomacy",
+          value     = 0,
+          alignment = 3
+        },
+        -- !! Disguise !!
+        {
+          pos       = {0.771, 0.1, -0.602},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "disguise",
+          value     = 0,
+          alignment = 3
+        },
+        -- !! Engineering !!
+        {
+          pos       = {0.771, 0.1, -0.505},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "engineering",
+          value     = 0,
+          alignment = 3
+        },
+        -- !! Initmidate !!
+        {
+          pos       = {0.771, 0.1, -0.408},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "intimidate",
+          value     = 0,
+          alignment = 3
+        },
+        -- !! Life Science !!
+        {
+          pos       = {0.771, 0.1, -0.3112},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "lifeScience",
+          value     = 0,
+          alignment = 3
+        },
+        -- !! Medicine !!
+        {
+          pos       = {0.771, 0.1, -0.214},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "medicine",
+          value     = 0,
+          alignment = 3
+        },
+        -- !! Mysticism !!
+        {
+          pos       = {0.771, 0.1, -0.117},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "mysticism",
+          value     = 0,
+          alignment = 3
+        },
+        -- !! Perception !!
+        {
+          pos       = {0.771, 0.1, -0.021},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "perception",
+          value     = 0,
+          alignment = 3
+        },
+        -- !! Physical Science !!
+        {
+          pos       = {0.771, 0.1, 0.076},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "physicalScience",
+          value     = 0,
+          alignment = 3
+        },
+        -- !! Piloting !!
+        {
+          pos       = {0.771, 0.1, 0.173},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "piloting",
+          value     = 0,
+          alignment = 3
+        },
+        -- !! Profession !!
+        {
+          pos       = {0.771, 0.1, 0.27},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "profession1",
+          value     = 0,
+          alignment = 3
+        },
+        -- !! Profession !!
+        {
+          pos       = {0.771, 0.1, 0.464},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "profession2",
+          value     = 0,
+          alignment = 3
+        },
+        -- !! Sense Motive !!
+        {
+          pos       = {0.771, 0.1, 0.655},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "senseMotive",
+          value     = 0,
+          alignment = 3
+        },
+        -- !! Sleight of Hand !!
+        {
+          pos       = {0.771, 0.1, 0.75},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "sleightOfHand",
+          value     = 0,
+          alignment = 3
+        },
+        -- !! Stealth !!
+        {
+          pos       = {0.771, 0.1, 0.85},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "stealth",
+          value     = 0,
+          alignment = 3
+        },
+        -- !! Survival !!
+        {
+          pos       = {0.771, 0.1, 0.948},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "survival",
+          value     = 0,
+          alignment = 3
+        },
+
+        --ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo--
+        -- !! Acrobatics !!
+        {
+          pos       = {1.355, 0.1, -1.183},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "acrobaticsBonus",
+          value     = 0,
+          alignment = 3
+        },
+        -- !! Athletics !!
+        {
+          pos       = {1.355, 0.1, -1.086},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "athleticsBonus",
+          value     = 0,
+          alignment = 3
+        },
+        -- !! Bluff !!
+        {
+          pos       = {1.355, 0.1, -0.989},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "bluffBonus",
+          value     = 0,
+          alignment = 3
+        },
+        -- !! Computers !!
+        {
+          pos       = {1.355, 0.1, -0.892},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "computersBonus",
+          value     = 0,
+          alignment = 3
+        },
+        -- !! Culture !!
+        {
+          pos       = {1.355, 0.1, -0.796},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "cultureBonus",
+          value     = 0,
+          alignment = 3
+        },
+        -- !! Diplomacy !!
+        {
+          pos       = {1.355, 0.1, -0.699},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "diplomacyBonus",
+          value     = 0,
+          alignment = 3
+        },
+        -- !! Disguise !!
+        {
+          pos       = {1.355, 0.1, -0.602},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "disguiseBonus",
+          value     = 0,
+          alignment = 3
+        },
+        -- !! Engineering !!
+        {
+          pos       = {1.355, 0.1, -0.505},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "engineeringBonus",
+          value     = 0,
+          alignment = 3
+        },
+        -- !! Initmidate !!
+        {
+          pos       = {1.355, 0.1, -0.408},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "intimidateBonus",
+          value     = 0,
+          alignment = 3
+        },
+        -- !! Life Science !!
+        {
+          pos       = {1.355, 0.1, -0.3112},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "lifeScienceBonus",
+          value     = 0,
+          alignment = 3
+        },
+        -- !! Medicine !!
+        {
+          pos       = {1.355, 0.1, -0.214},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "medicineBonus",
+          value     = 0,
+          alignment = 3
+        },
+        -- !! Mysticism !!
+        {
+          pos       = {1.355, 0.1, -0.117},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "mysticismBonus",
+          value     = 0,
+          alignment = 3
+        },
+        -- !! Perception !!
+        {
+          pos       = {1.355, 0.1, -0.021},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "perceptionBonus",
+          value     = 0,
+          alignment = 3
+        },
+        -- !! Physical Science !!
+        {
+          pos       = {1.355, 0.1, 0.076},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "physicalScienceBonus",
+          value     = 0,
+          alignment = 3
+        },
+        -- !! Piloting !!
+        {
+          pos       = {1.355, 0.1, 0.173},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "pilotingBonus",
+          value     = 0,
+          alignment = 3
+        },
+        -- !! Profession !!
+        {
+          pos       = {1.355, 0.1, 0.27},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "-profession1Bonus",
+          value     = 0,
+          alignment = 3
+        },
+        -- !! Profession !!
+        {
+          pos       = {1.355, 0.1, 0.464},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "profession2Bonus",
+          value     = 0,
+          alignment = 3
+        },
+        -- !! Sense Motive !!
+        {
+          pos       = {1.355, 0.1, 0.655},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "senseMotiveBonus",
+          value     = 0,
+          alignment = 3
+        },
+        -- !! Sleight of Hand !!
+        {
+          pos       = {1.355, 0.1, 0.75},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "sleightOfHandBonus",
+          value     = 0,
+          alignment = 3
+        },
+        -- !! Stealth !!
+        {
+          pos       = {1.355, 0.1, 0.85},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "stealthBonus",
+          value     = 0,
+          alignment = 3
+        },
+        -- !! Survival !!
+        {
+          pos       = {1.355, 0.1, 0.948},
+          rows      = 1,
+          width     = 350,
+          font_size = 300,
+          label     = "survivalBonus",
+          value     = 0,
+          alignment = 3
+        },
+        --ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo--
+
+
+        -----------------------------------------------------------
+        -- !! HP/SP per Class Level !!
+        {
+            pos       = {0.75, 0.1, -1.735},
+            rows      = 1,
+            width     = 3400,
+            font_size = 300,
+            label     = "write HP/lvl there >",
+            value     = "HP/SP per Class Level:",
+            alignment = 1
+        },
+        {
+            pos       = {1.25, 0.1, -1.735},
+            rows      = 1,
+            width     = 950,
+            font_size = 300,
+            label     = "HP/LVL",
+            value     = 6,
+            alignment = 3
+        },
+        -- !! HP from Race !!
+        {
+            pos       = {0.75, 0.1, -1.655},
+            rows      = 1,
+            width     = 3400,
+            font_size = 300,
+            label     = "write racial HP there >",
+            value     = "HP from Race:",
+            alignment = 1
+        },
+        {
+            pos       = {1.25, 0.1, -1.655},
+            rows      = 1,
+            width     = 950,
+            font_size = 300,
+            label     = "HP/Race",
+            value     = 4,
+            alignment = 3
+        },
+        -- !! Skill ranks per Class Level !!
+        {
+            pos       = {0.75, 0.1, -1.575},
+            rows      = 1,
+            width     = 3400,
+            font_size = 300,
+            label     = "write ranks/lvl there >",
+            value     = "Skill ranks per level:",
+            alignment = 1
+        },
+        {
+            pos       = {1.25, 0.1, -1.575},
+            rows      = 1,
+            width     = 950,
+            font_size = 300,
+            label     = "Ranks/LVL",
+            value     = 4,
+            alignment = 3
+        },
+        -- !! Full BAB progression? !!
+        {
+            pos       = {0.75, 0.1, -1.495},
+            rows      = 1,
+            width     = 3400,
+            font_size = 300,
+            label     = "check if martial class >",
+            value     = "Full BAB progression?",
+            alignment = 1
+        },
+
+        -----------------------------------------------------------
+
+
+
+
+        -- !! Name !!
+        {
+            pos       = {-0.33, 0.1, -1.845},
+            rows      = 1,
+            width     = 5000,
+            font_size = 300,
+            label     = "name",
+            value     = "Fyrtog the Mighty",
+            alignment = 2
+        },
+        -- !! Class !!
+        {
+            pos       = {-1.18, 0.1, -1.744},
+            rows      = 1,
+            width     = 2500,
+            font_size = 300,
+            label     = "class",
+            value     = "",
+            alignment = 2
+        },
+        -- !! Level !!
+        {
+            pos       = {-0.785, 0.1, -1.744},
+            rows      = 1,
+            width     = 1000,
+            font_size = 300,
+            label     = "LVL",
+            value     = 1,
+            alignment = 2
+        },
+        -- !! Race !!
+        {
+            pos       = {-0.424, 0.1, -1.744},
+            rows      = 1,
+            width     = 2000,
+            font_size = 300,
+            label     = "race",
+            value     = "",
+            alignment = 2
+        },
+        -- !! Theme !!
+        {
+            pos       = {0.111, 0.1, -1.744},
+            rows      = 1,
+            width     = 2000,
+            font_size = 300,
+            label     = "theme",
+            value     = "",
+            alignment = 2
+        },
+        -- !! Size !!
+        {
+            pos       = {-1.333, 0.1, -1.6},
+            rows      = 1,
+            width     = 1200,
+            font_size = 300,
+            label     = "size",
+            value     = "",
+            alignment = 2
+        },
+        -- !! Speed !!
+        {
+            pos       = {-1.105, 0.1, -1.6},
+            rows      = 1,
+            width     = 650,
+            font_size = 300,
+            label     = "speed",
+            value     = 30,
+            alignment = 3
+        },
+        -- !! Gender !!
+        {
+            pos       = {-0.727, 0.1, -1.6},
+            rows      = 1,
+            width     = 1000,
+            font_size = 300,
+            label     = "gender",
+            value     = "",
+            alignment = 2
+        },
+        -- !! Home World !!
+        {
+            pos       = {-0.103, 0.1, -1.6},
+            rows      = 1,
+            width     = 4250,
+            font_size = 300,
+            label     = "homeWorld",
+            value     = "",
+            alignment = 2
+        },
+        -- !! Alignment !!
+        {
+            pos       = {-1.226, 0.1, -1.452},
+            rows      = 1,
+            width     = 2200,
+            font_size = 300,
+            label     = "alignment",
+            value     = "",
+            alignment = 2
+        },
+        -- !! Deity !!
+        {
+            pos       = {-0.689, 0.1, -1.452},
+            rows      = 1,
+            width     = 2200,
+            font_size = 300,
+            label     = "deity",
+            value     = "",
+            alignment = 2
+        },
+        -- !! Player Name !!
+        {
+            pos       = {-0.042, 0.1, -1.452},
+            rows      = 1,
+            width     = 3200,
+            font_size = 300,
+            label     = "playerName",
+            value     = "",
+            alignment = 2
+        },
+        -- !! DR !!
+        {
+            pos       = {-0.907, 0.1, -0.96},
+            rows      = 1,
+            width     = 2000,
+            font_size = 300,
+            label     = "DR",
+            value     = "",
+            alignment = 2
+        },
+        -- !! Resistances !!
+        {
+            pos       = {-0.127, 0.1, -0.96},
+            rows      = 1,
+            width     = 2600,
+            font_size = 300,
+            label     = "Resistances",
+            value     = "",
+            alignment = 2
+        },
+
+        -- !! Weapons !!
+
+        -- Weapon 1
+        {
+            pos       = {-0.900, 0.1, 0.29},
+            rows      = 1,
+            width     = 2450,
+            font_size = 250,
+            label     = "weapon1Name",
+            value     = "Laser Rifle, Azimuth",
+            alignment = 2
+        },
+        {
+            pos       = {-0.554, 0.1, 0.29},
+            rows      = 1,
+            width     = 550,
+            font_size = 300,
+            label     = "weapon1LVL",
+            value     = 1,
+            alignment = 2
+        },
+        {
+            pos       = {-0.373, 0.1, 0.29},
+            rows      = 1,
+            width     = 1000,
+            font_size = 200,
+            label     = "weapon1Damage",
+            value     = "1d8",
+            alignment = 2
+        },
+        {
+            pos       = {-0.104, 0.1, 0.29},
+            rows      = 1,
+            width     = 1200,
+            font_size = 200,
+            label     = "weapon1DamageType",
+            value     = "F",
+            alignment = 2
+        },
+        {
+            pos       = {0.196, 0.1, 0.29},
+            rows      = 1,
+            width     = 1200,
+            font_size = 200,
+            label     = "weapon1Crit",
+            value     = "1d6 Burn",
+            alignment = 2
+        },
+        {
+            pos       = {0.384, 0.1, 0.29},
+            rows      = 1,
+            width     = 350,
+            font_size = 150,
+            label     = "weapon1Bulk",
+            value     = 1,
+            alignment = 2
+        },
+        {
+            pos       = {-1.016, 0.1, 0.383},
+            rows      = 1,
+            width     = 1150,
+            font_size = 300,
+            label     = "weapon1Range",
+            value     = "80ft",
+            alignment = 2
+        },
+        {
+            pos       = {-0.73, 0.1, 0.383},
+            rows      = 1,
+            width     = 1150,
+            font_size = 300,
+            label     = "weapon1Type",
+            value     = "Longarm",
+            alignment = 2
+        },
+        {
+            pos       = {-0.392, 0.1, 0.383},
+            rows      = 1,
+            width     = 1650,
+            font_size = 200,
+            label     = "weapon1Capacity/Usage/AmmoType",
+            value     = "20/1/charges",
+            alignment = 2
+        },
+        {
+            pos       = {0.115, 0.1, 0.383},
+            rows      = 1,
+            width     = 2900,
+            font_size = 200,
+            label     = "weapon1Special",
+            value     = "",
+            alignment = 2
+        },
+
+        -- Weapon 2
+          {
+              pos       = {-0.900, 0.1, 0.485},
+              rows      = 1,
+              width     = 2450,
+              font_size = 250,
+              label     = "weapon2Name",
+              value     = "",
+              alignment = 2
+          },
+          {
+              pos       = {-0.554, 0.1, 0.485},
+              rows      = 1,
+              width     = 550,
+              font_size = 300,
+              label     = "weapon2LVL",
+              value     = "",
+              alignment = 2
+          },
+          {
+              pos       = {-0.373, 0.1, 0.485},
+              rows      = 1,
+              width     = 1000,
+              font_size = 200,
+              label     = "weapon2Damage",
+              value     = "",
+              alignment = 2
+          },
+          {
+              pos       = {-0.104, 0.1, 0.485},
+              rows      = 1,
+              width     = 1200,
+              font_size = 200,
+              label     = "weapon2DamageType",
+              value     = "",
+              alignment = 2
+          },
+          {
+              pos       = {0.196, 0.1, 0.485},
+              rows      = 1,
+              width     = 1200,
+              font_size = 200,
+              label     = "weapon2Crit",
+              value     = "",
+              alignment = 2
+          },
+          {
+              pos       = {0.384, 0.1, 0.485},
+              rows      = 1,
+              width     = 350,
+              font_size = 150,
+              label     = "weapon2Bulk",
+              value     = "",
+              alignment = 2
+          },
+          {
+              pos       = {-1.016, 0.1, 0.583},
+              rows      = 1,
+              width     = 1150,
+              font_size = 300,
+              label     = "weapon2Range",
+              value     = "",
+              alignment = 2
+          },
+          {
+              pos       = {-0.73, 0.1, 0.583},
+              rows      = 1,
+              width     = 1150,
+              font_size = 300,
+              label     = "weapon2Type",
+              value     = "",
+              alignment = 2
+          },
+          {
+              pos       = {-0.392, 0.1, 0.583},
+              rows      = 1,
+              width     = 1650,
+              font_size = 200,
+              label     = "weapon2Capacity/Usage/AmmoType",
+              value     = "",
+              alignment = 2
+          },
+          {
+              pos       = {0.115, 0.1, 0.583},
+              rows      = 1,
+              width     = 2900,
+              font_size = 200,
+              label     = "weapon2Special",
+              value     = "",
+              alignment = 2
+          },
+
+          -- Weapon 3
+          {
+              pos       = {-0.900, 0.1, 0.674},
+              rows      = 1,
+              width     = 2450,
+              font_size = 250,
+              label     = "weapon3Name",
+              value     = "",
+              alignment = 2
+          },
+          {
+              pos       = {-0.554, 0.1, 0.674},
+              rows      = 1,
+              width     = 550,
+              font_size = 300,
+              label     = "weapon3LVL",
+              value     = "",
+              alignment = 2
+          },
+          {
+              pos       = {-0.373, 0.1, 0.674},
+              rows      = 1,
+              width     = 1000,
+              font_size = 200,
+              label     = "weapon3Damage",
+              value     = "",
+              alignment = 2
+          },
+          {
+              pos       = {-0.104, 0.1, 0.674},
+              rows      = 1,
+              width     = 1200,
+              font_size = 200,
+              label     = "weapon3DamageType",
+              value     = "",
+              alignment = 2
+          },
+          {
+              pos       = {0.196, 0.1, 0.674},
+              rows      = 1,
+              width     = 1200,
+              font_size = 200,
+              label     = "weapon3Crit",
+              value     = "",
+              alignment = 2
+          },
+          {
+              pos       = {0.384, 0.1, 0.674},
+              rows      = 1,
+              width     = 350,
+              font_size = 150,
+              label     = "weapon3Bulk",
+              value     = "",
+              alignment = 2
+          },
+          {
+              pos       = {-1.016, 0.1, 0.773},
+              rows      = 1,
+              width     = 1150,
+              font_size = 300,
+              label     = "weapon3Range",
+              value     = "",
+              alignment = 2
+          },
+          {
+              pos       = {-0.73, 0.1, 0.773},
+              rows      = 1,
+              width     = 1150,
+              font_size = 300,
+              label     = "weapon3Type",
+              value     = "",
+              alignment = 2
+          },
+          {
+              pos       = {-0.392, 0.1, 0.773},
+              rows      = 1,
+              width     = 1650,
+              font_size = 200,
+              label     = "weapon3Capacity/Usage/AmmoType",
+              value     = "",
+              alignment = 2
+          },
+          {
+              pos       = {0.115, 0.1, 0.773},
+              rows      = 1,
+              width     = 2900,
+              font_size = 200,
+              label     = "weapon3Special",
+              value     = "",
+              alignment = 2
+          },
+
+        -- !! proficiencies list !!
+        {
+            pos       = {-0.948, 0.1, 1.49},
+            rows      = 1,
+            width     = 4800,
+            font_size = 300,
+            label     = "proficienciesTitle",
+            value     = "Wpns: N one, P roficient, S pecialised",
+            alignment = 2
+        },
+        {
+            pos       = {-1.25, 0.1, 1.73},
+            rows      = 8,
+            width     = 1900,
+            font_size = 250,
+            label     = "proficienciesList",
+            value     = "Basic Melee:\nAdvanced Melee:\nSmall Arm:\nLongarm:\nHeavy Weapons:\nSniper:\nGrenades:\nSpecial:",
+            alignment = 2
+        },
+
+
+        -- !! Professions 1 !!
+        {
+            pos       = {0.990, 0.1, 0.342},
+            rows      = 1,
+            width     = 2500,
+            font_size = 300,
+            label     = "profession1Type",
+            value     = "(INT-based)",
+            alignment = 2
+        },
+        -- !! Professions 2 !!
+        {
+            pos       = {0.990, 0.1, 0.537},
+            rows      = 1,
+            width     = 2500,
+            font_size = 300,
+            label     = "profession2Type",
+            value     = "(WIS-based)",
+            alignment = 2
+        },
+
+        -- !! Armor !!
+        {
+            pos       = {-1.150, 0.1, 0.962},
+            rows      = 1,
+            width     = 2700,
+            font_size = 300,
+            label     = "armorName",
+            value     = "Carboard Armour",
+            alignment = 2
+        },
+        {
+            pos       = {-0.749, 0.1, 0.962},
+            rows      = 1,
+            width     = 500,
+            font_size = 300,
+            label     = "armorLVL",
+            value     = 20,
+            alignment = 2
+        },
+        {
+            pos       = {-1.356, 0.1, 1.062},
+            rows      = 1,
+            width     = 800,
+            font_size = 300,
+            label     = "armorEAC",
+            value     = 3,
+            alignment = 2
+        },
+        {
+            pos       = {-1.164, 0.1, 1.062},
+            rows      = 1,
+            width     = 800,
+            font_size = 300,
+            label     = "armorKAC",
+            value     = 5,
+            alignment = 2
+        },
+        {
+            pos       = {-0.97, 0.1, 1.062},
+            rows      = 1,
+            width     = 800,
+            font_size = 300,
+            label     = "armorMaxDEX",
+            value     = 2,
+            alignment = 2
+        },
+        {
+            pos       = {-0.776, 0.1, 1.062},
+            rows      = 1,
+            width     = 800,
+            font_size = 300,
+            label     = "ACP",
+            value     = -2,
+            alignment = 2
+        },
+        {
+            pos       = {-1.329, 0.1, 1.16},
+            rows      = 1,
+            width     = 1000,
+            font_size = 300,
+            label     = "armorType",
+            value     = "Light",
+            alignment = 2
+        },
+        {
+            pos       = {-1.093, 0.1, 1.16},
+            rows      = 1,
+            width     = 1000,
+            font_size = 200,
+            label     = "armorCapacity/Usage",
+            value     = "",
+            alignment = 2
+        },
+        {
+            pos       = {-0.894, 0.1, 1.16},
+            rows      = 1,
+            width     = 600,
+            font_size = 150,
+            label     = "armorUpgrades",
+            value     = "",
+            alignment = 2
+        },
+        {
+            pos       = {-0.752, 0.1, 1.16},
+            rows      = 1,
+            width     = 600,
+            font_size = 150,
+            label     = "armorWeapons",
+            value     = "",
+            alignment = 2
+        },
+        {
+            pos       = {-1.354, 0.1, 1.258},
+            rows      = 1,
+            width     = 800,
+            font_size = 200,
+            label     = "armorStrength",
+            value     = "",
+            alignment = 2
+        },
+        {
+            pos       = {-1.163, 0.1, 1.258},
+            rows      = 1,
+            width     = 800,
+            font_size = 200,
+            label     = "armorDamage",
+            value     = "",
+            alignment = 2
+        },
+        {
+            pos       = {-0.967, 0.1, 1.258},
+            rows      = 1,
+            width     = 800,
+            font_size = 200,
+            label     = "armorBulk",
+            value     = "",
+            alignment = 2
+        },
+        {
+            pos       = {-0.777, 0.1, 1.258},
+            rows      = 1,
+            width     = 800,
+            font_size = 200,
+            label     = "armorSpeed",
+            value     = "",
+            alignment = 2
+        },
+        {
+            pos       = {-1.257, 0.1, 1.354},
+            rows      = 1,
+            width     = 1700,
+            font_size = 300,
+            label     = "armorUpgradeSlot1",
+            value     = "",
+            alignment = 2
+        },
+        {
+            pos       = {-0.874, 0.1, 1.354},
+            rows      = 1,
+            width     = 1700,
+            font_size = 300,
+            label     = "armorUpgradeSlot2",
+            value     = "",
+            alignment = 2
+        },
+        {
+            pos       = {-0.486, 0.1, 0.969},
+            rows      = 1,
+            width     = 1700,
+            font_size = 300,
+            label     = "armorUpgradeSlot3",
+            value     = "",
+            alignment = 2
+        },
+        {
+            pos       = {-0.486, 0.1, 1.066},
+            rows      = 1,
+            width     = 1700,
+            font_size = 300,
+            label     = "armorUpgradeSlot4",
+            value     = "",
+            alignment = 2
+        },
+        {
+            pos       = {-0.486, 0.1, 1.16},
+            rows      = 1,
+            width     = 1700,
+            font_size = 300,
+            label     = "armorUpgradeSlot5",
+            value     = "",
+            alignment = 2
+        },
+        {
+            pos       = {-0.486, 0.1, 1.256},
+            rows      = 1,
+            width     = 1700,
+            font_size = 300,
+            label     = "armorUpgradeSlot6",
+            value     = "",
+            alignment = 2
+        },
+        {
+            pos       = {-0.486, 0.1, 1.355},
+            rows      = 1,
+            width     = 1700,
+            font_size = 300,
+            label     = "armorUpgradeSlot7",
+            value     = "",
+            alignment = 2
+        },
+
+
+
+
+        -- !! Strength MOD!!
+        {
+          pos       = {-1.33, 0.12, -1.02},
+          rows      = 1,
+          width     = 900,
+          font_size = 250,
+          label     = "STRMOD",
+          value     = "0",
+          alignment = 3
+        },
+        -- !! Dexterity MOD!!
+        {
+          pos       = {-1.33, 0.12, -0.667},
+          rows      = 1,
+          width     = 900,
+          font_size = 250,
+          label     = "DEXMOD",
+          value     = "0",
+          alignment = 3
+        },
+        -- !! Constitution MOD!!
+        {
+          pos       = {-1.33, 0.12, -0.324},
+          rows      = 1,
+          width     = 900,
+          font_size = 250,
+          label     = "CONMOD",
+          value     = "0",
+          alignment = 3
+        },
+        -- !! Intelligence MOD!!
+        {
+          pos       = {-1.33, 0.12, 0.012},
+          rows      = 1,
+          width     = 900,
+          font_size = 250,
+          label     = "INTMOD",
+          value     = "0",
+          alignment = 3
+        },
+        -- !! Wisdom MOD!!
+        {
+          pos       = {-1.33, 0.12, 0.342},
+          rows      = 1,
+          width     = 900,
+          font_size = 250,
+          label     = "WISMOD",
+          value     = "0",
+          alignment = 3
+        },
+        -- !! Charisma MOD!!
+        {
+          pos       = {-1.33, 0.12, 0.685},
+          rows      = 1,
+          width     = 900,
+          font_size = 250,
+          label     = "CHAMOD",
+          value     = "0",
+          alignment = 3
+        },
+
+
+        -- !! Key Stat !!
+        {
+          pos       = {0.75, 0.1, -1.415},
+          rows      = 1,
+          width     = 3400,
+          font_size = 300,
+          label     = "write class' key stat >",
+          value     = "Key stat: ",
+          alignment = 1
+        },
+        {
+          pos       = {1.25, 0.1, -1.415},
+          rows      = 1,
+          width     = 950,
+          font_size = 300,
+          label     = "keySTAT",
+          value     = "STR",
+          alignment = 3
+        },
+
+
+        -- !! current/max ranks !!
+        {
+          pos       = {1.3, 0.1, -1.263},
+          rows      = 1,
+          width     = 950,
+          font_size = 300,
+          label     = "rankCount",
+          value     = "0/0",
+          alignment = 3
+        },
+
+
+        -- Proficiencies Input
+        {
+            pos       = {-1.02, 0.1, 1.73},
+            rows      = 8,
+            width     = 270,
+            font_size = 250,
+            label     = "proficienciesInput",
+            value     = "N\nN\nN\nN\nN\nN\nN\nN",
+            alignment = 3
+        },
+
+
+        -- !! Speed Adjusted !!
+        {
+            pos       = {-0.956, 0.1, -1.6},
+            rows      = 1,
+            width     = 650,
+            font_size = 300,
+            label     = "speedAdjusted",
+            value     = "->30",
+            alignment = 3
+        },
+
+        --End of textboxes
+    },
+    --Add buttons
+    button = {
+      -- Acrobatics
+      {
+         pos = {1.48, 0.1, -1.183},
+         rot = {0,0,0},
+         label = 'acrobatics',
+      },
+      -- Athletics
+      {
+          pos   = {1.48, 0.1, -1.085},
+          rot = {0,0,0},
+          label = "athletics"
+      },
+      -- Bluff
+      {
+          pos   = {1.48, 0.1, -0.994},
+          rot = {0,0,0},
+          label = "bluff"
+      },
+      -- Computers
+      {
+          pos   = {1.48, 0.1, -0.895},
+          rot = {0,0,0},
+          label = "computers"
+      },
+      -- Culture
+      {
+          pos   = {1.48, 0.1, -0.8},
+          rot = {0,0,0},
+          label = "culture"
+      },
+      -- Diplomacy
+      {
+          pos   = {1.48, 0.1, -0.701},
+          rot = {0,0,0},
+          label = "diplomacy"
+      },
+      -- Disguise
+      {
+          pos   = {1.48, 0.1, -0.604},
+          rot = {0,0,0},
+          label = "disguise"
+      },
+      -- Engineering
+      {
+          pos   = {1.48, 0.1, -0.508},
+          rot = {0,0,0},
+          label = "engineering"
+      },
+      -- Intimidate
+      {
+          pos   = {1.48, 0.1, -0.414},
+          rot = {0,0,0},
+          label = "intimidate"
+      },
+      -- Life Science
+      {
+          pos   = {1.48, 0.1, -0.317},
+          rot = {0,0,0},
+          label = "lifeScience"
+      },
+      -- Medicine
+      {
+          pos   = {1.48, 0.1, -0.215},
+          rot = {0,0,0},
+          label = "medicine"
+      },
+      -- Mysticism
+      {
+          pos   = {1.48, 0.1, -0.119},
+          rot = {0,0,0},
+          label = "mysticism"
+      },
+      -- Perception
+      {
+          pos   = {1.48, 0.1, -0.016},
+          rot = {0,0,0},
+          label = "perception"
+      },
+      -- Physical Science
+      {
+          pos   = {1.48, 0.1, 0.074},
+          rot = {0,0,0},
+          label = "physicalScience"
+      },
+      -- Piloting
+      {
+          pos   = {1.48, 0.1, 0.172},
+          rot = {0,0,0},
+          label = "piloting"
+      },
+      -- Profession
+      {
+          pos   = {1.48, 0.1, 0.27},
+          rot = {0,0,0},
+          label = "profession1"
+      },
+      -- Profession
+      {
+          pos   = {1.48, 0.1, 0.461},
+          rot = {0,0,0},
+          label = "profession2"
+      },
+      -- Sense Motive
+      {
+          pos   = {1.48, 0.1, 0.655},
+          rot = {0,0,0},
+          label = "senseMotive"
+      },
+      -- Sleight of Hand
+      {
+          pos   = {1.48, 0.1, 0.753},
+          rot = {0,0,0},
+          label = "sleightOfHand"
+      },
+      -- Stealth
+      {
+          pos   = {1.48, 0.1, 0.851},
+          rot = {0,0,0},
+          label = "stealth"
+      },
+      -- Survival
+      {
+          pos   = {1.48, 0.1, 0.948},
+          rot = {0,0,0},
+          label = "survival"
+      },
+    },
+    majorButton = {
+      -- update all
+      {
+        func = 'update_all',
+        label = 'updateAll',
+        pos = {1, 0.1, -2},
+        rot = {0, 0, 0},
+        size = 100,
+        font_size = 1,
+      },
+      -- set Player
+      {
+        func = 'set_player',
+        label = 'setPlayer',
+        pos = {1.3, 0.1, -2},
+        rot = {0, 0, 0},
+        size = 100,
+        font_size = 1,
+      },
+      -- set Figure
+      {
+        func = 'set_figure',
+        label = 'setFigure',
+        pos = {1.5, 0.1, -2},
+        rot = {0, 0, 0},
+        size = 100,
+        font_size = 1,
+      },
+    },
+    -- Assignments for player, figure
+    assignment = {
+      assignedPlayer = "",
+      assignedFigure = "",
+    },
+
+    -- UI Creation =================================================== UI create
+    -- modWizard window >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    modWizardBase = {
+      -- Defaults
+      {
+        tag = 'Defaults',
+        children =
+        {
+          -- the big mod window
+          {
+            tag = 'Panel',
+            attributes =
+            {
+                class="Window" ,
+                rotation='0 0 180' ,
+                scale = '0.1 0.1',
+                rectAlignment="MiddleCenter" ,
+                returnToOriginalPositionWhenReleased=false ,
+                allowDragging=true ,
+                color="#69696940" ,
+                outline="#404040",
+            },
+          },
+
+          -- top bar
+          {
+            tag = 'Panel',
+            attributes =
+            {
+                class="TopBar"  ,
+                height=100 ,
+                width=3000 ,
+                rectAlignment="UpperCenter" ,
+                color="#19197040" ,
+                outline="#00008B",
+            },
+          },
+
+          -- top bar right buttons
+          {
+            tag = 'Button',
+            attributes =
+            {
+                class="topRightButtons" ,
+                fontSize=90 ,
+                fontStyle="Bold" ,
+                width=100 ,
+                height=100 ,
+                rectAlignment="UpperRight" ,
+                color="#eeeeee",
+            },
+          },
+
+          -- top bar left buttons
+          {
+            tag = 'Button',
+            attributes =
+            {
+                class="topLeftButtons" ,
+                fontSize=90 ,
+                fontStyle="Bold" ,
+                width=100 ,
+                height=100 ,
+                rectAlignment="UpperLeft" ,
+                color="#eeeeee",
+            },
+          },
+
+          -- top bar title
+          {
+            tag = 'Text',
+            attributes =
+            {
+                class="WindowTitle"  ,
+                text="Mod Wizard" ,
+                fontSize=90 ,
+                height=100 ,
+                fontStyle="Bold" ,
+                rectAlignment="UpperCenter" ,
+                color="#FFFFFF" ,
+            },
+          },
+
+
+          -- a single mod
+          -- window
+          {
+            tag = 'Panel',
+            attributes =
+            {
+                class="modWindow"  ,
+                width=2900 ,
+                height=1000 ,
+                rectAlignment="UpperCenter" ,
+                color="#69696940" ,
+                outline="#404040",
+            },
+          },
+
+          --modValue
+          {
+            tag = 'InputField',
+            attributes =
+            {
+                class='modValue' ,
+                fontSize=95 ,
+                width=4000 ,
+                height=2500 ,
+                rectAlignment="UpperLeft",
+            },
+          },
+
+          -- modTopBar
+          {
+            tag = 'Panel',
+            attributes =
+            {
+                class="modTopBar"  ,
+                height=100 ,
+                width=2900 ,
+                rectAlignment="UpperCenter" ,
+                color="#19197040" ,
+                outline="#00008B",
+            },
+          },
+
+          -- modWindowTitle
+          {
+            tag = 'Text',
+            attributes =
+            {
+                class="modWindowTitle" ,
+                text="Operative's Edge" ,
+                fontSize=95 ,
+                height=100 ,
+                fontStyle="Bold" ,
+                rectAlignment="UpperCenter" ,
+                color="#FFFFFF",
+            },
+          },
+
+
+        },
+      },
+
+      -- Window (the big one)
+      {
+        tag = 'Panel',
+        attributes =
+        {
+          class="Window" ,
+          id="Window",
+          width=3000 ,
+          height=4280 ,
+          offsetXY = '-320 -1' ,
+        },
+        children =
+        {
+
+          -- Panel: TopBar
+          {
+            tag = 'Panel',
+            attributes =
+            {
+              class="TopBar" ,
+              id="TopBar",
+            },
+          },
+
+          -- Text: WindowTitle
+          {
+            tag = 'Text',
+            attributes =
+            {
+              id="WindowTitle",
+              class="WindowTitle",
+              offsetXY="0 0",
+            },
+          },
+
+          -- Button: minimizeButton
+          {
+            tag = 'Button',
+            attributes =
+            {
+              id="minimizeButton",
+              class="topRightButtons",
+              textColor="#000000",
+              text="_",
+              offsetXY="-140 0",
+              onClick="minimizeModWizard",
+            },
+          },
+
+          -- Button: closeButton
+          {
+            tag = 'Button',
+            attributes =
+            {
+              id="closeButton",
+              class="topRightButtons",
+              color="#990000",
+              textColor="#FFFFFF",
+              text="X",
+              offsetXY="0 0",
+              onClick="close",
+            },
+          },
+
+          -- Button: addButton
+          {
+            tag = 'Button',
+            attributes =
+            {
+              id="addButton",
+              class="topLeftButtons",
+              color="#FFE966",
+              textColor="#000000",
+              text="+",
+              offsetXY="0 0",
+              onClick="close",
+            },
+          },
+
+
+
+        },
+      },
+      -- </Window>
+    },
+
+    -- <modWindowBase> (one of the small ones) >>>>>>>>>>>>>>>
+    modWindowBase = {
+      tag = 'Panel',
+      attributes =
+      {
+        class="modWindow",
+        id="modWindow1",
+        offsetXY='0 -20',
+      },
+      children =
+      {
+
+        -- modTopBar
+        {
+          tag = 'Panel',
+          attributes = {
+            class="modTopBar",
+            id="modTopBar1",
+          },
+        },
+
+        -- modWindowTitle
+        {
+          tag = 'InputField',
+          attributes = {
+            textColor='#000000',
+            offsetXY="0 0",
+            fontSize=75 ,
+            width=2300 ,
+            height=100 ,
+            rectAlignment="UpperCenter",
+            id="modValue1",
+          },
+        },
+
+        -- -- modWindowTitle
+        -- {
+        --   tag = 'Text',
+        --   attributes = {
+        --     id="modWindowTitle1",
+        --     class="modWindowTitle",
+        --     offsetXY="0 0",
+        --   },
+        -- },
+
+        -- minimizeButton
+        {
+          tag = 'Button',
+          attributes = {
+            id="minimizeButton1",
+            class="topRightButtons",
+            textColor="#000000",
+            text="_",
+            offsetXY="-140 0",
+            onClick="minimizeMod",
+          },
+        },
+
+        -- closeButton FIX CLOSE FUNCTION
+        {
+          tag = 'Button',
+          attributes = {
+            id="closeButton1",
+            class="topRightButtons",
+            color="#990000",
+            textColor="#FFFFFF",
+            text="X",
+            offsetXY="0 0",
+            onClick="closeMod",
+          },
+        },
+
+      },
+    },
+}
+
+attributeGroups = {
+  STATS = {'STATS'},
+  STR = {'STR', 'STATS'},
+  DEX = {'DEX', 'STATS'},
+  CON = {'CON', 'STATS'},
+  INT = {'INT', 'STATS'},
+  WIS = {'WIS', 'STATS'},
+  CHA = {'CHA', 'STATS'},
+
+  MODS = {'MODS'},
+  STRMOD = {'STRMOD', 'STATMODS'},
+  DEXMOD = {'DEXMOD', 'STATMODS'},
+  CONMOD = {'CONMOD', 'STATMODS'},
+  INTMOD = {'INTMOD', 'STATMODS'},
+  WISMOD = {'WISMOD', 'STATMODS'},
+  CHAMOD = {'CHAMOD', 'STATMODS'},
+
+  checks = {'checks'},
+  STRChecks = {'STRChecks', 'checks'},
+  DEXChecks = {'DEXChecks', 'checks'},
+  CONChecks = {'CONChecks', 'checks'},
+  INTChecks = {'INTChecks', 'checks'},
+  WISChecks = {'WISChecks', 'checks'},
+  CHAChecks = {'CHAChecks', 'checks'},
+
+  abilityChecks = {'abilityChecks'},
+  STRAbilityChecks = {'STRAbilityChecks', 'STRChecks', 'checks'},
+  DEXAbilityChecks = {'DEXAbilityChecks', 'DEXChecks', 'checks'},
+  CONAbilityChecks = {'CONAbilityChecks', 'CONChecks', 'checks'},
+  INTAbilityChecks = {'INTAbilityChecks', 'INTChecks', 'checks'},
+  WISAbilityChecks = {'WISAbilityChecks', 'WISChecks', 'checks'},
+  CHAAbilityChecks = {'CHAAbilityChecks', 'CHAChecks', 'checks'},
+
+  skills = {'skills', 'checks'},
+  STRSkills = {'STRSkills', 'STRChecks', 'skills', 'checks'},
+  athletics = {'athletics', 'STRSkills', 'STRChecks', 'skills', 'checks'},
+
+  DEXSkills = {'DEXSkills', 'DEXChecks', 'skills', 'checks'},
+  acrobatics = {'acrobatics', 'DEXSkills', 'DEXChecks', 'skills', 'checks'},
+  acrobaticsEscape = {'acrobaticsEscape', 'acrobatics', 'DEXSkills', 'DEXChecks', 'skills', 'checks'},
+  piloting = {'piloting', 'DEXSkills', 'DEXChecks', 'skills', 'checks'},
+  sleightOfHand = {'sleightOfHand', 'DEXSkills', 'DEXChecks', 'skills', 'checks'},
+  stealth = {'stealth', 'DEXSkills', 'DEXChecks', 'skills', 'checks'},
+
+  CONSkills = {'CONSkills', 'CONChecks', 'skills', 'checks'},
+
+  INTSkills = {'INTSkills', 'INTChecks', 'skills', 'checks'},
+  computers = {'computers', 'INTSkills', 'INTChecks', 'skills', 'checks'},
+  culture = {'culture', 'INTSkills', 'INTChecks', 'skills', 'checks'},
+  engineering = {'engineering', 'INTSkills', 'INTChecks', 'skills', 'checks'},
+  lifeScience = {'lifeScience', 'INTSkills', 'INTChecks', 'skills', 'checks'},
+  medicine = {'medicine', 'INTSkills', 'INTChecks', 'skills', 'checks'},
+  physicalScience = {'physicalScience', 'INTSkills', 'INTChecks', 'skills', 'checks'},
+  profession1 = {'profession1', 'INTSkills', 'INTChecks', 'skills', 'checks'},
+
+  WISSkills = {'WISSkills', 'WISChecks', 'skills', 'checks'},
+  mysticism = {'mysticism', 'WISSkills', 'WISChecks', 'skills', 'checks'},
+  perception = {'perception', 'WISSkills', 'WISChecks', 'skills', 'checks'},
+  perceptionSight = {'perceptionSight', 'perception', 'WISSkills', 'WISChecks', 'skills', 'checks'},
+  perceptionHearing = {'perceptionHearing', 'perception', 'WISSkills', 'WISChecks', 'skills', 'checks'},
+  profession2 = {'profession2', 'WISSkills', 'WISChecks', 'skills', 'checks'},
+  senseMotive = {'senseMotive', 'WISSkills', 'WISChecks', 'skills', 'checks'},
+  survival = {'survival', 'WISSkills', 'WISChecks', 'skills', 'checks'},
+
+  CHASkills = {'CHASkills', 'CHAChecks', 'skills', 'checks'},
+  bluff = {'bluff', 'CHASkills', 'CHAChecks', 'skills', 'checks'},
+  diplomacy = {'diplomacy', 'CHASkills', 'CHAChecks', 'skills', 'checks'},
+  disguise = {'disguise', 'CHASkills', 'CHAChecks', 'skills', 'checks'},
+  intimidate = {'intimidate', 'CHASkills', 'CHAChecks', 'skills', 'checks'},
+
+  AC = {'AC'},
+  KAC = {'KAC', 'AC'},
+  RKAC = {'RKAC', 'KAC', 'AC'},
+  MKAC = {'MKAC', 'KAC', 'AC'},
+  EAC = {'EAC', 'AC'},
+  RKAC = {'RKAC', 'EAC', 'AC'},
+  MKAC = {'MKAC', 'EAC', 'AC'},
+
+  maxDEX = {'maxDEX'},
+
+  attackRolls = {'attackRolls'},
+  spellAttackRolls = {'spellAttackRolls', 'attackRolls'},
+  weaponAttackRolls = {'weaponAttackRolls', 'attackRolls'},
+  meleeAttackRolls = {'meleeAttackRolls', 'weaponAttackRolls', 'attackRolls'},
+  basicMeleeAttackRolls = {'basicMeleeAttackRolls', 'meleeAttackRolls', 'weaponAttackRolls', 'attackRolls'},
+  advancedMeleeAttackRolls = {'advancedMeleeAttackRolls', 'meleeAttackRolls', 'weaponAttackRolls', 'attackRolls'},
+  rangedAttackRolls = {'rangedAttackRolls', 'weaponAttackRolls', 'attackRolls'},
+  smallArmAttackRolls = {'smallArmAttackRolls', 'rangedAttackRolls', 'weaponAttackRolls', 'attackRolls'},
+  longarmAttackRolls = {'longarmAttackRolls', 'rangedAttackRolls', 'weaponAttackRolls', 'attackRolls'},
+  heavyWeaponAttackRolls = {'heavyWeaponAttackRolls', 'rangedAttackRolls', 'weaponAttackRolls', 'attackRolls'},
+  thrownAttackRolls = {'thrownAttackRolls', 'rangedAttackRolls', 'weaponAttackRolls', 'attackRolls'},
+
+  attackDamage = {'attackDamage'},
+  spellDamage = {'spellDamage', 'attackDamage'},
+  weaponDamage = {'weaponDamage', 'attackDamage'},
+  meleeDamage = {'meleeDamage', 'weaponDamage', 'attackDamage'},
+  basicMeleeDamage = {'basicMeleeDamage', 'meleeDamage', 'weaponDamage', 'attackDamage'},
+  advancedMeleeDamage = {'advancedMeleeDamage', 'meleeDamage', 'weaponDamage', 'attackDamage'},
+  rangedDamage = {'rangedDamage', 'weaponDamage', 'attackDamage'},
+  smallArmDamage = {'smallArmDamage', 'rangedDamage', 'weaponDamage', 'attackDamage'},
+  longarmDamage = {'longarmDamage', 'rangedDamage', 'weaponDamage', 'attackDamage'},
+  heavyWeaponDamage = {'heavyWeaponDamage', 'rangedDamage', 'weaponDamage', 'attackDamage'},
+  thrownDamage = {'thrownDamage', 'rangedDamage', 'weaponDamage', 'attackDamage'},
+
+  combatManeuvers = {'combatManeuvers', 'attackRolls'},
+  bullRush = {'bullRush', 'combatManeuvers', 'attackRolls'},
+  dirtyTrick = {'dirtyTrick', 'combatManeuvers', 'attackRolls'},
+  disarm = {'disarm', 'combatManeuvers', 'attackRolls'},
+  grapple = {'grapple', 'combatManeuvers', 'attackRolls'},
+  reposition = {'reposition', 'combatManeuvers', 'attackRolls'},
+  sunder = {'sunder', 'combatManeuvers', 'attackRolls'},
+  trip = {'trip', 'combatManeuvers', 'attackRolls'},
+
+  CMD = {'CMD'},
+  bullRushD = {'bullRushD', 'CMD'},
+  dirtyTrickD = {'dirtyTrickD', 'CMD'},
+  disarmD = {'diarmD', 'CMD'},
+  grappleD = {'grappleD', 'CMD'},
+  repositionD = {'repositionD', 'CMD'},
+  sunderD = {'sunderD', 'CMD'},
+  tripD = {'tripD', 'CMD'},
+
+  saves = {'saves'},
+  FORT = {'FORT', 'saves'},
+  REF = {'REF', 'saves'},
+  WILL = {'WILL', 'saves'},
+
+  encumberedBulk = {'encumberedBulk'},
+  overburdenedBulk = {'overburdenedBulk'},
+
+  DC = {'DC'},
+  weaponDC = {'weaponDC', 'DC'},
+  spellDC = {'spellDC', 'DC'},
+  abilityDC = {'abilityDC', 'DC'},
+
+  maxHP = {'maxHP'},
+  HPPerLevel = {'HPPerLevel'},
+  maxSP = {'maxSP'},
+  SPPerLevel = {'SPPerLevel'},
+  maxRP = {'maxRP'},
+  ACP = {'ACP'},
+  ranksPerLevel = {'ranksPerLevel'},
+  casterLevel = {'casterLevel'},
+  spellPenetration = {'spellPenetration'},
+  speed = {'speed'},
+  INIT = {'INIT'},
+}
+
+-- for tracking ability origins
+sources = {}
+
+
+-- UI Stuff ================================================================= UI
+function createModWizard()
+  modWizard = ref_buttonData['modWizardBase']
+
+  for x = 1, #modList do
+    local modWindowTemp = ref_buttonData['modWindowBase']
+
+    local openedAbove = 0
+
+    for o = 1, x-1 do
+      if modList[o]['open'] == true then
+        openedAbove = openedAbove + 1
+      end
+    end
+    local setY = 150 + (x-1) * 150 + openedAbove * 750
+
+    local setHeight = 850
+    if modList[x]['open'] == false then
+      setHeight = 100
+    end
+
+    modWindowTemp['attributes']['offsetXY'] = '0 -'..setY
+    modWindowTemp['attributes']['height'] = setHeight
+    modWindowTemp['attributes']['id'] = 'modWindow'..x
+    modWindowTemp['children'][1]['attributes']['id'] = 'modTopBar'..x
+    modWindowTemp['children'][2]['attributes']['id'] = 'modWindowTitle'..x
+    modWindowTemp['children'][3]['attributes']['id'] = 'minimizeButton'..x
+    modWindowTemp['children'][4]['attributes']['id'] = 'closeButton'..x
+    modWindowTemp['children'][2]['attributes']['text'] = modList[x]['name']
+
+    -- setTable is required here or modWindowTemp will persist between iterations and all the mods will be the same
+    self.setTable('modWindowTemp'..x, modWindowTemp)
+
+    modWizard[2]['children'][x + childrenBeforeMods] = self.getTable('modWindowTemp'..x)
+  end
+  self.UI.setXmlTable(modWizard)
+end
+-- Mod Wizard Stuff >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+-- Function to minimize the window
+function minimizeModWizard(player, value, id)
+  -- Is the size of the window bigger than its top bar?
+  if(tonumber(self.UI.getAttribute("Window", "Height")) > tonumber(self.UI.getAttribute("TopBar", "Height"))) then
+    self.UI.setAttribute("Window","OffsetXY", "-320 -210") -- Offset is set to (Height - Height_of_Top_Bar) /2
+    self.UI.setAttribute("Window", "Height", tonumber(self.UI.getAttribute("TopBar", "Height")))
+
+    for x = 1, childrenBeforeMods do
+      self.UI.hide('modWindow'..x)
+    end
+
+  else
+    self.UI.setAttribute("Window","OffsetXY", "-320 -1")
+    self.UI.setAttribute("Window", "Height", 4280)
+
+    for x = 1, childrenBeforeMods do
+      self.UI.show('modWindow'..x)
+    end
+  end
+end
+-- Function to close the window
+function close(player, value, id)
+    self.UI.hide("Window")
+end
+-- Mod Stuff >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+function minimizeMod(player, value, id)
+  -- id = minimizeButtonX (where X is an integer. it's also the 15th character, observed below)
+  local number = tonumber(string.sub(id, 15))
+  if modList[number]['open'] == true then
+    modList[number]['open'] = false
+    self.UI.setAttribute("modWindow"..number, "Height", 100)
+  else
+    modList[number]['open'] = true
+    self.UI.setAttribute("modWindow"..number, "Height", 850)
+  end
+  alignMods(number)
+end
+-- replaces mods after minimizing or deleting. aligns every mod after the input number
+function alignMods(number)
+  for x = number+1, #modList do
+    local openedAbove = 0
+    for o = 1, x-1 do
+      if modList[o]['open'] == true then
+        openedAbove = openedAbove + 1
+      end
+    end
+    self.UI.setAttribute("modWindow"..x,"OffsetXY", "0 -"..150 + (x-1) * 150 + openedAbove * 750)
+  end
+end
+-- Function to remove a mod
+function closeMod(player, value, id)
+  -- id = closeButtonX (where X is an integer. it's also the 12th character, observed below)
+  local number = tonumber(string.sub(id, 12))
+  -- the number 5 here corresponds to the number of non-mod children that the modWizard table has... keep an eye on it.
+  table.remove(modWizard[2]['children'], number + childrenBeforeMods)
+  table.remove(modList, number)
+  createModWizard()
+end
+
+--Lua Stuff ================================================================ Lua
+--Startup: loads save, spawns stuff >>>>>>>>>>>>>>>>>
+function onload(saved_data)
+    if disableSave==true then saved_data="" end
+    if saved_data ~= "" then
+        local loaded_data = JSON.decode(saved_data)
+        ref_buttonData = loaded_data
+    else
+        ref_buttonData = defaultButtonData
+    end
+
+    childrenBeforeMods = #defaultButtonData.modWizardBase[2]['children']
+    assignMode = 0
+
+    modList = {
+      {
+        open = true,
+        name = "Operative's Edge",
+        effects = {
+          skills = 3,
+          ininitative = 3,
+        },
+        description = "A perfectly normal ability."
+      },
+
+      {
+        open = true,
+        name = "Great Weapon Master",
+        effects = {
+          weaponDamage = 10,
+          AC = -5
+        },
+        description = "Wrong game?"
+      },
+
+      {
+        open = true,
+        name = "Whimsy",
+        effects = {
+          speed = 20,
+          attackRolls = 2,
+        },
+        description = "Hot foot!"
+      },
+    }
+
+    spawnedButtonCount = 0
+    createCheckbox()
+    createTextbox()
+    createButton()
+    fatbutton()
+    createMajorButton()
+
+    createModWizard()
+
+end
+--Save function >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+function updateSave()
+    c = ref_buttonData.currentConditions
+    c = tagEffects(c)
+    updateOutputBasic()
+    updateOutputBoxes()
+    updateHealthBars()
+
+    saved_data = JSON.encode(ref_buttonData)
+    if disableSave==true then saved_data="" end
+    self.script_state = saved_data
+end
+
+-- Calculate and Update text boxes ================================== text boxes
+-- Calculate the outputs
+function updateOutputBasic()
+    -- Time to update those stats and things!
+  -- Update base stats
+  STR = effectCalc(c, 'STR', self.getInputs()[1]['value'])
+  DEX = effectCalc(c, 'DEX', self.getInputs()[2]['value'])
+  CON = effectCalc(c, 'CON', self.getInputs()[3]['value'])
+  INT = effectCalc(c, 'INT', self.getInputs()[4]['value'])
+  WIS = effectCalc(c, 'WIS', self.getInputs()[5]['value'])
+  CHA = effectCalc(c, 'CHA', self.getInputs()[6]['value'])
+
+  -- Update dem stat mods
+  STRMOD = effectCalc(c, 'STRMOD', math.floor((STR - 10)/ 2))
+  DEXMOD = effectCalc(c, 'DEXMOD', math.floor((DEX - 10)/ 2))
+  CONMOD = effectCalc(c, 'CONMOD', math.floor((CON - 10)/ 2))
+  INTMOD = effectCalc(c, 'INTMOD', math.floor((INT - 10)/ 2))
+  WISMOD = effectCalc(c, 'WISMOD', math.floor((WIS - 10)/ 2))
+  CHAMOD = effectCalc(c, 'CHAMOD', math.floor((CHA - 10)/ 2))
+
+  -- statModRef & statModStringRef are helper funtions used in a few places. Do not touch!
+  statModRef = {STRMOD, DEXMOD, CONMOD, INTMOD, WISMOD, CHAMOD}
+  statModStringRef = {STR = STRMOD, DEX = DEXMOD, CON = CONMOD, INT = INTMOD, WIS = WISMOD, CHA = CHAMOD}
+
+  -- Update dem KAC, EAC, Initiative and CMD
+  maxDEX = effectCalc(c, 'maxDEX', self.getInputs()[125]['value'])
+  -- KAC and EAC have been split in half for clarity.
+  KAC = effectCalc(c, 'KAC', self.getInputs()[124]['value'])
+  EAC = effectCalc(c, 'EAC', self.getInputs()[123]['value'])
+  KAC = 10 + KAC + math.min(DEXMOD, effectCalc(c, 'maxDEX', maxDEX))
+  EAC = 10 + EAC + math.min(DEXMOD, effectCalc(c, 'maxDEX', maxDEX))
+  INIT = effectCalc(c, 'INIT', DEXMOD)
+  CMD = effectCalc(c, 'CMD', KAC + 8)
+
+  -- Update dem SAVES + define LVL
+  -- for each save, see if it is a good save or bad save and calculate.
+  -- the save formula is SAVE = min(LVL/(3 - bool) + 2 * bool + STATMOD
+
+  LVL = self.getInputs()[75]['value']
+  goodFORT = boolToInt(ref_buttonData.checkbox[23].state)
+  goodREF = boolToInt(ref_buttonData.checkbox[24].state)
+  goodWILL = boolToInt(ref_buttonData.checkbox[25].state)
+  FORT = effectCalc(c, 'FORT', math.floor(LVL/(3 - goodFORT)) + 2 * goodFORT + CONMOD)
+  REF = effectCalc(c, 'REF', math.floor(LVL/(3 - goodREF)) + 2 * goodREF + DEXMOD)
+  WILL = effectCalc(c, 'WILL', math.floor(LVL/(3 - goodWILL)) + 2 *goodWILL + WISMOD)
+
+
+  -- Update dem BAB, attack bonuses
+  BAB = math.floor(LVL * 3/4 + (LVL/4) * boolToInt(ref_buttonData.checkbox[22].state))
+  meleeAttackBonus = effectCalc(c, 'meleeAttackRolls', BAB + STRMOD)
+  rangedAttackBonus = effectCalc(c, 'rangedAttackRolls', BAB + DEXMOD)
+  thrownAttackBonus = effectCalc(c, 'thrownAttackRolls', BAB + STRMOD)
+
+
+  -- Update dem max sp/hp/rp + keySTAT
+  SPPerLevel = effectCalc(c, 'SPPerLevel', self.getInputs()[67]['value'] + CONMOD)
+  HPPerLevel = effectCalc(c, 'HPPerLevel', self.getInputs()[67]['value'])
+  maxSP = effectCalc(c, 'maxSP', SPPerLevel * LVL)
+  maxHP = effectCalc(c, 'maxHP', HPPerLevel * LVL + self.getInputs()[69]['value'])
+  keySTAT = statModStringRef[self.getInputs()[149]['value']]
+  maxRP = effectCalc(c, 'maxRP', math.max(math.floor(LVL / 2) + keySTAT, 1))
+
+
+  -- Update dem skills + ACP
+  -- this assumes that no effects are capable of changing skill ranks
+  -- (i swear ta god)
+  function calculateSkills(skill, stat)
+    if ref_buttonData.checkbox[skill].state == true  and tonumber(self.getInputs()[skill + 23]['value']) ~= 0 then
+      return self.getInputs()[skill + 23]['value'] + statModRef[stat] + 3
+    else
+      return self.getInputs()[skill + 23]['value'] + statModRef[stat]
+    end
+  end
+
+  ACP = effectCalc(c, 'ACP', self.getInputs()[126]['value'])
+  acrobatics = effectCalc(c, 'acrobatics', calculateSkills(1, 2) + ACP)
+  athletics = effectCalc(c, 'athletics', calculateSkills(2, 1) + ACP)
+  bluff = effectCalc(c, 'bluff', calculateSkills(3, 6))
+  computers = effectCalc(c, 'computers', calculateSkills(4, 4))
+  culture = effectCalc(c, 'culture', calculateSkills(5, 4))
+  diplomacy = effectCalc(c, 'diplomacy', calculateSkills(6, 6))
+  disguise = effectCalc(c, 'disguise', calculateSkills(7, 6))
+  engineering = effectCalc(c, 'engineering', calculateSkills(8, 4))
+  intimidate = effectCalc(c, 'intimidate', calculateSkills(9, 6))
+  lifeScience = effectCalc(c, 'lifeScience', calculateSkills(10, 4))
+  medicine = effectCalc(c, 'medicine', calculateSkills(11, 4))
+  mysticism = effectCalc(c, 'mysticism', calculateSkills(12, 5))
+  perception = effectCalc(c, 'perception', calculateSkills(13, 5))
+  physicalScience = effectCalc(c, 'physicalScience', calculateSkills(14, 4))
+  piloting = effectCalc(c, 'piloting', calculateSkills(15, 2))
+  profession1 = effectCalc(c, 'profession1', calculateSkills(16, 4))
+  profession2 = effectCalc(c, 'profession2', calculateSkills(17, 5))
+  senseMotive = effectCalc(c, 'senseMotive', calculateSkills(18, 5))
+  sleightOfHand = effectCalc(c, 'sleightOfHand', calculateSkills(19, 2) + ACP)
+  stealth = effectCalc(c, 'stealth', calculateSkills(20, 2) + ACP)
+  survival = effectCalc(c, 'survival', calculateSkills(21, 5))
+
+  speed = effectCalc(c, 'speed', self.getInputs()[79]['value'])
+end
+-- Set all the textboxes
+function updateOutputBoxes()
+  self.editInput({index=141, value=STR..' : '..STRMOD})
+  self.editInput({index=142, value=DEX..' : '..DEXMOD})
+  self.editInput({index=143, value=CON..' : '..CONMOD})
+  self.editInput({index=144, value=INT..' : '..INTMOD})
+  self.editInput({index=145, value=WIS..' : '..WISMOD})
+  self.editInput({index=146, value=CHA..' : '..CHAMOD})
+
+  self.editInput({index=6, value=KAC})
+  self.editInput({index=7, value=EAC})
+  self.editInput({index=8, value=INIT})
+  self.editInput({index=9, value=CMD})
+
+
+  self.editInput({index=10, value=FORT})
+  self.editInput({index=11, value=REF})
+  self.editInput({index=12, value=WILL})
+  self.editInput({index=13, value=BAB})
+
+
+  self.editInput({index=17, value=maxSP})
+  self.editInput({index=19, value=maxHP})
+  self.editInput({index=22, value=maxRP})
+
+  self.editInput({index=14, value=meleeAttackBonus})
+  self.editInput({index=15, value=rangedAttackBonus})
+  self.editInput({index=16, value=thrownAttackBonus})
+
+  self.editInput({index=44, value=acrobatics})
+  self.editInput({index=45, value=athletics})
+  self.editInput({index=46, value=bluff})
+  self.editInput({index=47, value=computers})
+  self.editInput({index=48, value=culture})
+  self.editInput({index=49, value=diplomacy})
+  self.editInput({index=50, value=disguise})
+  self.editInput({index=51, value=engineering})
+  self.editInput({index=52, value=intimidate})
+  self.editInput({index=53, value=lifeScience})
+  self.editInput({index=54, value=medicine})
+  self.editInput({index=55, value=mysticism})
+  self.editInput({index=56, value=perception})
+  self.editInput({index=57, value=physicalScience})
+  self.editInput({index=58, value=piloting})
+  self.editInput({index=59, value=profession1})
+  self.editInput({index=60, value=profession2})
+  self.editInput({index=61, value=senseMotive})
+  self.editInput({index=62, value=sleightOfHand})
+  self.editInput({index=63, value=stealth})
+  self.editInput({index=64, value=survival})
+
+  self.editInput({index=151, value="->"..speed})
+
+  -- Update dem Ranks
+  ranks = 0
+  for i = 24,44,1 do
+    ranks = ranks + self.getInputs()[i]['value']
+  end
+  self.editInput({index=149, value=tostring(ranks .. "/" .. tostring(LVL * (self.getInputs()[71]['value'] + INTMOD)))})
+end
+-- converts raw input conditions into effective table
+function tagEffects(effectsList)
+  effects = ref_buttonData.conditionEffects
+  taggedEffects = {}
+
+  -- test if condition is already in the list
+  -- adds conditions via the 'true' tag
+  for i,condition in pairs(effectsList) do
+    -- print('\n'..condition..' volunteers as tribute.')
+    if taggedEffects[condition] == nil then
+      -- print('taggedEffects has a new effect: '..condition)
+      taggedEffects[condition] = true
+
+      -- test if condition wants to apply more conditions, then see if they are in the list
+      if effects[condition]['other'] ~= nil then
+        for j, additionalCondition in pairs(effects[condition]['other']) do
+          if additionalCondition ~= nil then
+            -- print(condition..' also wants to add the effect '..additionalCondition)
+            if taggedEffects[additionalCondition] == nil then
+              -- print('Accepted!')
+              taggedEffects[additionalCondition] = true
+            else
+              -- print('Rejected!')
+            end
+          end
+        end
+      end
+
+      -- test if condition wants to quash, then label all conditions to be quashed with the 'false' tag
+      if effects[condition]['quashes'] ~= nil then
+        for k, quashedCondition in pairs(effects[condition]['quashes']) do
+          -- print(condition..' is now quashing '..quashedCondition..'!')
+          -- This bit is useless, by the way, but it tells you when the quashing does something.
+          -- if taggedEffects[quashedCondition] ~= nil then
+          --   print(condition..' quashed '..quashedCondition..' from taggedEffects!')
+          -- end
+          -- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+          taggedEffects[quashedCondition] = false
+        end
+      end
+    else
+      -- print('taggedEffects already has '..condition)
+    end
+  end
+
+  -- removes all quashed conditions via the 'false' tag
+  for taggedCondition, legitimate in pairs(taggedEffects) do
+    if legitimate == false then
+      -- print('Since '..taggedCondition..' was quashed, it will now be removed.')
+      taggedEffects[taggedCondition] = nil
+    end
+  end
+
+  return taggedEffects
+end
+-- note, if let initial = false, then effectCalc will only calculate addition mods
+function effectCalc(conditions, stat, initial)
+  effects = ref_buttonData.conditionEffects
+  total = 0
+  replacements = {}
+  multiplications = {}
+
+  sources[stat] = {initial = initial, working = ""}
+  -- print('Looking for '..stat..' effecting conditions')
+  if initial ~= false then
+    -- print('Initial is '..initial)
+  end
+  for i,possibleStat in pairs(attributeGroups[stat]) do
+    -- print(stat..' could be listed as '..possibleStat)
+    for condition, j in pairs(conditions) do
+      -- print('Looking for things effecting '..possibleStat..' in '..condition)
+      if type(effects[condition][possibleStat]) == 'number' then
+        -- print(possibleStat..' is penalised by '..condition..'!')
+        total = total + effects[condition][possibleStat]
+        sources[stat]['working'] = sources[stat]['working']..effects[condition][possibleStat]..'['..condition..']'
+        -- print('Current Total Bonus is '..total)
+      elseif type(effects[condition][possibleStat]) == 'string' then
+        if string.sub(effects[condition][possibleStat], 1, 1) == 'r' then
+          -- print(condition..' wants to replace '..possibleStat..'... add it to the replacements list.')
+          table.insert(replacements, string.sub(effects[condition][possibleStat], 2))
+        elseif string.sub(effects[condition][possibleStat], 1, 1) == 'm'then
+          -- print(condition..' wants to multiply '..possibleStat)
+          table.insert(multiplications, string.sub(effects[condition][possibleStat], 2))
+        elseif string.sub(effects[condition][possibleStat], 1, 1) == 'b' then
+          -- print(condition..' wants to apply a bonus to '..possibleStat..'... too bad NOT IMPLEMENTED LEL')
+        end
+      end
+    end
+  end
+  -- print('Calculated Total Bonus for '..stat..' is '..total)
+  if initial ~= false then
+    total = total + initial
+    -- print('Calculated Total Result for '..stat..' is '..total)
+
+    -- print('\nThere are '..#multiplications..' multiplications waiting')
+    for i,v in pairs(multiplications) do
+      total = total * v
+    end
+    -- print('Multiplied Total Result for '..stat..' is '..total)
+
+    -- print('\nThere are '..#replacements..' replacements waiting')
+    table.insert(replacements, total)
+    total = math.min(table.unpack(replacements))
+  else
+    -- print('Warning: no "initial" attribute given. Multiplications and Replacements ignored.')
+  end
+
+  -- print('Final Total Result for '..stat..' is '..total..'\nWorking: '..initial..'[initial]'..sources[stat]['working']..'\n')
+  return total
+end
+
+-- Update Health Bars ============================================== figurine HP
+-- Set health bars
+function updateHealthBars()
+  if ref_buttonData.assignment['assignedFigure'] ~= "" then
+    healthFraction = self.getInputs()[21]['value'] / maxHP
+    healthFraction5 = math.min(self.getInputs()[21]['value'] / maxHP * 5)*2
+    healthFractionAt = ""
+    for n =1,healthFraction5-1 do
+      healthFractionAt = healthFractionAt.."@ "
+    end
+    healthFractionAt = healthFractionAt.."@"
+
+    staminaFraction = self.getInputs()[19]['value'] / maxSP
+    staminaFraction5 = math.min(self.getInputs()[19]['value'] / maxSP * 5)*2
+    staminaFractionAt = ""
+    for n =1,staminaFraction5-1 do
+      staminaFractionAt = staminaFractionAt.."@ "
+    end
+    staminaFractionAt = staminaFractionAt.."@"
+
+    getObjectFromGUID(ref_buttonData.assignment['assignedFigure']).editButton({index=0, label=healthFractionAt, width=1750*healthFraction})
+    getObjectFromGUID(ref_buttonData.assignment['assignedFigure']).editButton({index=1, label=staminaFractionAt, width=1750*staminaFraction})
+  end
+end
+
+--Click functions ======================================================== click
+--Checks or unchecks the given box
+function click_checkbox(tableIndex, buttonIndex)
+    if ref_buttonData.checkbox[tableIndex].state == true then
+        ref_buttonData.checkbox[tableIndex].state = false
+        self.editButton({index=buttonIndex, label=""})
+
+        -- turn condition off
+        if tableIndex >= 26 and tableIndex <= 57 then
+          ref_buttonData.currentConditions[ref_buttonData.checkbox[tableIndex].label] = nil
+        end
+    else
+        ref_buttonData.checkbox[tableIndex].state = true
+        self.editButton({index=buttonIndex, label=string.char(10008)})
+
+        -- turn condition on
+        if tableIndex >= 26 and tableIndex <= 57 then
+          ref_buttonData.currentConditions[ref_buttonData.checkbox[tableIndex].label] = ref_buttonData.checkbox[tableIndex].label
+        end
+    end
+    updateSave()
+end
+--Updates saved value for given text box
+function click_textbox(i, value, selected)
+    if selected == false then
+        ref_buttonData.textbox[i].value = value
+        updateSave()
+    end
+end
+--Print out the modifier for a skill check
+function skill_button(skill_name)
+  updateSave()
+  print(self.getInputs()[73]['value']..' rolls a '..skill_name..' check with a '.._G[skill_name]..' modifier!')
+  print('Working: '..sources[skill_name]['initial']..'[initial]'..sources[skill_name]['working']..'\n')
+end
+-- junk function
+function click_figure()
+  print('hi')
+end
+
+-- click Major Buttons >>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+-- TO BE DONE LATER!
+function update_all()
+  updateSave()
+end
+function set_player()
+  if assignMode ~= 1 then
+    print('assignMode: Player to Sheet\nThe next player to pick up this sheet will be assigned to it!\nClick again to cancel.\n')
+    assignMode = 1
+  elseif assignMode == 1 then
+    print('Cancelled.\nassignMode: None\n')
+    assignMode = 0
+  end
+end
+function set_figure()
+  if assignMode ~= 2 then
+    if ref_buttonData.assignment['assignedPlayer'] == "" then
+      print('Cannot assign figurine without assigning Player.\nassignMode: None\n')
+      assignMode = 0
+    else
+      print("assignMode: Figure to Sheet\nThe next object "..ref_buttonData.assignment['assignedPlayer'].." picks up will be assigned as their figurine!\nPick up the character sheet to deselect current figurine.\nClick again to cancel.\n")
+      assignMode = 2
+    end
+  elseif assignMode == 2 then
+    print('Cancelled.\nassignMode: None\n')
+    assignMode = 0
+  end
+end
+-- works with set_player() and set_figure
+function onObjectPickUp(player_color, picked_up_object)
+  if picked_up_object == self and assignMode == 1 then
+    ref_buttonData.assignment['assignedPlayer'] = player_color
+    self.editInput({index=83, value=ref_buttonData.assignment['assignedPlayer']})
+    assignMode = 0
+    print("Sheet has been assigned to "..ref_buttonData.assignment['assignedPlayer'].."!\n")
+  elseif picked_up_object ~= self and assignMode == 2 then
+    -- if there's already a figure, deselect it before continuing
+    if ref_buttonData.assignment['assignedFigure'] ~= "" then
+      for n = 0,1 do
+        getObjectFromGUID(ref_buttonData.assignment['assignedFigure']).removeButton(n)
+      end
+      ref_buttonData.assignment['assignedFigure'] = ""
+    end
+
+    ref_buttonData.assignment['assignedFigure'] = picked_up_object.getGUID()
+    assignMode = 0
+    print("Figure has been assigned to object "..picked_up_object.getGUID()..'\n')
+
+    -- make the HP/SP/THP bars
+    colors = {
+      {0.2,0.8,0.2},
+      {0.2,0.2,0.8},
+      {0.9,0.9,0.1}
+    }
+    for n = 1,2 do
+      getObjectFromGUID(ref_buttonData.assignment['assignedFigure']).createButton({
+          label="@ @ @ @ @ @ @ @ @ @", click_function="click_figure", function_owner=self,
+          position={0, (2 + n * 0.3), 0}, height=175, width=1750,
+          font_size=150, rotation={90,180,0},
+          color=colors[n], font_color={1,1,1}, tooltip=""
+        })
+    end
+  elseif picked_up_object == self and assignMode == 2 and ref_buttonData.assignment['assignedFigure'] ~= "" then
+    for n = 0,1 do
+      getObjectFromGUID(ref_buttonData.assignment['assignedFigure']).removeButton(n)
+    end
+    ref_buttonData.assignment['assignedFigure'] = ""
+    print("Figure unassigned.\n")
+    assignMode = 0
+  end
+end
+
+-- Stuff creation ===================================================== spawning
+--Makes checkboxes
+function createCheckbox()
+    for i, data in ipairs(ref_buttonData.checkbox) do
+        --Sets up reference function
+        local buttonNumber = spawnedButtonCount
+        local funcName = "checkbox"..i
+        local func = function() click_checkbox(i, buttonNumber) end
+        self.setVar(funcName, func)
+        --Sets up label
+        local label = ""
+        if data.state==true then label=string.char(10008) end
+        --Creates button and counts it
+        self.createButton({
+            label="", click_function=funcName, function_owner=self,
+            position=data.pos, height=data.size, width=data.size,
+            font_size=data.size, scale=buttonScale,
+            color=buttonColor, font_color=buttonFontColor, tooltip=data.label
+        })
+        spawnedButtonCount = spawnedButtonCount + 1
+    end
+end
+function createTextbox()
+    for i, data in ipairs(ref_buttonData.textbox) do
+        --Sets up reference function
+        local funcName = "textbox"..i
+        local func = function(_,_,val,sel) click_textbox(i,val,sel) end
+        self.setVar(funcName, func)
+
+        self.createInput({
+            input_function = funcName,
+            function_owner = self,
+            label          = data.label,
+            alignment      = data.alignment,
+            position       = data.pos,
+            scale          = buttonScale,
+            width          = data.width,
+            height         = (data.font_size*data.rows)+24,
+            font_size      = data.font_size,
+            color          = buttonColor,
+            font_color     = buttonFontColor,
+            value          = data.value,
+            tooltip        = data.label
+        })
+
+
+    end
+end
+function createButton()
+  for i, data in ipairs(ref_buttonData.button) do
+    local buttonNumber = spawnedButtonCount
+    local funcName = "skillbutton"..i
+    local func = function() skill_button(data.label) end
+    self.setVar(funcName, func)
+    button_parameters = {
+      click_function = funcName,
+      function_owner  = self,
+      label = data.label,
+      position = data.pos,
+      rotation = data.rot,
+      height = 40,
+      width = 40,
+      font_size = 1,
+    }
+    self.createButton(button_parameters)
+    spawnedButtonCount = spawnedButtonCount + 1
+  end
+end
+function createMajorButton()
+  for i, data in ipairs(ref_buttonData.majorButton) do
+    button_parameters = {
+      click_function = data.func,
+      function_owner  = self,
+      label = data.label,
+      position = data.pos,
+      rotation = data.rot,
+      height = data.size,
+      width = data.size,
+      font_size = data.font_size,
+      tooltip = data.label
+    }
+    self.createButton(button_parameters)
+  end
+end
+-- spawns the mod thing on the back
+function fatbutton()
+  -- !! Back test !!
+  param2 = {
+      input_function = 'click_figure',
+      function_owner = self,
+      rotation  = {0, 0, 180},
+      position  = {0, -0.1, 0},
+      width     = 1500,
+      height    = 2000,
+      font_size = 100,
+      label     = "",
+      value     = 'mods',
+      alignment = 3
+  }
+  self.createInput(param2)
+end
+
+
+-- Bonus functions ======================================================= bonus
+function boolToInt(bool)
+  if bool == true then return 1
+  elseif bool == false then return 0
+  end
+end
